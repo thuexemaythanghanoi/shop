@@ -1,748 +1,562 @@
 <!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thuê Xe Máy Tháng Long Biên - Bống</title>
-    <meta name="description" content="Dịch vụ cho thuê xe máy tháng uy tín tại Long Biên, Hà Nội. Giá tốt, thủ tục nhanh gọn, hỗ trợ sinh viên và người đi làm.">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome & Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+   <title>Bống - Thuê Xe Máy Ultra App</title>
+   <meta name="description" content="Dịch vụ cho thuê xe máy tháng uy tín tại Long Biên - Bống. Giao diện Ultra App, thủ tục nhanh gọn.">
 
-    <style>
-        :root {
-            --brand-dark: #0B0D10;
-            --brand-light: #F5F7FA;
-            --brand-accent: #4A6CF7;
-            --brand-accent-hover: #3252D1;
-        }
+   <!-- Tailwind CDN -->
+   <script src="https://cdn.tailwindcss.com"></script>
+   
+   <!-- Config Tailwind Colors to match Apple Style -->
+   <script>
+       tailwind.config = {
+           darkMode: 'class',
+           theme: {
+               extend: {
+                   colors: {
+                       ios: {
+                           blue: '#007AFF',
+                           green: '#34C759',
+                           red: '#FF3B30',
+                           gray: '#8E8E93',
+                           lightBg: '#F2F2F7',
+                           darkBg: '#000000', // Deep black for OLED feel
+                           darkCard: '#1C1C1E',
+                       }
+                   },
+                   fontFamily: {
+                       sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                   },
+                   boxShadow: {
+                       'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                       'glow': '0 0 20px rgba(0, 122, 255, 0.5)',
+                   }
+               }
+           }
+       }
+   </script>
 
-        /* Custom Brand Utilities */
-        .text-brand-accent { color: var(--brand-accent); }
-        .bg-brand-light { background-color: var(--brand-light); }
-        .bg-brand-accent { background-color: var(--brand-accent); }
-        .bg-brand-accent:hover { background-color: var(--brand-accent-hover); }
-        
-        .dark .dark\:bg-brand-dark { background-color: var(--brand-dark); }
-        .bg-brand-accent\/10 { background-color: rgba(74, 108, 247, 0.1); }
-        .bg-brand-accent\/5 { background-color: rgba(74, 108, 247, 0.05); }
-        .hover\:bg-brand-accentHover:hover { background-color: var(--brand-accent-hover); }
-        .ring-brand-accent { --tw-ring-color: var(--brand-accent); }
+   <!-- Fonts & Icons -->
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-        /* Animation */
-        @keyframes blob {
-            0% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob { animation: blob 7s infinite; }
-        .animation-delay-2000 { animation-delay: 2s; }
+   <style>
+       /* Base Apple Style Tweaks */
+       body {
+           -webkit-tap-highlight-color: transparent;
+           font-family: 'Inter', sans-serif;
+       }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+       /* Ultra Glassmorphism */
+       .glass-panel {
+           background: rgba(255, 255, 255, 0.75);
+           backdrop-filter: blur(20px);
+           -webkit-backdrop-filter: blur(20px);
+           border: 1px solid rgba(255, 255, 255, 0.5);
+       }
+       .dark .glass-panel {
+           background: rgba(28, 28, 30, 0.75);
+           border: 1px solid rgba(255, 255, 255, 0.1);
+       }
 
-        /* Glass Nav */
-        .glass-nav {
-            background: rgba(245, 247, 250, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        .dark .glass-nav {
-            background: rgba(11, 13, 16, 0.8);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+       /* Face-in Animation (Scroll Reveal) */
+       .reveal {
+           opacity: 0;
+           transform: translateY(30px);
+           transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+       }
+       .reveal.active {
+           opacity: 1;
+           transform: translateY(0);
+       }
 
-        html { scroll-padding-top: 80px; }
+       /* Floating Dock Animation */
+       .dock-item {
+           transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+       }
+       .dock-item:active {
+           transform: scale(0.9);
+       }
 
-        .btn-primary {
-            background-color: var(--brand-accent);
-            color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .btn-primary:hover {
-            transform: scale(1.02);
-            background-color: var(--brand-accent-hover);
-            box-shadow: 0 10px 20px -10px rgba(74, 108, 247, 0.5);
-        }
+       /* Custom Scrollbar hide for cleaner look */
+       .no-scrollbar::-webkit-scrollbar {
+           display: none;
+       }
+       .no-scrollbar {
+           -ms-overflow-style: none;
+           scrollbar-width: none;
+       }
 
-        .apple-card {
-            border-radius: 24px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .apple-card:hover {
-            transform: translateY(-5px);
-        }
+       /* Range Slider Styling */
+       input[type=range] {
+           -webkit-appearance: none;
+           background: transparent;
+       }
+       input[type=range]::-webkit-slider-thumb {
+           -webkit-appearance: none;
+           height: 24px;
+           width: 24px;
+           border-radius: 50%;
+           background: #ffffff;
+           box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+           margin-top: -10px;
+           cursor: pointer;
+       }
+       input[type=range]::-webkit-slider-runnable-track {
+           width: 100%;
+           height: 4px;
+           cursor: pointer;
+           background: #E5E5EA;
+           border-radius: 2px;
+       }
+       .dark input[type=range]::-webkit-slider-runnable-track {
+           background: #3A3A3C;
+       }
 
-        /* Quick Call App Mini CSS */
-        .quick-app-container {
-            position: fixed;
-            bottom: 24px;
-            left: 24px;
-            z-index: 100;
-        }
-
-        .quick-btn {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            cursor: pointer;
-            opacity: 0;
-            transform: scale(0.5);
-            pointer-events: none;
-        }
-
-        .quick-btn-main {
-            z-index: 10;
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-            background: var(--brand-accent);
-            color: white;
-        }
-        
-        /* Trạng thái mở menu */
-        .quick-app-container.active .quick-btn-main {
-            transform: rotate(45deg);
-            background: #ef4444; /* Màu đỏ khi đóng */
-        }
-
-        .quick-app-container.active .quick-btn:nth-child(2) {
-            transform: translateY(-70px) scale(1);
-            opacity: 1;
-            pointer-events: auto;
-            transition-delay: 0.05s;
-        }
-        .quick-app-container.active .quick-btn:nth-child(3) {
-            transform: translateY(-140px) scale(1);
-            opacity: 1;
-            pointer-events: auto;
-            transition-delay: 0.1s;
-        }
-        .quick-app-container.active .quick-btn:nth-child(4) {
-            transform: translateY(-210px) scale(1);
-            opacity: 1;
-            pointer-events: auto;
-            transition-delay: 0.15s;
-        }
-
-        .tooltip-text {
-            position: absolute;
-            left: 70px;
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            opacity: 0;
-            transition: opacity 0.2s;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-        .quick-btn:hover .tooltip-text {
-            opacity: 1;
-        }
-
-        /* Dark Mode Toggle */
-        .toggle-checkbox:checked { right: 0; border-color: var(--brand-accent); }
-        .toggle-checkbox:checked + .toggle-label { background-color: var(--brand-accent); }
-    </style>
+       /* Status Dot Pulse */
+       @keyframes pulse-green {
+           0% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7); }
+           70% { box-shadow: 0 0 0 6px rgba(52, 199, 89, 0); }
+           100% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
+       }
+       .status-pulse-green { animation: pulse-green 2s infinite; }
+       
+       @keyframes pulse-red {
+           0% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7); }
+           70% { box-shadow: 0 0 0 6px rgba(255, 59, 48, 0); }
+           100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
+       }
+       .status-pulse-red { animation: pulse-red 2s infinite; }
+   </style>
 </head>
-<body class="bg-brand-light text-gray-900 dark:bg-brand-dark dark:text-gray-100 flex flex-col min-h-screen relative">
+<body class="bg-ios-lightBg dark:bg-ios-darkBg text-gray-900 dark:text-white transition-colors duration-500 overflow-x-hidden">
 
-    <!-- Header / Navigation -->
-    <header class="fixed w-full top-0 z-50 glass-nav transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <img class="h-12 w-auto rounded-full shadow-md" src="https://raw.githubusercontent.com/thuexemaythanghanoi/shop/main/IMG_0712.jpeg" alt="Bống Logo" width="48" height="48">
-                    <span class="ml-3 font-bold text-xl tracking-tight hidden sm:block">Thuê xe máy Bống</span>
-                </div>
+   <!-- Navbar (Glass Header) -->
+   <header class="fixed top-0 w-full z-40 glass-panel border-b-0">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6">
+           <div class="flex justify-between items-center h-16">
+               <!-- Logo -->
+               <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                   <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ios-blue to-purple-600 flex items-center justify-center text-white font-bold shadow-lg">
+                       B
+                   </div>
+                   <span class="text-xl font-bold tracking-tight">Bống<span class="text-ios-blue">.App</span></span>
+               </div>
 
-                <!-- Desktop Menu -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#hero" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Trang chủ</a>
-                    <a href="#pricing" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Bảng giá</a>
-                    <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Giới thiệu</a>
-                    <a href="#seo-content" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Cẩm nang</a>
-                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Liên hệ</a>
-                </nav>
+               <!-- Desktop Menu -->
+               <nav class="hidden md:flex space-x-8">
+                   <a href="#hero" class="text-sm font-medium hover:text-ios-blue transition-colors">Trang chủ</a>
+                   <a href="#pricing" class="text-sm font-medium hover:text-ios-blue transition-colors">Bảng giá</a>
+                   <a href="#about" class="text-sm font-medium hover:text-ios-blue transition-colors">Giới thiệu</a>
+               </nav>
 
-                <!-- Right Side -->
-                <div class="flex items-center space-x-4">
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors focus:outline-none" aria-label="Toggle Dark Mode">
-                        <i class="fas fa-moon text-gray-600 dark:text-brand-accent text-xl dark:hidden"></i>
-                        <i class="fas fa-sun text-yellow-400 text-xl hidden dark:block"></i>
-                    </button>
+               <!-- Right Actions -->
+               <div class="flex items-center gap-4">
+                   <!-- Status Badge (Auto JS) -->
+                   <div id="status-badge" class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-semibold transition-all">
+                       <span id="status-dot" class="w-2 h-2 rounded-full bg-gray-400"></span>
+                       <span id="status-text">Checking...</span>
+                   </div>
 
-                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-brand-accent focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" aria-label="Mở menu">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+                   <!-- Theme Toggle -->
+                   <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 transition-transform hover:scale-110">
+                       <i class="fas fa-moon text-xs dark:hidden"></i>
+                       <i class="fas fa-sun text-xs hidden dark:block text-yellow-400"></i>
+                   </button>
 
-        <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-light dark:bg-brand-dark border-b border-gray-200 dark:border-gray-800">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#hero" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Trang chủ</a>
-                <a href="#pricing" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Bảng giá</a>
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Giới thiệu</a>
-                <a href="#seo-content" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Cẩm nang</a>
-                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Liên hệ</a>
-            </div>
-        </div>
-    </header>
+                   <!-- Mobile Menu Btn -->
+                   <button id="menu-btn" class="md:hidden text-2xl focus:outline-none">
+                       <i class="fas fa-bars"></i>
+                   </button>
+               </div>
+           </div>
+       </div>
+   </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow pt-20">
-        
-        <!-- Hero Section & Calculator -->
-        <section id="hero" class="relative py-16 sm:py-24 overflow-hidden">
-            <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full z-0 pointer-events-none">
-                <div class="absolute top-20 left-10 w-72 h-72 bg-brand-accent opacity-10 rounded-full blur-3xl filter mix-blend-multiply animate-blob"></div>
-                <div class="absolute top-20 right-10 w-72 h-72 bg-purple-500 opacity-10 rounded-full blur-3xl filter mix-blend-multiply animate-blob animation-delay-2000"></div>
-            </div>
+   <!-- Sidebar Mobile Menu (Ultra Style) -->
+   <div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+   <div id="sidebar" class="fixed top-0 right-0 h-full w-3/4 max-w-xs bg-ios-lightBg/95 dark:bg-ios-darkCard/95 backdrop-blur-xl z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col border-l border-white/20">
+       <div class="p-6 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+           <h2 class="text-xl font-bold">Menu</h2>
+           <button id="close-sidebar" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+               <i class="fas fa-times"></i>
+           </button>
+       </div>
+       <div class="flex-1 overflow-y-auto py-4 px-4 space-y-2">
+           <!-- Mobile Status -->
+           <div id="mobile-status-container" class="mb-6 p-4 rounded-2xl bg-white dark:bg-black/50 flex items-center justify-between shadow-sm">
+               <span class="text-sm font-medium">Trạng thái cửa hàng</span>
+               <span id="mobile-status-badge" class="px-2 py-1 rounded-md text-xs font-bold bg-gray-200 text-gray-500">...</span>
+           </div>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                
-                <!-- Hero Text -->
-                <div class="text-center lg:text-left">
-                    <span class="inline-block py-1 px-3 rounded-full bg-brand-accent/10 text-brand-accent text-sm font-semibold mb-4">
-                        Cho thuê xe máy Long Biên
-                    </span>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-                        Di chuyển tự do.<br>
-                        <span class="text-brand-accent">Chi phí tối ưu.</span>
-                    </h1>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0">
-                        Dịch vụ cho thuê xe máy theo tháng uy tín tại Hà Nội. Thủ tục đơn giản, xe chất lượng, hỗ trợ 24/7.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="tel:+8437496643" class="btn-primary px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2">
-                            <i class="fas fa-phone-alt"></i> Gọi ngay 037 496 643
-                        </a>
-                        <a href="#pricing" class="px-8 py-3 rounded-full font-semibold border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                            Xem bảng giá
-                        </a>
-                    </div>
-                </div>
+           <a href="#hero" class="block px-4 py-3 rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-all font-medium text-lg sidebar-link">Trang chủ</a>
+           <a href="#pricing" class="block px-4 py-3 rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-all font-medium text-lg sidebar-link">Bảng giá xe</a>
+           <a href="#about" class="block px-4 py-3 rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-all font-medium text-lg sidebar-link">Về Bống</a>
+           <a href="#contact" class="block px-4 py-3 rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-all font-medium text-lg sidebar-link">Liên hệ</a>
+       </div>
+       <div class="p-6 border-t border-gray-200 dark:border-gray-700">
+           <p class="text-xs text-center text-gray-500">Designed for Bống App</p>
+       </div>
+   </div>
 
-                <!-- Calculator Widget -->
-                <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 dark:border-gray-800">
-                    <h3 class="text-2xl font-bold mb-6 text-center">Ước tính chi phí</h3>
-                    
-                    <div class="space-y-5">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Loại xe</label>
-                            <div class="grid grid-cols-2 gap-4">
-                                <button type="button" class="bike-select active ring-2 ring-brand-accent bg-brand-accent/5 py-3 rounded-xl border border-transparent dark:border-gray-700 font-medium transition-all" data-price="900000">
-                                    <i class="fas fa-motorcycle mb-1 block text-lg"></i>
-                                    Xe Số
-                                </button>
-                                <button type="button" class="bike-select bg-gray-50 dark:bg-gray-800 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-500 font-medium hover:bg-gray-100 transition-all" data-price="1200000">
-                                    <i class="fas fa-scooter mb-1 block text-lg"></i>
-                                    Xe Ga
-                                </button>
-                            </div>
-                        </div>
+   <!-- Main Content -->
+   <main class="pt-24 pb-32"> <!-- Padding bottom for floating dock -->
 
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="month-slider">Thời gian thuê (Tháng)</label>
-                            <input type="range" min="1" max="12" value="1" id="month-slider" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-accent" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1">
-                            <div class="flex justify-between text-sm text-gray-500 mt-2">
-                                <span>1 tháng</span>
-                                <span id="month-display" class="font-bold text-brand-accent text-lg">1 tháng</span>
-                                <span>12 tháng</span>
-                            </div>
-                        </div>
+       <!-- Hero Section Ultra -->
+       <section id="hero" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
+           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+               
+               <!-- Left: Text -->
+               <div class="reveal active space-y-6 text-center lg:text-left">
+                   <div class="inline-block px-4 py-1.5 rounded-full border border-ios-blue/30 bg-ios-blue/10 text-ios-blue text-sm font-semibold tracking-wide">
+                       ✨ Thuê xe máy Long Biên - Uy tín số 1
+                   </div>
+                   <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
+                       Tự do di chuyển <br>
+                       <span class="bg-clip-text text-transparent bg-gradient-to-r from-ios-blue to-purple-500">Phong cách Bống.</span>
+                   </h1>
+                   <p class="text-lg text-gray-500 dark:text-gray-400 max-w-lg mx-auto lg:mx-0">
+                       Trải nghiệm dịch vụ thuê xe máy theo tháng nhanh gọn, xe chất lượng, hỗ trợ 24/7. Chỉ cần CCCD.
+                   </p>
+                   <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                       <button onclick="scrollToPricing()" class="bg-ios-blue hover:bg-blue-600 text-white px-8 py-4 rounded-full font-semibold shadow-glow transition-all transform hover:-translate-y-1">
+                           Chọn xe ngay
+                       </button>
+                       <a href="https://maps.app.goo.gl/zKemrqmR5bsdR46H9?g_st=ipc" target="_blank" class="px-8 py-4 rounded-full border border-gray-200 dark:border-gray-700 font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                           Xem vị trí
+                       </a>
+                   </div>
+               </div>
 
-                        <div class="pt-4 border-t border-gray-100 dark:border-gray-800">
-                            <div class="flex justify-between items-end">
-                                <span class="text-sm text-gray-500">Tổng ước tính</span>
-                                <span id="total-price" class="text-3xl font-bold text-gray-900 dark:text-white">900.000đ</span>
-                            </div>
-                            <p class="text-xs text-right text-gray-400 mt-1">*Giá có thể thay đổi tùy dòng xe cụ thể</p>
-                        </div>
+               <!-- Right: Calculator Card (Apple Style) -->
+               <div class="reveal relative">
+                   <!-- Background blobs -->
+                   <div class="absolute top-0 right-0 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+                   <div class="absolute bottom-0 left-0 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl -z-10 animate-pulse delay-1000"></div>
 
-                        <a href="https://m.facebook.com/thuexemaythanghanoi/" target="_blank" rel="noopener noreferrer" class="w-full block text-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-3 rounded-xl font-bold hover:opacity-90 transition-opacity">
-                            Đặt xe ngay
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+                   <div class="glass-panel rounded-[32px] p-6 sm:p-8 shadow-2xl transform transition-transform hover:scale-[1.01]">
+                       <div class="flex justify-between items-center mb-6">
+                           <h3 class="text-2xl font-bold">Dự tính chi phí</h3>
+                           <i class="fas fa-calculator text-ios-blue text-xl"></i>
+                       </div>
 
-        <!-- Pricing Section -->
-        <section id="pricing" class="py-16 bg-gray-50 dark:bg-[#0f1115]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold mb-4">Bảng giá minh bạch</h2>
-                    <p class="text-gray-500 dark:text-gray-400">Không phí ẩn, cam kết giá tốt nhất khu vực Long Biên</p>
-                </div>
+                       <!-- Bike Type Selector -->
+                       <div class="grid grid-cols-2 gap-3 mb-6">
+                           <button class="bike-selector p-4 rounded-2xl border-2 border-ios-blue bg-ios-blue/5 text-ios-blue font-bold transition-all" data-price="900000" onclick="selectBike(this)">
+                               <i class="fas fa-motorcycle block text-2xl mb-2"></i>
+                               Xe Số
+                           </button>
+                           <button class="bike-selector p-4 rounded-2xl border-2 border-transparent bg-gray-100 dark:bg-gray-800 text-gray-500 font-medium transition-all hover:bg-gray-200 dark:hover:bg-gray-700" data-price="1200000" onclick="selectBike(this)">
+                               <i class="fas fa-scooter block text-2xl mb-2"></i>
+                               Xe Ga
+                           </button>
+                       </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Basic -->
-                    <div class="apple-card bg-white dark:bg-gray-900 p-8 shadow-lg border border-gray-100 dark:border-gray-800 flex flex-col">
-                        <div class="mb-4">
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-bold uppercase tracking-wide text-gray-500">Xe Số</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2">Honda Wave/Dream</h3>
-                        <div class="text-4xl font-bold text-brand-accent mb-6">900k<span class="text-lg text-gray-400 font-normal">/tháng</span></div>
-                        <ul class="space-y-3 mb-8 flex-grow text-gray-600 dark:text-gray-300">
-                            <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Động cơ bền bỉ</li>
-                            <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Tiết kiệm xăng</li>
-                            <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Mũ bảo hiểm đi kèm</li>
-                        </ul>
-                        <a href="tel:+8437496643" class="w-full btn-primary py-3 rounded-xl font-semibold text-center">Liên hệ thuê</a>
-                    </div>
+                       <!-- Slider -->
+                       <div class="mb-8">
+                           <div class="flex justify-between text-sm font-medium mb-3">
+                               <span class="text-gray-500">Thời gian thuê</span>
+                               <span id="month-display" class="text-ios-blue font-bold">1 tháng</span>
+                           </div>
+                           <input type="range" min="1" max="12" value="1" id="month-slider" class="w-full">
+                           <div class="flex justify-between text-xs text-gray-400 mt-2 px-1">
+                               <span>1T</span>
+                               <span>6T</span>
+                               <span>12T</span>
+                           </div>
+                       </div>
 
-                    <!-- Popular -->
-                    <div class="apple-card bg-gray-900 dark:bg-white text-white dark:text-gray-900 p-8 shadow-xl border border-transparent transform md:-translate-y-4 flex flex-col relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-brand-accent text-white text-xs font-bold px-3 py-1 rounded-bl-xl">PHỔ BIẾN</div>
-                        <div class="mb-4">
-                            <span class="px-3 py-1 bg-gray-700 dark:bg-gray-200 rounded-full text-xs font-bold uppercase tracking-wide text-gray-300 dark:text-gray-600">Xe Ga</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2">Vision / Airblade</h3>
-                        <div class="text-4xl font-bold text-brand-accent mb-6">1.2tr<span class="text-lg text-gray-400 dark:text-gray-500 font-normal">/tháng</span></div>
-                        <ul class="space-y-3 mb-8 flex-grow text-gray-300 dark:text-gray-600">
-                            <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Cốp rộng rãi</li>
-                            <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Kiểu dáng thời trang</li>
-                            <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Bảo dưỡng định kỳ</li>
-                            <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Hỗ trợ sự cố 24/7</li>
-                        </ul>
-                        <a href="tel:+8437496643" class="w-full bg-brand-accent hover:bg-brand-accentHover text-white py-3 rounded-xl font-semibold text-center transition-colors">Liên hệ thuê</a>
-                    </div>
+                       <!-- Total -->
+                       <div class="flex items-end justify-between border-t border-gray-200 dark:border-gray-700 pt-6">
+                           <div>
+                               <p class="text-sm text-gray-500 mb-1">Tổng cộng ước tính</p>
+                               <p class="text-xs text-ios-green">*Đã bao gồm ưu đãi dài hạn</p>
+                           </div>
+                           <div id="total-price" class="text-3xl font-bold tracking-tight">900k</div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
 
-                    <!-- Premium -->
-                    <div class="apple-card bg-white dark:bg-gray-900 p-8 shadow-lg border border-gray-100 dark:border-gray-800 flex flex-col">
-                        <div class="mb-4">
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-bold uppercase tracking-wide text-gray-500">Tay Côn</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2">Exciter / Winner</h3>
-                        <div class="text-4xl font-bold text-brand-accent mb-6">1.5tr<span class="text-lg text-gray-400 font-normal">/tháng</span></div>
-                        <ul class="space-y-3 mb-8 flex-grow text-gray-600 dark:text-gray-300">
-                            <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Động cơ mạnh mẽ</li>
-                            <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Phù hợp đi phượt</li>
-                            <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Trang bị an toàn</li>
-                        </ul>
-                        <a href="tel:+8437496643" class="w-full btn-primary py-3 rounded-xl font-semibold text-center">Liên hệ thuê</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+       <!-- Pricing Section (Cards) -->
+       <section id="pricing" class="py-16 bg-white dark:bg-black/40">
+           <div class="max-w-7xl mx-auto px-4 sm:px-6">
+               <div class="text-center mb-12 reveal">
+                   <h2 class="text-3xl md:text-4xl font-bold mb-4">Bảng giá xe</h2>
+                   <p class="text-gray-500">Minh bạch, không phí ẩn. Giá tốt nhất cho sinh viên & người đi làm.</p>
+               </div>
 
-        <!-- Features / About Section -->
-        <section id="about" class="py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                    <div class="order-2 md:order-1">
-                         <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl text-center">
-                                <i class="fas fa-clock text-4xl text-brand-accent mb-3"></i>
-                                <h4 class="font-bold mb-1">Giờ mở cửa</h4>
-                                <p class="text-sm text-gray-500">9h00 - 17h00</p>
-                            </div>
-                            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl text-center">
-                                <i class="fas fa-file-contract text-4xl text-brand-accent mb-3"></i>
-                                <h4 class="font-bold mb-1">Thủ tục</h4>
-                                <p class="text-sm text-gray-500">Nhanh gọn 5 phút</p>
-                            </div>
-                            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl text-center col-span-2">
-                                <i class="fas fa-map-marker-alt text-4xl text-brand-accent mb-3"></i>
-                                <h4 class="font-bold mb-1">Địa điểm tiện lợi</h4>
-                                <p class="text-sm text-gray-500">Nguyễn Văn Cừ, Long Biên</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-1 md:order-2">
-                        <h2 class="text-3xl font-bold mb-6">Tại sao chọn Bống?</h2>
-                        <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                            Chúng tôi hiểu rằng việc di chuyển tại Hà Nội cần sự linh hoạt và tiết kiệm. Dịch vụ cho thuê xe máy của Bống mang đến giải pháp tối ưu cho sinh viên, người đi làm và khách du lịch dài ngày.
-                        </p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-accent flex items-center justify-center text-white mt-1">
-                                    <i class="fas fa-check text-xs"></i>
-                                </div>
-                                <span class="ml-3 text-gray-600 dark:text-gray-300">Xe luôn được bảo dưỡng trước khi giao.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-accent flex items-center justify-center text-white mt-1">
-                                    <i class="fas fa-check text-xs"></i>
-                                </div>
-                                <span class="ml-3 text-gray-600 dark:text-gray-300">Hỗ trợ đổi xe nếu gặp sự cố kỹ thuật.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-accent flex items-center justify-center text-white mt-1">
-                                    <i class="fas fa-check text-xs"></i>
-                                </div>
-                                <span class="ml-3 text-gray-600 dark:text-gray-300">Giá thuê dài hạn cực kỳ ưu đãi.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+               <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                   <!-- Card 1 -->
+                   <div class="reveal glass-panel p-8 rounded-3xl flex flex-col hover:shadow-xl transition-shadow duration-300">
+                       <div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-4 text-2xl">⚙️</div>
+                       <h3 class="text-xl font-bold mb-2">Honda Wave/Dream</h3>
+                       <p class="text-3xl font-bold text-ios-blue mb-6">900k<span class="text-sm text-gray-500 font-normal">/tháng</span></p>
+                       <ul class="space-y-3 mb-8 flex-1 text-gray-600 dark:text-gray-300">
+                           <li>• Tiết kiệm xăng tối đa</li>
+                           <li>• Máy bền, leo dốc khoẻ</li>
+                           <li>• Phụ tùng dễ thay thế</li>
+                       </ul>
+                       <button onclick="contactFor('Xe Số')" class="w-full py-3 rounded-xl bg-gray-100 dark:bg-gray-800 font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Chọn xe này</button>
+                   </div>
 
-        <!-- CONTACT SECTION -->
-        <section id="contact" class="py-16 bg-gray-50 dark:bg-[#0f1115]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-xl flex flex-col md:flex-row">
-                    <!-- Info -->
-                    <div class="p-8 md:p-12 w-full md:w-1/2 flex flex-col justify-center">
-                        <h2 class="text-3xl font-bold mb-6">Liên hệ với chúng tôi</h2>
-                        
-                        <div class="space-y-6">
-                            <a href="https://maps.app.goo.gl/zKemrqmR5bsdR46H9?g_st=ipc" target="_blank" rel="noopener noreferrer" class="flex items-start group">
-                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 dark:bg-gray-800 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-colors">
-                                    <i class="fas fa-map-marker-alt text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-lg font-semibold">Địa chỉ</h4>
-                                    <p class="text-gray-500 dark:text-gray-400">Nguyễn Văn Cừ, Long Biên, Hà Nội</p>
-                                </div>
-                            </a>
+                   <!-- Card 2 (Highlight) -->
+                   <div class="reveal p-8 rounded-3xl bg-ios-darkCard text-white flex flex-col shadow-glow relative transform md:-translate-y-4 border border-gray-700">
+                       <div class="absolute top-4 right-4 px-2 py-1 bg-ios-blue text-xs font-bold rounded text-white">POPULAR</div>
+                       <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center mb-4 text-2xl">🛵</div>
+                       <h3 class="text-xl font-bold mb-2">Vision / Airblade</h3>
+                       <p class="text-3xl font-bold text-ios-blue mb-6">1.2tr<span class="text-sm text-gray-400 font-normal">/tháng</span></p>
+                       <ul class="space-y-3 mb-8 flex-1 text-gray-300">
+                           <li>• Cốp rộng rãi</li>
+                           <li>• Kiểu dáng thời trang</li>
+                           <li>• Xe chạy êm, mượt mà</li>
+                           <li>• Phanh an toàn</li>
+                       </ul>
+                       <button onclick="contactFor('Xe Ga')" class="w-full py-3 rounded-xl bg-ios-blue font-semibold hover:bg-blue-600 transition-colors">Chọn xe này</button>
+                   </div>
 
-                            <a href="tel:+8437496643" class="flex items-start group">
-                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 dark:bg-gray-800 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-colors">
-                                    <i class="fas fa-phone text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-lg font-semibold">Hotline</h4>
-                                    <p class="text-gray-500 dark:text-gray-400">037 496 643</p>
-                                </div>
-                            </a>
+                   <!-- Card 3 -->
+                   <div class="reveal glass-panel p-8 rounded-3xl flex flex-col hover:shadow-xl transition-shadow duration-300">
+                       <div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-4 text-2xl">🏍️</div>
+                       <h3 class="text-xl font-bold mb-2">Exciter / Winner</h3>
+                       <p class="text-3xl font-bold text-ios-blue mb-6">1.5tr<span class="text-sm text-gray-500 font-normal">/tháng</span></p>
+                       <ul class="space-y-3 mb-8 flex-1 text-gray-600 dark:text-gray-300">
+                           <li>• Động cơ mạnh mẽ</li>
+                           <li>• Phong cách thể thao</li>
+                           <li>• Phù hợp đường dài</li>
+                       </ul>
+                       <button onclick="contactFor('Xe Côn')" class="w-full py-3 rounded-xl bg-gray-100 dark:bg-gray-800 font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Chọn xe này</button>
+                   </div>
+               </div>
+           </div>
+       </section>
 
-                            <a href="mailto:mrtuantu1982@gmail.com" class="flex items-start group">
-                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 dark:bg-gray-800 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-colors">
-                                    <i class="fas fa-envelope text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-lg font-semibold">Email</h4>
-                                    <p class="text-gray-500 dark:text-gray-400">mrtuantu1982@gmail.com</p>
-                                </div>
-                            </a>
-                        </div>
+       <!-- About / Info Grid -->
+       <section id="about" class="py-16 max-w-7xl mx-auto px-4 sm:px-6">
+           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 reveal">
+               <!-- Box 1 -->
+               <div class="glass-panel p-6 rounded-2xl text-center md:col-span-2 flex flex-col items-center justify-center min-h-[200px]">
+                   <i class="fas fa-store text-4xl text-ios-blue mb-4"></i>
+                   <h3 class="font-bold text-lg">Giờ mở cửa</h3>
+                   <p class="text-gray-500">09:00 - 17:00</p>
+                   <p class="text-sm text-ios-green mt-1 font-medium" id="status-text-2">Checking...</p>
+               </div>
+               <!-- Box 2 -->
+               <div class="glass-panel p-6 rounded-2xl text-center flex flex-col items-center justify-center min-h-[200px]">
+                   <i class="fas fa-bolt text-4xl text-yellow-500 mb-4"></i>
+                   <h3 class="font-bold text-lg">Thủ tục</h3>
+                   <p class="text-gray-500 text-sm">Chỉ cần CCCD + cọc nhỏ. Nhận xe sau 10 phút.</p>
+               </div>
+               <!-- Box 3 -->
+               <div class="glass-panel p-6 rounded-2xl text-center flex flex-col items-center justify-center min-h-[200px]">
+                   <i class="fas fa-tools text-4xl text-gray-500 mb-4"></i>
+                   <h3 class="font-bold text-lg">Bảo dưỡng</h3>
+                   <p class="text-gray-500 text-sm">Hỗ trợ sửa chữa, thay dầu định kỳ miễn phí công.</p>
+               </div>
+           </div>
+       </section>
 
-                        <div class="mt-8">
-                            <a href="https://maps.app.goo.gl/zKemrqmR5bsdR46H9?g_st=ipc" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-3 px-8 rounded-full transition-colors">
-                                Mở Google Maps <i class="fas fa-external-link-alt ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
+   </main>
 
-                    <!-- Map Image Placeholder -->
-                    <div class="w-full md:w-1/2 h-64 md:h-auto bg-gray-200 relative group overflow-hidden cursor-pointer" onclick="window.open('https://maps.app.goo.gl/zKemrqmR5bsdR46H9?g_st=ipc', '_blank')">
-                         <img src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg" alt="Map Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60" loading="lazy" width="800" height="600">
-                         <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                            <span class="bg-white text-gray-900 px-6 py-2 rounded-full font-bold shadow-lg transform group-hover:scale-105 transition-transform">
-                                Xem bản đồ lớn
-                            </span>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+   <!-- App-Like Floating Action Dock (Unified Footer) -->
+   <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-auto">
+       <div class="glass-panel px-6 py-3 rounded-full shadow-2xl flex items-center gap-6 border border-white/40 dark:border-white/10 ring-1 ring-black/5">
+           
+           <!-- Call Button -->
+           <a href="tel:+8437496643" class="dock-item flex flex-col items-center gap-1 group">
+               <div class="w-10 h-10 rounded-full bg-ios-green flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                   <i class="fas fa-phone"></i>
+               </div>
+               <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-300">Gọi</span>
+           </a>
 
-        <!-- SEO Content Sections (New 12 Links/Sections) -->
-        <section id="seo-content" class="py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold mb-4">Thông tin & Cẩm nang thuê xe</h2>
-                    <p class="text-gray-500 dark:text-gray-400">Kiến thức hữu ích cho hành trình của bạn tại Hà Nội</p>
-                </div>
+           <!-- Map Button -->
+           <a href="https://maps.app.goo.gl/zKemrqmR5bsdR46H9?g_st=ipc" target="_blank" class="dock-item flex flex-col items-center gap-1 group">
+               <div class="w-10 h-10 rounded-full bg-ios-blue flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                   <i class="fas fa-map-marked-alt"></i>
+               </div>
+               <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-300">Map</span>
+           </a>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Link 1 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Kinh nghiệm thuê xe máy</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Những lưu ý quan trọng khi kiểm tra xe và làm hợp đồng thuê xe tại Hà Nội.</p>
-                    </a>
-                    <!-- Link 2 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Thủ tục cho sinh viên</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Hướng dẫn chi tiết giấy tờ cần thiết để sinh viên thuê xe giá ưu đãi.</p>
-                    </a>
-                    <!-- Link 3 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Địa điểm phượt gần HN</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Top 5 địa điểm du lịch quanh Hà Nội thích hợp đi xe máy trong ngày.</p>
-                    </a>
-                    <!-- Link 4 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Luật giao thông cần biết</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Cập nhật các lỗi vi phạm thường gặp và mức phạt mới nhất năm nay.</p>
-                    </a>
-                    <!-- Link 5 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Cách tiết kiệm xăng</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Mẹo đi xe máy trong nội thành Hà Nội giúp tiết kiệm nhiên liệu tối đa.</p>
-                    </a>
-                    <!-- Link 6 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Bảo dưỡng xe định kỳ</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Tại sao nên thuê xe tại Bống? Chúng tôi lo trọn gói bảo dưỡng cho bạn.</p>
-                    </a>
-                    <!-- Link 7 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Review quán ngon Long Biên</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Khám phá thiên đường ẩm thực Ngọc Lâm chỉ với chiếc xe máy thuê.</p>
-                    </a>
-                    <!-- Link 8 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Nên thuê Xe Ga hay Số?</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Phân tích ưu nhược điểm để bạn chọn được chiếc xe phù hợp nhu cầu.</p>
-                    </a>
-                    <!-- Link 9 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Dịch vụ cứu hộ 24/7</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">An tâm trên mọi nẻo đường với đội ngũ hỗ trợ kỹ thuật của chúng tôi.</p>
-                    </a>
-                    <!-- Link 10 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Quy trình trả xe & cọc</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Minh bạch trong việc hoàn trả tiền cọc và thanh lý hợp đồng thuê xe.</p>
-                    </a>
-                    <!-- Link 11 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Đường đi Aeon Mall</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Hướng dẫn đường đi ngắn nhất đến Aeon Mall Long Biên bằng xe máy.</p>
-                    </a>
-                    <!-- Link 12 -->
-                    <a href="#" class="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Cầu Long Biên lịch sử</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Trải nghiệm ngắm hoàng hôn trên cầu Long Biên cùng "xế yêu".</p>
-                    </a>
-                </div>
-            </div>
-        </section>
+           <!-- Zalo Button -->
+           <a href="https://zalo.me/037496643" target="_blank" class="dock-item flex flex-col items-center gap-1 group">
+               <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform font-bold text-xs">
+                   Zalo
+               </div>
+               <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-300">Chat</span>
+           </a>
 
-    </main>
+           <!-- Back Top Button (Only shows when scrolled, managed by JS visually, but here structurally) -->
+           <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="dock-item flex flex-col items-center gap-1 group border-l pl-6 border-gray-300 dark:border-gray-600">
+               <div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-white group-hover:scale-110 transition-transform">
+                   <i class="fas fa-arrow-up"></i>
+               </div>
+               <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-300">Lên</span>
+           </button>
+       </div>
+   </div>
 
-    <!-- Footer -->
-    <footer class="bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <!-- Brand -->
-                <div class="col-span-1 md:col-span-1">
-                     <div class="flex items-center mb-4">
-                        <img class="h-10 w-auto rounded-full" src="https://raw.githubusercontent.com/thuexemaythanghanoi/shop/main/IMG_0712.jpeg" alt="Logo Footer" width="40" height="40" loading="lazy">
-                        <span class="ml-3 font-bold text-lg">Cho thuê xe máy Bống</span>
-                    </div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                        Dịch vụ uy tín, tận tâm tại Long Biên, Hà Nội.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="https://m.facebook.com/thuexemaythanghanoi/" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fab fa-facebook text-2xl"></i></a>
-                    </div>
-                </div>
+   <!-- Mini Footer Info -->
+   <footer class="text-center py-8 pb-32 text-gray-400 text-sm">
+       <p class="mb-2">© 2024 Cho thuê xe máy Bống</p>
+       <p>Nguyễn Văn Cừ, Long Biên, Hà Nội</p>
+   </footer>
 
-                <!-- Links (Same as Menu) -->
-                <div>
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Điều hướng</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#hero" class="text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Trang chủ</a></li>
-                        <li><a href="#pricing" class="text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Bảng giá</a></li>
-                        <li><a href="#about" class="text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Giới thiệu</a></li>
-                        <li><a href="#contact" class="text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Liên hệ</a></li>
-                    </ul>
-                </div>
+   <!-- Scripts -->
+   <script>
+       // --- 1. Dark Mode Logic (Ultra) ---
+       const html = document.documentElement;
+       const themeToggle = document.getElementById('theme-toggle');
+       
+       // Check local storage or system pref
+       if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+           html.classList.add('dark');
+       }
 
-                <!-- Contact Info -->
-                <div>
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Thông tin</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start text-base text-gray-500 dark:text-gray-400">
-                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-brand-accent"></i>
-                            Nguyễn Văn Cừ, Long Biên, HN
-                        </li>
-                        <li class="flex items-center text-base text-gray-500 dark:text-gray-400">
-                            <i class="fas fa-phone mt-1 mr-2 text-brand-accent"></i>
-                            037 496 643
-                        </li>
-                        <li class="flex items-center text-base text-gray-500 dark:text-gray-400">
-                            <i class="fas fa-clock mt-1 mr-2 text-brand-accent"></i>
-                            9h - 17h
-                        </li>
-                    </ul>
-                </div>
-                 <!-- Policy -->
-                 <div>
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Chính sách</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Điều khoản thuê xe</a></li>
-                        <li><a href="#" class="text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Chính sách bảo mật</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-200 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-base text-gray-400 text-center md:text-left">&copy; <span id="year"></span> Cho thuê xe máy Bống. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+       themeToggle.addEventListener('click', () => {
+           html.classList.toggle('dark');
+           localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+       });
 
-    <!-- QUICK CALL APP MINI (LEFT SIDE) -->
-    <div id="quick-app" class="quick-app-container">
-        <!-- 1. Trigger Button -->
-        <button id="quick-trigger" class="quick-btn quick-btn-main shadow-lg" aria-label="Mở menu nhanh">
-            <i class="fas fa-bars text-xl"></i>
-        </button>
+       // --- 2. Opening Hours Logic (Auto 9h-17h) ---
+       function checkStatus() {
+           const now = new Date();
+           const hour = now.getHours();
+           // Open from 9 to 17 (5 PM)
+           const isOpen = hour >= 9 && hour < 17;
+           
+           const dot = document.getElementById('status-dot');
+           const text = document.getElementById('status-text');
+           const text2 = document.getElementById('status-text-2');
+           const mobileStatusBadge = document.getElementById('mobile-status-badge');
 
-        <!-- 2. Call Button -->
-        <a href="tel:+8437496643" class="quick-btn bg-green-500 text-white hover:bg-green-600">
-            <i class="fas fa-phone-alt text-xl"></i>
-            <span class="tooltip-text">Gọi ngay</span>
-        </a>
+           if (isOpen) {
+               // Desktop
+               if(dot) {
+                   dot.className = 'w-2 h-2 rounded-full bg-ios-green status-pulse-green';
+                   text.innerText = 'Đang mở cửa';
+                   text.className = 'text-ios-green';
+               }
+               // About section
+               if(text2) text2.innerText = '● Đang mở cửa phục vụ';
+               // Mobile
+               if(mobileStatusBadge) {
+                   mobileStatusBadge.innerText = 'Mở cửa';
+                   mobileStatusBadge.className = 'px-2 py-1 rounded-md text-xs font-bold bg-ios-green/20 text-ios-green';
+               }
+           } else {
+               if(dot) {
+                   dot.className = 'w-2 h-2 rounded-full bg-ios-red status-pulse-red';
+                   text.innerText = 'Đã đóng cửa';
+                   text.className = 'text-ios-red';
+               }
+               if(text2) {
+                   text2.innerText = '● Đã đóng cửa (Mở lại lúc 9h)';
+                   text2.className = 'text-sm text-ios-red mt-1 font-medium';
+               }
+               if(mobileStatusBadge) {
+                   mobileStatusBadge.innerText = 'Đóng cửa';
+                   mobileStatusBadge.className = 'px-2 py-1 rounded-md text-xs font-bold bg-ios-red/20 text-ios-red';
+               }
+           }
+       }
+       checkStatus();
+       setInterval(checkStatus, 60000); // Check every minute
 
-        <!-- 3. Map Button -->
-        <a href="https://maps.app.goo.gl/zKemrqmR5bsdR46H9?g_st=ipc" target="_blank" class="quick-btn bg-blue-500 text-white hover:bg-blue-600">
-            <i class="fas fa-map-marker-alt text-xl"></i>
-            <span class="tooltip-text">Bản đồ</span>
-        </a>
+       // --- 3. Calculator Logic ---
+       let currentBasePrice = 900000;
+       const slider = document.getElementById('month-slider');
+       const monthDisplay = document.getElementById('month-display');
+       const totalPriceEl = document.getElementById('total-price');
 
-        <!-- 4. Back Top Button -->
-        <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="quick-btn bg-gray-600 text-white hover:bg-gray-700">
-            <i class="fas fa-arrow-up text-xl"></i>
-            <span class="tooltip-text">Lên đầu</span>
-        </button>
-    </div>
+       function updateCalculator() {
+           const months = parseInt(slider.value);
+           monthDisplay.innerText = months + (months === 1 ? ' tháng' : ' tháng');
+           
+           let discount = 0;
+           if (months >= 6) discount = 0.10; // 10% off for 6 months
+           else if (months >= 3) discount = 0.05; // 5% off for 3 months
 
-    <!-- Scripts -->
-    <script>
-        // Set dynamic year
-        document.getElementById('year').textContent = new Date().getFullYear();
+           let total = currentBasePrice * months * (1 - discount);
+           
+           // Formatting nicely: 900k, 1.2tr
+           if(total >= 1000000) {
+               totalPriceEl.innerText = (total / 1000000).toFixed(1).replace('.0', '') + ' triệu';
+           } else {
+               totalPriceEl.innerText = (total / 1000).toFixed(0) + 'k';
+           }
+       }
 
-        // 1. Dark Mode Logic
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
+       function selectBike(btn) {
+           // Remove active style from all
+           document.querySelectorAll('.bike-selector').forEach(b => {
+               b.className = 'bike-selector p-4 rounded-2xl border-2 border-transparent bg-gray-100 dark:bg-gray-800 text-gray-500 font-medium transition-all hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer';
+           });
+           // Add active style
+           btn.className = 'bike-selector p-4 rounded-2xl border-2 border-ios-blue bg-ios-blue/5 text-ios-blue font-bold transition-all cursor-pointer';
+           
+           currentBasePrice = parseInt(btn.dataset.price);
+           updateCalculator();
+       }
 
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
+       slider.addEventListener('input', updateCalculator);
 
-        themeToggleBtn.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
-        });
+       // --- 4. Mobile Menu (Sidebar Slide) ---
+       const menuBtn = document.getElementById('menu-btn');
+       const closeSidebar = document.getElementById('close-sidebar');
+       const sidebar = document.getElementById('sidebar');
+       const backdrop = document.getElementById('sidebar-backdrop');
+       const sidebarLinks = document.querySelectorAll('.sidebar-link');
 
-        // 2. Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+       function toggleMenu() {
+           const isClosed = sidebar.classList.contains('translate-x-full');
+           if (isClosed) {
+               // Open
+               backdrop.classList.remove('hidden');
+               setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+               sidebar.classList.remove('translate-x-full');
+               document.body.style.overflow = 'hidden'; // Lock scroll
+           } else {
+               // Close
+               backdrop.classList.add('opacity-0');
+               sidebar.classList.add('translate-x-full');
+               setTimeout(() => backdrop.classList.add('hidden'), 300);
+               document.body.style.overflow = '';
+           }
+       }
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            const isExpanded = !mobileMenu.classList.contains('hidden');
-            mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
-        });
-        
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            });
-        });
+       menuBtn.addEventListener('click', toggleMenu);
+       closeSidebar.addEventListener('click', toggleMenu);
+       backdrop.addEventListener('click', toggleMenu);
+       sidebarLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-        // 3. Calculator Logic
-        const bikeButtons = document.querySelectorAll('.bike-select');
-        const monthSlider = document.getElementById('month-slider');
-        const monthDisplay = document.getElementById('month-display');
-        const totalPriceEl = document.getElementById('total-price');
-        
-        let currentBasePrice = 900000;
-        let currentMonths = 1;
+       // --- 5. Scroll Face-in Animation ---
+       const observerOptions = {
+           threshold: 0.1
+       };
 
-        const formatCurrency = (amount) => {
-            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
-        };
+       const observer = new IntersectionObserver((entries) => {
+           entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                   entry.target.classList.add('active');
+               }
+           });
+       }, observerOptions);
 
-        const updatePrice = () => {
-            let discount = 0;
-            if(currentMonths >= 3) discount = 0.05;
-            if(currentMonths >= 6) discount = 0.10;
+       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            let total = currentBasePrice * currentMonths * (1 - discount);
-            total = Math.round(total / 1000) * 1000;
+       // Helper function for buttons
+       function scrollToPricing() {
+           document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+       }
 
-            totalPriceEl.innerText = formatCurrency(total);
-        };
-
-        bikeButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                bikeButtons.forEach(b => {
-                    b.classList.remove('ring-2', 'ring-brand-accent', 'bg-brand-accent/5');
-                    b.classList.add('bg-gray-50', 'dark:bg-gray-800', 'text-gray-500');
-                    b.querySelector('i').classList.remove('text-brand-accent');
-                });
-                
-                btn.classList.remove('bg-gray-50', 'dark:bg-gray-800', 'text-gray-500');
-                btn.classList.add('ring-2', 'ring-brand-accent', 'bg-brand-accent/5', 'text-brand-accent'); 
-                
-                currentBasePrice = parseInt(btn.dataset.price);
-                updatePrice();
-            });
-        });
-
-        monthSlider.addEventListener('input', (e) => {
-            currentMonths = parseInt(e.target.value);
-            monthSlider.setAttribute('aria-valuenow', currentMonths);
-            monthDisplay.innerText = currentMonths + " tháng";
-            updatePrice();
-        });
-
-        updatePrice();
-
-        // 4. Quick Call App Logic
-        const quickTrigger = document.getElementById('quick-trigger');
-        const quickApp = document.getElementById('quick-app');
-        const quickIcon = quickTrigger.querySelector('i');
-
-        quickTrigger.addEventListener('click', () => {
-            quickApp.classList.toggle('active');
-            
-            if(quickApp.classList.contains('active')) {
-                quickIcon.classList.remove('fa-bars');
-                quickIcon.classList.add('fa-times');
-            } else {
-                quickIcon.classList.remove('fa-times');
-                quickIcon.classList.add('fa-bars');
-            }
-        });
-
-        // Close quick menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!quickApp.contains(e.target)) {
-                quickApp.classList.remove('active');
-                quickIcon.classList.remove('fa-times');
-                quickIcon.classList.add('fa-bars');
-            }
-        });
-
-    </script>
+       function contactFor(bikeName) {
+           // Redirect to call or Zalo with pre-filled msg concept (simplified here to just call)
+           window.location.href = "tel:+8437496643";
+       }
+   </script>
 </body>
 </html>
