@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thuê Xe Máy Tháng Long Biên - Bống</title>
     <meta name="description" content="Dịch vụ cho thuê xe máy tháng uy tín tại Long Biên, Hà Nội. Giá tốt, thủ tục nhanh gọn.">
-
-    <!-- Tailwind CDN -->
+    
+    <!-- Tailwind CSS (Framework để dựng layout nhanh và chuẩn) -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
@@ -23,120 +23,126 @@
             --brand-accent-hover: #3252D1;
         }
 
-        /* Ensure custom brand background classes override other utilities when needed */
-        .bg-brand-light { background-color: var(--brand-light) !important; }
-        .bg-brand-dark { background-color: var(--brand-dark) !important; }
-        .text-brand-accent { color: var(--brand-accent) !important; }
-        .bg-brand-accent { background-color: var(--brand-accent) !important; }
-        .bg-brand-accent:hover { background-color: var(--brand-accent-hover) !important; }
-        .text-brand-on-accent { color: #ffffff !important; }
+        /* Custom Brand Utilities Replacements */
+        .text-brand-accent { color: var(--brand-accent); }
+        .bg-brand-light { background-color: var(--brand-light); }
+        .bg-brand-accent { background-color: var(--brand-accent); }
+        .bg-brand-accent:hover { background-color: var(--brand-accent-hover); }
+        
+        /* Dark mode aware manual classes */
+        .dark .dark\:bg-brand-dark { background-color: var(--brand-dark); }
+        
+        /* Opacity variants used in HTML */
+        .bg-brand-accent\/10 { background-color: rgba(74, 108, 247, 0.1); }
+        .bg-brand-accent\/5 { background-color: rgba(74, 108, 247, 0.05); }
 
-        /* small opacity helpers used in markup (escaped slash) */
-        .bg-brand-accent\/10 { background-color: rgba(74,108,247,0.10) !important; }
-        .bg-brand-accent\/5 { background-color: rgba(74,108,247,0.05) !important; }
+        /* Specific hover class used in HTML */
+        .hover\:bg-brand-accentHover:hover { background-color: var(--brand-accent-hover); }
 
-        /* ring utility fallback (visual) */
-        .ring-brand-accent { box-shadow: 0 0 0 4px rgba(74,108,247,0.12); }
+        /* Ring utility replacement */
+        .ring-brand-accent { --tw-ring-color: var(--brand-accent); }
 
-        /* Button primary */
-        .btn-primary {
-            background-color: var(--brand-accent);
-            color: #ffffff;
-            transition: all 0.25s ease;
-        }
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            background-color: var(--brand-accent-hover);
-            box-shadow: 0 10px 20px -10px rgba(74,108,247,0.5);
-        }
-
-        /* Blob animation */
+        /* Custom Animations */
         @keyframes blob {
-            0% { transform: translate(0,0) scale(1); }
-            33% { transform: translate(30px,-50px) scale(1.05); }
-            66% { transform: translate(-20px,20px) scale(0.95); }
-            100% { transform: translate(0,0) scale(1); }
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
         }
-        .animate-blob { animation: blob 8s infinite; }
+        .animate-blob { animation: blob 7s infinite; }
         .animation-delay-2000 { animation-delay: 2s; }
 
-        /* Glass header - slightly stronger on light mode for contrast */
+        /* Custom Apple-like Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Glassmorphism Header */
         .glass-nav {
-            background: rgba(245,247,250,0.95);
+            background: rgba(245, 247, 250, 0.8);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.06);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
+
         .dark .glass-nav {
-            background: rgba(11,13,16,0.8);
+            background: rgba(11, 13, 16, 0.8);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* Offset for sticky header */
-        html { scroll-padding-top: 80px; scroll-behavior: smooth; }
-
-        /* Apple-card */
-        .apple-card { border-radius: 24px; transition: transform .3s ease, box-shadow .3s ease; }
-        .apple-card:hover { transform: translateY(-5px); }
-
-        /* Floating pulse */
-        @keyframes pulse-ring {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74,108,247,0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(74,108,247,0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74,108,247,0); }
+        /* Smooth Anchor Scrolling offset specifically for sticky header */
+        html {
+            scroll-padding-top: 80px;
         }
-        .quick-call-btn { animation: pulse-ring 2s infinite; }
 
-        /* Scrollspy nav link styles */
-        .nav-link { position: relative; transition: color .15s ease; }
-        .nav-link.active { color: var(--brand-accent) !important; font-weight: 600; }
-        .nav-link.active::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -6px;
-            width: 100%;
-            height: 2px;
+        /* Apple-style Buttons */
+        .btn-primary {
             background-color: var(--brand-accent);
-            border-radius: 2px;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            background-color: var(--brand-accent-hover);
+            box-shadow: 0 10px 20px -10px rgba(74, 108, 247, 0.5);
         }
 
-        .nav-link:focus { outline: 3px solid rgba(74,108,247,0.15); outline-offset: 3px; }
+        /* Card Styles */
+        .apple-card {
+            border-radius: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .apple-card:hover {
+            transform: translateY(-5px);
+        }
 
-        /* Isolation for hero content so background blobs don't blend with text in Safari / mobile */
-        .hero-isolate { isolation: isolate; }
+        /* Animation for Floating Buttons */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 108, 247, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(74, 108, 247, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 108, 247, 0); }
+        }
+        .quick-call-btn {
+            animation: pulse-ring 2s infinite;
+        }
 
-        /* Utility to visually hide element but keep accessible */
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        /* Dark Mode Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: var(--brand-accent);
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: var(--brand-accent);
+        }
     </style>
 </head>
 <body class="bg-brand-light text-gray-900 dark:bg-brand-dark dark:text-gray-100 flex flex-col min-h-screen relative">
 
     <!-- Header / Navigation -->
-    <header class="fixed w-full top-0 z-50 glass-nav transition-colors duration-300" role="banner">
+    <header class="fixed w-full top-0 z-50 glass-nav transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})" role="link" aria-label="Về đầu trang">
-                    <img class="h-12 w-auto rounded-full shadow-md" src="https://raw.githubusercontent.com/thuexemaythanghanoi/shop/main/IMG_0712.jpeg" alt="Bống Logo" width="48" height="48" loading="lazy">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img class="h-12 w-auto rounded-full shadow-md" src="https://raw.githubusercontent.com/thuexemaythanghanoi/shop/main/IMG_0712.jpeg" alt="Bống Logo" width="48" height="48">
                     <span class="ml-3 font-bold text-xl tracking-tight hidden sm:block">Thuê xe máy Bống</span>
                 </div>
 
                 <!-- Desktop Menu -->
-                <nav class="hidden md:flex space-x-8" role="navigation" aria-label="Primary navigation">
-                    <a href="#hero" class="nav-link text-gray-700 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Trang chủ</a>
-                    <a href="#pricing" class="nav-link text-gray-700 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Bảng giá</a>
-                    <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Giới thiệu</a>
-                    <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Liên hệ</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#hero" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Trang chủ</a>
+                    <a href="#pricing" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Bảng giá</a>
+                    <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Giới thiệu</a>
+                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent font-medium transition-colors">Liên hệ</a>
                 </nav>
 
                 <!-- Right Side: Dark Mode Toggle & Mobile Menu Btn -->
                 <div class="flex items-center space-x-4">
                     <!-- Dark Mode Toggle -->
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors focus:outline-none" aria-label="Chuyển chế độ sáng/tối" title="Chuyển chế độ sáng/tối">
-                        <i class="fas fa-moon text-gray-600 dark:text-brand-accent text-xl dark:hidden" aria-hidden="true"></i>
-                        <i class="fas fa-sun text-yellow-400 text-xl hidden dark:block" aria-hidden="true"></i>
-                        <span class="sr-only">Toggle dark mode</span>
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors focus:outline-none" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-moon text-gray-600 dark:text-brand-accent text-xl dark:hidden"></i>
+                        <i class="fas fa-sun text-yellow-400 text-xl hidden dark:block"></i>
                     </button>
 
                     <!-- Mobile Menu Button -->
@@ -148,36 +154,35 @@
         </div>
 
         <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-light dark:bg-brand-dark border-b border-gray-200 dark:border-gray-800" role="menu">
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-light dark:bg-brand-dark border-b border-gray-200 dark:border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#hero" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Trang chủ</a>
-                <a href="#pricing" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Bảng giá</a>
-                <a href="#about" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Giới thiệu</a>
-                <a href="#contact" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Liên hệ</a>
+                <a href="#hero" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Trang chủ</a>
+                <a href="#pricing" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Bảng giá</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Giới thiệu</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-brand-accent hover:bg-gray-100 dark:hover:bg-gray-800">Liên hệ</a>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow pt-20" id="main">
+    <main class="flex-grow pt-20">
         
         <!-- Hero Section & Calculator -->
         <section id="hero" class="relative py-16 sm:py-24 overflow-hidden">
-            <!-- Background Elements (z-0) -->
+            <!-- Background Elements -->
             <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full z-0 pointer-events-none">
                 <div class="absolute top-20 left-10 w-72 h-72 bg-brand-accent opacity-10 rounded-full blur-3xl filter mix-blend-multiply animate-blob"></div>
                 <div class="absolute top-20 right-10 w-72 h-72 bg-purple-500 opacity-10 rounded-full blur-3xl filter mix-blend-multiply animate-blob animation-delay-2000"></div>
             </div>
 
-            <!-- Content (z-10) with isolation to prevent blending effects -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center hero-isolate">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 
                 <!-- Hero Text -->
                 <div class="text-center lg:text-left">
                     <span class="inline-block py-1 px-3 rounded-full bg-brand-accent/10 text-brand-accent text-sm font-semibold mb-4">
                         Cho thuê xe máy Long Biên
                     </span>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-gray-900 dark:text-gray-100">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
                         Di chuyển tự do.<br>
                         <span class="text-brand-accent">Chi phí tối ưu.</span>
                     </h1>
@@ -185,10 +190,12 @@
                         Dịch vụ cho thuê xe máy theo tháng uy tín tại Hà Nội. Thủ tục đơn giản, xe chất lượng, hỗ trợ 24/7.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="tel:+8437496643" class="btn-primary px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2" aria-label="Gọi ngay">
-                            <i class="fas fa-phone-alt" aria-hidden="true"></i> <span>Gọi ngay 037 496 643</span>
+                        <a href="tel:+8437496643" class="btn-primary px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2">
+                            <i class="fas fa-phone-alt"></i> Gọi ngay 037 496 643
                         </a>
-                        <a href="#pricing" class="nav-link px-8 py-3 rounded-full font-semibold border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Xem bảng giá</a>
+                        <a href="#pricing" class="px-8 py-3 rounded-full font-semibold border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                            Xem bảng giá
+                        </a>
                     </div>
                 </div>
 
@@ -200,12 +207,12 @@
                         <!-- Loại xe -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Loại xe</label>
-                            <div class="grid grid-cols-2 gap-4" role="radiogroup" aria-label="Chọn loại xe">
-                                <button type="button" class="bike-select ring-2 ring-brand-accent bg-brand-accent/5 py-3 rounded-xl border border-transparent dark:border-gray-700 font-medium transition-all" data-price="900000" aria-pressed="true">
+                            <div class="grid grid-cols-2 gap-4">
+                                <button type="button" class="bike-select active ring-2 ring-brand-accent bg-brand-accent/5 py-3 rounded-xl border border-transparent dark:border-gray-700 font-medium transition-all" data-price="900000">
                                     <i class="fas fa-motorcycle mb-1 block text-lg"></i>
                                     Xe Số
                                 </button>
-                                <button type="button" class="bike-select bg-gray-50 dark:bg-gray-800 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-500 font-medium hover:bg-gray-100 transition-all" data-price="1200000" aria-pressed="false">
+                                <button type="button" class="bike-select bg-gray-50 dark:bg-gray-800 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-500 font-medium hover:bg-gray-100 transition-all" data-price="1200000">
                                     <i class="fas fa-scooter mb-1 block text-lg"></i>
                                     Xe Ga
                                 </button>
@@ -215,7 +222,7 @@
                         <!-- Thời gian -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="month-slider">Thời gian thuê (Tháng)</label>
-                            <input type="range" min="1" max="12" value="1" id="month-slider" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-accent" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1" />
+                            <input type="range" min="1" max="12" value="1" id="month-slider" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-accent" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1">
                             <div class="flex justify-between text-sm text-gray-500 mt-2">
                                 <span>1 tháng</span>
                                 <span id="month-display" class="font-bold text-brand-accent text-lg">1 tháng</span>
@@ -232,7 +239,7 @@
                             <p class="text-xs text-right text-gray-400 mt-1">*Giá có thể thay đổi tùy dòng xe cụ thể</p>
                         </div>
 
-                        <a href="https://m.facebook.com/thuexemaythanghanoi/" target="_blank" rel="noopener noreferrer" class="w-full block text-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-3 rounded-xl font-bold hover:opacity-90 transition-opacity" aria-label="Đặt xe qua Facebook">
+                        <a href="https://m.facebook.com/thuexemaythanghanoi/" target="_blank" rel="noopener noreferrer" class="w-full block text-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-3 rounded-xl font-bold hover:opacity-90 transition-opacity">
                             Đặt xe ngay
                         </a>
                     </div>
@@ -247,6 +254,7 @@
                     <h2 class="text-3xl font-bold mb-4">Bảng giá minh bạch</h2>
                     <p class="text-gray-500 dark:text-gray-400">Không phí ẩn, cam kết giá tốt nhất khu vực Long Biên</p>
                 </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Basic -->
                     <div class="apple-card bg-white dark:bg-gray-900 p-8 shadow-lg border border-gray-100 dark:border-gray-800 flex flex-col">
@@ -260,7 +268,7 @@
                             <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Tiết kiệm xăng</li>
                             <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Mũ bảo hiểm đi kèm</li>
                         </ul>
-                        <a href="tel:+8437496643" class="w-full btn-primary py-3 rounded-xl font-semibold text-center" aria-label="Liên hệ thuê xe Honda Wave/Dream">Liên hệ thuê</a>
+                        <a href="tel:+8437496643" class="w-full btn-primary py-3 rounded-xl font-semibold text-center">Liên hệ thuê</a>
                     </div>
 
                     <!-- Popular -->
@@ -277,7 +285,7 @@
                             <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Bảo dưỡng định kỳ</li>
                             <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Hỗ trợ sự cố 24/7</li>
                         </ul>
-                        <a href="tel:+8437496643" class="w-full bg-brand-accent hover:bg-brand-accent-hover text-white py-3 rounded-xl font-semibold text-center transition-colors" aria-label="Liên hệ thuê Vision/Airblade">Liên hệ thuê</a>
+                        <a href="tel:+8437496643" class="w-full bg-brand-accent hover:bg-brand-accentHover text-white py-3 rounded-xl font-semibold text-center transition-colors">Liên hệ thuê</a>
                     </div>
 
                     <!-- Premium -->
@@ -292,7 +300,7 @@
                             <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Phù hợp đi phượt</li>
                             <li class="flex items-center"><i class="fas fa-check text-brand-accent mr-3"></i>Trang bị an toàn</li>
                         </ul>
-                        <a href="tel:+8437496643" class="w-full btn-primary py-3 rounded-xl font-semibold text-center" aria-label="Liên hệ thuê Exciter/Winner">Liên hệ thuê</a>
+                        <a href="tel:+8437496643" class="w-full btn-primary py-3 rounded-xl font-semibold text-center">Liên hệ thuê</a>
                     </div>
                 </div>
             </div>
@@ -370,7 +378,7 @@
                                 </div>
                             </a>
 
-                            <a href="tel:+8437496643" class="flex items-start group" aria-label="Gọi hotline">
+                            <a href="tel:+8437496643" class="flex items-start group">
                                 <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 dark:bg-gray-800 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-colors">
                                     <i class="fas fa-phone text-xl"></i>
                                 </div>
@@ -380,7 +388,7 @@
                                 </div>
                             </a>
 
-                            <a href="mailto:mrtuantu1982@gmail.com" class="flex items-start group" aria-label="Gửi email">
+                            <a href="mailto:mrtuantu1982@gmail.com" class="flex items-start group">
                                 <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 dark:bg-gray-800 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-colors">
                                     <i class="fas fa-envelope text-xl"></i>
                                 </div>
@@ -392,14 +400,15 @@
                         </div>
 
                         <div class="mt-8">
-                            <a href="https://maps.app.goo.gl/zKemrqmR5bsdR46H9?g_st=ipc" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-accent hover:bg-brand-accent-hover text-white font-bold py-3 px-8 rounded-full transition-colors" aria-label="Mở Google Maps">
+                            <a href="https://maps.app.goo.gl/zKemrqmR5bsdR46H9?g_st=ipc" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-3 px-8 rounded-full transition-colors">
                                 Mở Google Maps <i class="fas fa-external-link-alt ml-2"></i>
                             </a>
                         </div>
                     </div>
 
                     <!-- Map Image Placeholder (Click to open map) -->
-                    <div class="w-full md:w-1/2 h-64 md:h-auto bg-gray-200 relative group overflow-hidden cursor-pointer" onclick="window.open('https://maps.app.goo.gl/zKemrqmR5bsdR46H9?g_st=ipc', '_blank')" role="link" aria-label="Xem bản đồ lớn">
+                    <div class="w-full md:w-1/2 h-64 md:h-auto bg-gray-200 relative group overflow-hidden cursor-pointer" onclick="window.open('https://maps.app.goo.gl/zKemrqmR5bsdR46H9?g_st=ipc', '_blank')">
+                         <!-- Using a generic map placeholder image since dynamic embed needs API -->
                          <img src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg" alt="Map Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60" loading="lazy" width="800" height="600">
                          <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
                             <span class="bg-white text-gray-900 px-6 py-2 rounded-full font-bold shadow-lg transform group-hover:scale-105 transition-transform">
@@ -427,7 +436,7 @@
                         Dịch vụ uy tín, tận tâm tại Long Biên, Hà Nội.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="https://m.facebook.com/thuexemaythanghanoi/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-brand-accent transition-colors" aria-label="Facebook"><i class="fab fa-facebook text-2xl"></i></a>
+                        <a href="https://m.facebook.com/thuexemaythanghanoi/" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fab fa-facebook text-2xl"></i></a>
                     </div>
                 </div>
 
@@ -435,10 +444,10 @@
                 <div>
                     <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Điều hướng</h3>
                     <ul class="space-y-3">
-                        <li><a href="#hero" class="nav-link text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Trang chủ</a></li>
-                        <li><a href="#pricing" class="nav-link text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Bảng giá</a></li>
-                        <li><a href="#about" class="nav-link text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Giới thiệu</a></li>
-                        <li><a href="#contact" class="nav-link text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Liên hệ</a></li>
+                        <li><a href="#hero" class="text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Trang chủ</a></li>
+                        <li><a href="#pricing" class="text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Bảng giá</a></li>
+                        <li><a href="#about" class="text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Giới thiệu</a></li>
+                        <li><a href="#contact" class="text-base text-gray-500 dark:text-gray-400 hover:text-brand-accent">Liên hệ</a></li>
                     </ul>
                 </div>
 
@@ -482,22 +491,21 @@
     </a>
 
     <!-- Back to Top Button (Right) -->
-    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 bg-brand-accent text-white p-3 rounded-full shadow-lg hover:bg-brand-accent-hover transition-all opacity-0 invisible translate-y-4" aria-label="Lên đầu trang">
+    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 bg-brand-accent text-white p-3 rounded-full shadow-lg hover:bg-brand-accentHover transition-all opacity-0 invisible translate-y-4" aria-label="Lên đầu trang">
         <i class="fas fa-arrow-up text-xl"></i>
     </button>
 
-    <!-- Scripts (unchanged functionality + small aria improvements) -->
+    <!-- Scripts -->
     <script>
-        // Dynamic year
-        const yearEl = document.getElementById('year');
-        if (yearEl) yearEl.textContent = new Date().getFullYear();
+        // Set dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Dark Mode Logic
+        // 1. Dark Mode Logic
         const themeToggleBtn = document.getElementById('theme-toggle');
         const htmlElement = document.documentElement;
 
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // Check system preference or saved local storage
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             htmlElement.classList.add('dark');
         } else {
             htmlElement.classList.remove('dark');
@@ -505,85 +513,91 @@
 
         themeToggleBtn.addEventListener('click', () => {
             htmlElement.classList.toggle('dark');
-            localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
         });
 
-        // Mobile Menu Toggle (with ARIA)
+        // 2. Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
         mobileMenuBtn.addEventListener('click', () => {
-            const wasHidden = mobileMenu.classList.contains('hidden');
             mobileMenu.classList.toggle('hidden');
-            const expanded = !mobileMenu.classList.contains('hidden');
-            mobileMenuBtn.setAttribute('aria-expanded', String(expanded));
-            if (!wasHidden) {
-                mobileMenuBtn.focus();
-            } else {
-                const firstLink = mobileMenu.querySelector('a');
-                if (firstLink) firstLink.focus();
-            }
+            const isExpanded = !mobileMenu.classList.contains('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
         });
 
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('#mobile-menu a').forEach(link => link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        }));
-
-        // Calculator Logic
+        // 3. Calculator Logic
         const bikeButtons = document.querySelectorAll('.bike-select');
         const monthSlider = document.getElementById('month-slider');
         const monthDisplay = document.getElementById('month-display');
         const totalPriceEl = document.getElementById('total-price');
+        
+        let currentBasePrice = 900000; // Default Xe Số
+        let currentMonths = 1;
 
-        let currentBasePrice = 900000;
-        let currentMonths = parseInt(monthSlider ? monthSlider.value : 1, 10) || 1;
-
+        // Helper to format currency
         const formatCurrency = (amount) => {
             return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
         };
 
         const updatePrice = () => {
+            // Logic giảm giá nhẹ nếu thuê lâu (Giả lập)
             let discount = 0;
-            if (currentMonths >= 6) discount = 0.10;
-            else if (currentMonths >= 3) discount = 0.05;
+            if(currentMonths >= 3) discount = 0.05; // Giảm 5% nếu > 3 tháng
+            if(currentMonths >= 6) discount = 0.10; // Giảm 10% nếu > 6 tháng
 
             let total = currentBasePrice * currentMonths * (1 - discount);
+            // Làm tròn đến hàng nghìn
             total = Math.round(total / 1000) * 1000;
-            if (totalPriceEl) totalPriceEl.innerText = formatCurrency(total);
+
+            totalPriceEl.innerText = formatCurrency(total);
         };
 
+        // Handle Bike Type Selection
         bikeButtons.forEach(btn => {
             btn.addEventListener('click', () => {
+                // UI Toggle
                 bikeButtons.forEach(b => {
-                    b.classList.remove('ring-2', 'ring-brand-accent', 'bg-brand-accent/5', 'text-brand-accent');
+                    b.classList.remove('ring-2', 'ring-brand-accent', 'bg-brand-accent/5');
                     b.classList.add('bg-gray-50', 'dark:bg-gray-800', 'text-gray-500');
-                    b.setAttribute('aria-pressed', 'false');
+                    b.querySelector('i').classList.remove('text-brand-accent');
                 });
-
+                
                 btn.classList.remove('bg-gray-50', 'dark:bg-gray-800', 'text-gray-500');
-                btn.classList.add('ring-2', 'ring-brand-accent', 'bg-brand-accent/5', 'text-brand-accent');
-                btn.setAttribute('aria-pressed', 'true');
-
-                currentBasePrice = parseInt(btn.dataset.price, 10) || currentBasePrice;
+                btn.classList.add('ring-2', 'ring-brand-accent', 'bg-brand-accent/5', 'text-brand-accent'); 
+                
+                // Logic Update
+                currentBasePrice = parseInt(btn.dataset.price);
                 updatePrice();
             });
         });
 
-        if (monthSlider) {
-            monthSlider.addEventListener('input', (e) => {
-                currentMonths = parseInt(e.target.value, 10);
-                monthSlider.setAttribute('aria-valuenow', String(currentMonths));
-                if (monthDisplay) monthDisplay.innerText = currentMonths + " tháng";
-                updatePrice();
-            });
-        }
+        // Handle Slider
+        monthSlider.addEventListener('input', (e) => {
+            currentMonths = parseInt(e.target.value);
+            monthSlider.setAttribute('aria-valuenow', currentMonths);
+            monthDisplay.innerText = currentMonths + " tháng";
+            updatePrice();
+        });
 
+        // Init
         updatePrice();
 
-        // Back to Top visibility
+        // 4. Back to Top Button visibility
         const backToTopBtn = document.getElementById('back-to-top');
+
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
                 backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
@@ -591,114 +605,10 @@
                 backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
             }
         });
+
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            history.replaceState(null, '', '#hero');
         });
-
-        /* Scrollspy + URL hash sync */
-        const sections = Array.from(document.querySelectorAll('main section[id]'));
-        const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-        const inPageNavLinks = navLinks.filter(a => a.getAttribute('href') && a.getAttribute('href').startsWith('#'));
-
-        function setActiveHash(hash) {
-            const id = (hash || '').replace('#', '');
-            navLinks.forEach(link => {
-                const target = link.getAttribute('href');
-                if (target && target.startsWith('#') && target.replace('#','') === id) {
-                    link.classList.add('active');
-                    link.setAttribute('aria-current', 'true');
-                } else {
-                    link.classList.remove('active');
-                    link.removeAttribute('aria-current');
-                }
-            });
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    if (id) history.replaceState(null, '', '#' + id);
-                    setActiveHash('#' + id);
-                }
-            });
-        }, {
-            root: null,
-            rootMargin: '-40% 0px -40% 0px',
-            threshold: 0
-        });
-
-        sections.forEach(sec => observer.observe(sec));
-
-        inPageNavLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const href = link.getAttribute('href');
-                const id = href.replace('#', '');
-                const targetEl = document.getElementById(id);
-                if (targetEl) {
-                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    history.pushState(null, '', '#' + id);
-                    setActiveHash('#' + id);
-                } else {
-                    history.pushState(null, '', href);
-                }
-
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
-            });
-        });
-
-        window.addEventListener('popstate', () => {
-            const hash = location.hash;
-            if (hash) {
-                const id = hash.replace('#', '');
-                const el = document.getElementById(id);
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-            setActiveHash(location.hash || '#hero');
-        });
-
-        window.addEventListener('load', () => {
-            if (location.hash) {
-                const id = location.hash.replace('#', '');
-                const el = document.getElementById(id);
-                if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
-                setActiveHash(location.hash);
-            } else {
-                updateActiveByViewport();
-            }
-        });
-
-        function updateActiveByViewport() {
-            const centerY = window.innerHeight / 2;
-            let found = false;
-            for (const sec of sections) {
-                const rect = sec.getBoundingClientRect();
-                if (rect.top <= centerY && rect.bottom >= centerY) {
-                    const id = sec.id;
-                    history.replaceState(null, '', '#' + id);
-                    setActiveHash('#' + id);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                const firstId = sections.length ? sections[0].id : null;
-                if (firstId) setActiveHash('#' + firstId);
-            }
-        }
-
-        let scrollTimeout = null;
-        window.addEventListener('scroll', () => {
-            if (scrollTimeout) clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => updateActiveByViewport(), 150);
-        }, { passive: true });
 
     </script>
 </body>
