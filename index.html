@@ -1,755 +1,777 @@
 <!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-   <title>Bống - Thuê Xe Máy tháng Long Biên giao tận nơi</title>
-   <meta name="description" content="Dịch vụ cho thuê xe máy tháng uy tín tại Long Biên - Bống. Giao diện Ultra, thủ tục nhanh gọn.">
-   
-   <!-- Meta Geo Position -->
-   <meta name="geo.position" content="21.0429286;105.8713834" />
-   <meta name="geo.placename" content="Nguyễn Văn Cừ, Bồ Đề, Long Biên, Hà Nội, Việt Nam" />
-   <meta name="geo.region" content="VN-HN" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Bống - Thuê Xe Máy tháng Long Biên giao tận nơi</title>
+    <meta name="description" content="Dịch vụ cho thuê xe máy tháng uy tín tại Long Biên - Bống. Giao diện Ultra, thủ tục nhanh gọn.">
+    
+    <!-- Meta Geo Position -->
+    <meta name="geo.position" content="21.0429286;105.8713834" />
+    <meta name="geo.placename" content="Nguyễn Văn Cừ, Bồ Đề, Long Biên, Hà Nội, Việt Nam" />
+    <meta name="geo.region" content="VN-HN" />
 
-   <!-- Tailwind CDN -->
-   <script src="https://cdn.tailwindcss.com"></script>
-   
-   <!-- Config Tailwind Colors to match Apple iOS Style -->
-   <script>
-       tailwind.config = {
-           darkMode: 'class',
-           theme: {
-               extend: {
-                   colors: {
-                       ios: {
-                           blue: '#007AFF',
-                           green: '#34C759',
-                           red: '#FF3B30',
-                           orange: '#FF9500',
-                           yellow: '#FFCC00',
-                           purple: '#AF52DE',
-                           gray: '#8E8E93',
-                           lightBg: '#F2F2F7',
-                           darkBg: '#000000',
-                           darkCard: '#1C1C1E',
-                       }
-                   },
-                   fontFamily: {
-                       sans: ['SF Pro Display', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-                   },
-                   boxShadow: {
-                       'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
-                       'glow': '0 0 20px rgba(0, 122, 255, 0.4)',
-                       'float': '0 10px 40px -10px rgba(0,0,0,0.3)',
-                   },
-               }
-           }
-       }
-   </script>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Config Tailwind Colors to match Apple iOS Style -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ios: {
+                            blue: '#007AFF',
+                            green: '#34C759',
+                            red: '#FF3B30',
+                            orange: '#FF9500',
+                            yellow: '#FFCC00',
+                            purple: '#AF52DE',
+                            gray: '#8E8E93',
+                            lightBg: '#F2F2F7',
+                            darkBg: '#000000',
+                            darkCard: '#1C1C1E',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['SF Pro Display', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                        'glow': '0 0 20px rgba(0, 122, 255, 0.4)',
+                        'float': '0 10px 40px -10px rgba(0,0,0,0.3)',
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.3s ease-out forwards',
+                        'bounce-slow': 'bounce 2s infinite',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%': { transform: 'translateY(100%)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-   <!-- Fonts & Icons -->
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-   <style>
-       /* Base Style */
-       body {
-           -webkit-tap-highlight-color: transparent;
-           font-family: 'Inter', sans-serif;
-       }
+    <style>
+        /* Base Style */
+        body {
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+        }
 
-       /* Glassmorphism Classes */
-       .glass-panel {
-           background: rgba(255, 255, 255, 0.65);
-           backdrop-filter: blur(16px);
-           -webkit-backdrop-filter: blur(16px);
-           border: 1px solid rgba(255, 255, 255, 0.3);
-       }
-       .dark .glass-panel {
-           background: rgba(28, 28, 30, 0.65);
-           border: 1px solid rgba(255, 255, 255, 0.08);
-       }
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-panel {
+            background: rgba(28, 28, 30, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-       .glass-header {
-           background: rgba(255, 255, 255, 0.85);
-           backdrop-filter: blur(20px);
-           -webkit-backdrop-filter: blur(20px);
-           border-bottom: 1px solid rgba(0,0,0,0.05);
-       }
-       .dark .glass-header {
-           background: rgba(0, 0, 0, 0.85);
-           border-bottom: 1px solid rgba(255,255,255,0.1);
-       }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .dark .glass-header {
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
 
-       /* Animations */
-       .reveal {
-           opacity: 0;
-           transform: translateY(30px);
-           transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-       }
-       .reveal.active {
-           opacity: 1;
-           transform: translateY(0);
-       }
-
-       /* Slider Styling */
-       input[type=range] {
-           -webkit-appearance: none;
-           background: transparent;
-       }
-       input[type=range]::-webkit-slider-thumb {
-           -webkit-appearance: none;
-           height: 24px;
-           width: 24px;
-           border-radius: 50%;
-           background: #ffffff;
-           box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-           margin-top: -10px;
-           cursor: pointer;
-           transition: transform 0.1s;
-       }
-       input[type=range]::-webkit-slider-runnable-track {
-           width: 100%;
-           height: 4px;
-           cursor: pointer;
-           background: #E5E5EA;
-           border-radius: 2px;
-       }
-       .dark input[type=range]::-webkit-slider-runnable-track {
-           background: #3A3A3C;
-       }
-
-       /* Call Pulse */
-       @keyframes pulse-ring {
-           0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7); }
-           70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(52, 199, 89, 0); }
-           100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
-       }
-       .call-pulse {
-           animation: pulse-ring 2s infinite;
-       }
-       
-       /* Text Gradient */
-       .text-gradient {
-           background-clip: text;
-           -webkit-background-clip: text;
-           -webkit-text-fill-color: transparent;
-           background-image: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
-       }
-
-       /* FAQ Details Styling */
-       details > summary {
-           list-style: none;
-       }
-       details > summary::-webkit-details-marker {
-           display: none;
-       }
-       details[open] summary ~ * {
-           animation: sweep .3s ease-in-out;
-       }
-       @keyframes sweep {
-           0%    {opacity: 0; transform: translateY(-10px)}
-           100%  {opacity: 1; transform: translateY(0)}
-       }
-
-       /* Footer Accordion Styles */
-       .footer-group.active .footer-content {
-           max-height: 500px; /* Arbitrary large height for animation */
-           opacity: 1;
-       }
-       .footer-group.active i.fa-chevron-down {
-           transform: rotate(180deg);
-       }
-
-       /* Quick Action Button Styles */
-       .quick-action-menu {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            transform-origin: bottom center;
-       }
-       .quick-action-menu.active {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            pointer-events: auto;
-       }
-       .quick-action-menu.inactive {
+        /* Animations */
+        .reveal {
             opacity: 0;
-            transform: scale(0.8) translateY(20px);
-            pointer-events: none;
-       }
-       #quick-main-btn.active i {
-           transform: rotate(135deg);
-       }
-   </style>
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            margin-top: -10px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #E5E5EA;
+            border-radius: 2px;
+        }
+        .dark input[type=range]::-webkit-slider-runnable-track {
+            background: #3A3A3C;
+        }
+
+        /* Call Pulse */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(52, 199, 89, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
+        }
+        .call-pulse {
+            animation: pulse-ring 2s infinite;
+        }
+        
+        /* Text Gradient */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+        }
+
+        /* FAQ Details Styling */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: sweep .3s ease-in-out;
+        }
+        @keyframes sweep {
+            0%    {opacity: 0; transform: translateY(-10px)}
+            100%  {opacity: 1; transform: translateY(0)}
+        }
+
+        /* Footer Accordion Styles */
+        .footer-group.active .footer-content {
+            max-height: 500px; /* Arbitrary large height for animation */
+            opacity: 1;
+        }
+        .footer-group.active i.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        /* Quick Action Button Styles */
+        .quick-action-menu {
+             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+             transform-origin: bottom center;
+        }
+        .quick-action-menu.active {
+             opacity: 1;
+             transform: scale(1) translateY(0);
+             pointer-events: auto;
+        }
+        .quick-action-menu.inactive {
+             opacity: 0;
+             transform: scale(0.8) translateY(20px);
+             pointer-events: none;
+        }
+        #quick-main-btn.active i {
+            transform: rotate(135deg);
+        }
+
+        /* Chat UI Specifics */
+        .chat-bubble-user {
+            background: #007AFF;
+            color: white;
+            border-radius: 18px 18px 4px 18px;
+            margin-left: auto;
+        }
+        .chat-bubble-ai {
+            background: #E5E5EA;
+            color: black;
+            border-radius: 18px 18px 18px 4px;
+            margin-right: auto;
+        }
+        .dark .chat-bubble-ai {
+            background: #3A3A3C;
+            color: white;
+        }
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body class="bg-ios-lightBg dark:bg-ios-darkBg text-gray-900 dark:text-white transition-colors duration-500 overflow-x-hidden font-sans">
 
-   <!-- 1. NAVBAR (Glass Header) -->
-   <header class="fixed top-0 w-full z-40 glass-header transition-all duration-300">
-       <div class="max-w-7xl mx-auto px-4 sm:px-6">
-           <div class="flex justify-between items-center h-16">
-               <!-- Logo -->
-               <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-                   <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ios-blue to-purple-600 flex items-center justify-center text-white font-bold shadow-lg transform group-hover:rotate-12 transition-transform duration-300">
-                       B
-                   </div>
-                   <span class="text-xl font-bold tracking-tight">Bống</span>
-               </div>
-
-               <!-- Desktop Menu (Updated with new links) -->
-               <nav class="hidden xl:flex space-x-1">
-                   <a href="#hero" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all">Trang chủ</a>
-                   <a href="#process" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all text-ios-blue">Quy trình</a>
-                   <a href="#about" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all">Giới thiệu</a>
-                   <a href="#why-us" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all text-ios-blue">Ưu điểm</a>
-                   <a href="#services" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all">Dịch vụ</a>
-                   <a href="#pricing" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all">Bảng giá</a>
-                   <a href="#target-users" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all text-ios-blue">Đối tượng</a>
-                   <a href="#reviews" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all">Đánh giá</a>
-                   <a href="#guarantee" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all text-ios-blue">Cam kết</a>
-                   <a href="#contact" class="px-3 py-2 rounded-full text-xs font-medium bg-black text-white dark:bg-white dark:text-black hover:opacity-80 transition-all shadow-lg">Liên hệ</a>
-               </nav>
-
-               <!-- Right Actions -->
-               <div class="flex items-center gap-3">
-                   <button id="theme-toggle" class="w-9 h-9 rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 transition-transform hover:scale-110 active:scale-95">
-                       <i class="fas fa-moon text-xs dark:hidden text-gray-600"></i>
-                       <i class="fas fa-sun text-xs hidden dark:block text-yellow-400"></i>
-                   </button>
-
-                   <!-- Mobile Menu Btn -->
-                   <button id="menu-btn" class="xl:hidden w-9 h-9 flex items-center justify-center text-xl focus:outline-none">
-                       <i class="fas fa-bars"></i>
-                   </button>
-               </div>
-           </div>
-       </div>
-   </header>
-
-   <!-- SIDEBAR (Full Menu - Updated) -->
-   <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
-   <div id="sidebar" class="fixed top-0 right-0 h-full w-[280px] bg-white/90 dark:bg-ios-darkCard/95 backdrop-blur-xl z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col border-l border-white/20">
-       <div class="p-6 flex justify-between items-center border-b border-gray-100 dark:border-gray-700">
-           <h2 class="text-xl font-bold">Menu</h2>
-           <button id="close-sidebar" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600">
-               <i class="fas fa-times"></i>
-           </button>
-       </div>
-       <div class="flex-1 overflow-y-auto py-2">
-           <div class="px-4 space-y-1">
-               <!-- Existing Links -->
-               <a href="#hero" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-home w-6 text-ios-blue"></i> Trang chủ</a>
-               
-               <!-- New Link 1 -->
-               <a href="#process" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-stream w-6 text-ios-purple"></i> Quy trình thuê</a>
-               
-               <a href="#about" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-info-circle w-6 text-purple-500"></i> Giới thiệu</a>
-               
-               <!-- New Link 2 -->
-               <a href="#why-us" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-thumbs-up w-6 text-ios-green"></i> Vì sao chọn Bống</a>
-
-               <a href="#services" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-motorcycle w-6 text-ios-orange"></i> Dịch vụ</a>
-               <a href="#pricing" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-tag w-6 text-ios-green"></i> Bảng giá</a>
-               
-               <!-- New Link 3 -->
-               <a href="#target-users" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-users w-6 text-blue-400"></i> Đối tượng</a>
-
-               <a href="#faq" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-question-circle w-6 text-ios-yellow"></i> FAQ</a>
-               <a href="#reviews" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-star w-6 text-yellow-400"></i> Đánh giá</a>
-               
-               <!-- New Link 4 -->
-               <a href="#guarantee" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-medal w-6 text-red-500"></i> Cam kết</a>
-
-               <a href="#security" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-shield-alt w-6 text-blue-400"></i> Bảo mật</a>
-               <a href="#policy" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-file-contract w-6 text-gray-500"></i> Chính sách</a>
-               
-               <!-- New Link 5 -->
-               <a href="#final-cta" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-bolt w-6 text-yellow-500"></i> Đăng ký ngay</a>
-
-               <a href="#contact" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all text-ios-blue"><i class="fas fa-paper-plane w-6"></i> Liên hệ</a>
-           </div>
-       </div>
-   </div>
-
-   <!-- MAIN CONTENT -->
-   <main class="pt-24 pb-10 min-h-screen">
-       
-       <!-- 1. HERO (TRANG CHỦ) -->
-       <section id="hero" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-24 scroll-mt-28">
-           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-               <!-- Text -->
-               <div class="reveal active space-y-6 text-center lg:text-left">
-                   <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ios-blue/10 border border-ios-blue/20 text-ios-blue text-xs font-bold uppercase tracking-wider">
-                       <span class="relative flex h-2 w-2">
-                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ios-blue opacity-75"></span>
-                         <span class="relative inline-flex rounded-full h-2 w-2 bg-ios-blue"></span>
-                       </span>
-                       Sẵn sàng phục vụ
-                   </div>
-                   <h1 class="text-5xl sm:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-                       Di chuyển <br>
-                       <span class="text-gradient">Thông minh hơn.</span>
-                   </h1>
-                   <p class="text-lg text-gray-500 dark:text-gray-400 max-w-lg mx-auto lg:mx-0 font-light">
-                       Ứng dụng cho thuê xe máy <b>siêu tốc</b> tại Long Biên. Không thủ tục rườm rà, chỉ cần CCCD, nhận xe trong 10 phút.
-                   </p>
-                   <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-                       <button onclick="document.getElementById('pricing').scrollIntoView()" class="bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full font-bold shadow-lg hover:transform hover:-translate-y-1 transition-all">
-                           Xem xe ngay
-                       </button>
-                       <button onclick="window.location.href='tel:037496643'" class="px-8 py-4 rounded-full font-bold border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-white/5 transition-all">
-                           Gọi tư vấn
-                       </button>
-                   </div>
-               </div>
-
-               <!-- Interactive Calculator Card -->
-               <div class="reveal relative lg:h-[500px] flex items-center justify-center">
-                   <div class="absolute top-10 right-10 w-64 h-64 bg-blue-500/30 rounded-full blur-[80px] -z-10 animate-pulse"></div>
-                   <div class="glass-panel w-full max-w-md p-6 sm:p-8 rounded-[40px] shadow-float relative overflow-hidden">
-                       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-ios-blue to-purple-500"></div>
-                       <div class="flex justify-between items-center mb-8">
-                           <div>
-                               <h3 class="text-2xl font-bold">Tính chi phí</h3>
-                               <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold mt-1">Ước tính nhanh</p>
-                           </div>
-                           <div class="w-10 h-10 rounded-full bg-ios-lightBg dark:bg-white/10 flex items-center justify-center">
-                               <i class="fas fa-calculator text-ios-blue"></i>
-                           </div>
-                       </div>
-                       <!-- Selector -->
-                       <div class="grid grid-cols-2 gap-3 mb-8">
-                           <button class="bike-selector group relative overflow-hidden p-4 rounded-2xl border border-ios-blue bg-ios-blue/10 text-ios-blue transition-all" data-price="900000" onclick="selectBike(this)">
-                               <span class="relative z-10 flex flex-col items-center">
-                                   <i class="fas fa-motorcycle text-2xl mb-2"></i>
-                                   <span class="font-bold text-sm">Xe Số</span>
-                               </span>
-                           </button>
-                           <button class="bike-selector group relative overflow-hidden p-4 rounded-2xl border border-transparent bg-gray-100 dark:bg-white/5 text-gray-500 transition-all hover:bg-gray-200 dark:hover:bg-white/10" data-price="1200000" onclick="selectBike(this)">
-                               <span class="relative z-10 flex flex-col items-center">
-                                   <i class="fas fa-scooter text-2xl mb-2"></i>
-                                   <span class="font-bold text-sm">Xe Ga</span>
-                               </span>
-                           </button>
-                       </div>
-                       <!-- Slider -->
-                       <div class="mb-8">
-                           <div class="flex justify-between text-sm font-medium mb-4">
-                               <span class="text-gray-500">Thời gian thuê</span>
-                               <span id="month-display" class="bg-black dark:bg-white text-white dark:text-black px-3 py-1 rounded-lg text-xs font-bold">1 tháng</span>
-                           </div>
-                           <input type="range" min="1" max="12" value="1" id="month-slider" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
-                       </div>
-                       <!-- Result -->
-                       <div class="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-white/10">
-                           <div class="flex flex-col">
-                               <span class="text-xs text-gray-400">Tổng thanh toán</span>
-                           </div>
-                           <div id="total-price" class="text-4xl font-bold tracking-tighter text-gradient">900k</div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </section>
-
-       <!-- NEW SECTION 1: QUY TRÌNH THUÊ XE -->
-       <section id="process" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
-           <div class="text-center mb-16 reveal">
-               <h2 class="text-3xl font-bold mb-4">4 Bước Đơn Giản</h2>
-               <p class="text-gray-500">Nhận xe nhanh chóng chỉ sau 10 phút</p>
-           </div>
-           <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-               <!-- Step 1 -->
-               <div class="reveal glass-panel p-6 rounded-[32px] text-center relative z-10">
-                   <div class="w-14 h-14 mx-auto bg-ios-blue text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-glow">1</div>
-                   <h3 class="text-lg font-bold mb-2">Chọn Xe</h3>
-                   <p class="text-sm text-gray-500">Lựa chọn mẫu xe phù hợp trên website hoặc gọi hotline.</p>
-               </div>
-               <!-- Step 2 -->
-               <div class="reveal glass-panel p-6 rounded-[32px] text-center relative z-10 delay-100">
-                   <div class="w-14 h-14 mx-auto bg-ios-purple text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-lg">2</div>
-                   <h3 class="text-lg font-bold mb-2">Gửi CCCD</h3>
-                   <p class="text-sm text-gray-500">Chụp ảnh CCCD gửi qua Zalo để làm hợp đồng điện tử.</p>
-               </div>
-               <!-- Step 3 -->
-               <div class="reveal glass-panel p-6 rounded-[32px] text-center relative z-10 delay-200">
-                   <div class="w-14 h-14 mx-auto bg-ios-orange text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-lg">3</div>
-                   <h3 class="text-lg font-bold mb-2">Nhận Xe</h3>
-                   <p class="text-sm text-gray-500">Đến cửa hàng nhận xe hoặc chúng tôi giao tận nơi.</p>
-               </div>
-               <!-- Step 4 -->
-               <div class="reveal glass-panel p-6 rounded-[32px] text-center relative z-10 delay-300">
-                   <div class="w-14 h-14 mx-auto bg-ios-green text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-glow">4</div>
-                   <h3 class="text-lg font-bold mb-2">Thanh Toán</h3>
-                   <p class="text-sm text-gray-500">Thanh toán tháng đầu và cọc (nếu có) bằng chuyển khoản/TM.</p>
-               </div>
-           </div>
-       </section>
-
-       <!-- 2. GIỚI THIỆU (ABOUT) -->
-       <section id="about" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
-           <div class="glass-panel p-8 md:p-12 rounded-[40px] reveal">
-               <div class="grid md:grid-cols-2 gap-10 items-center">
-                   <div>
-                       <div class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 mb-6">
-                           <i class="fas fa-info-circle text-2xl"></i>
-                       </div>
-                       <h2 class="text-3xl font-bold mb-4">Về Bống</h2>
-                       <p class="text-gray-500 dark:text-gray-300 leading-relaxed mb-6">
-                           Chúng tôi là đơn vị tiên phong trong việc số hóa quy trình thuê xe máy tại Hà Nội. Với Bống, việc thuê xe trở nên đơn giản như đặt một cuốc xe công nghệ. Không giữ giấy tờ gốc, không tiền cọc cao, ưu tiên trải nghiệm người dùng.
-                       </p>
-                       <ul class="space-y-3">
-                           <li class="flex items-center gap-3"><i class="fas fa-check-circle text-ios-green"></i> <span>5 năm kinh nghiệm</span></li>
-                           <li class="flex items-center gap-3"><i class="fas fa-check-circle text-ios-green"></i> <span>Hơn 1000+ khách hàng hài lòng</span></li>
-                           <li class="flex items-center gap-3"><i class="fas fa-check-circle text-ios-green"></i> <span>Hỗ trợ sự cố 24/7</span></li>
-                       </ul>
-                   </div>
-                   <div class="grid grid-cols-2 gap-4">
-                       <div class="bg-gray-100 dark:bg-white/5 p-6 rounded-3xl text-center">
-                           <h4 class="text-4xl font-bold text-ios-blue mb-2">500+</h4>
-                           <p class="text-sm text-gray-500">Đầu xe</p>
-                       </div>
-                       <div class="bg-gray-100 dark:bg-white/5 p-6 rounded-3xl text-center">
-                           <h4 class="text-4xl font-bold text-ios-purple mb-2">10k+</h4>
-                           <p class="text-sm text-gray-500">Chuyến đi</p>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </section>
-
-       <!-- NEW SECTION 2: VÌ SAO CHỌN BỐNG -->
-       <section id="why-us" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl font-bold mb-4">Vì Sao Chọn Bống?</h2>
-                <p class="text-gray-500">Sự khác biệt tạo nên thương hiệu</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Advantage 1 -->
-                <div class="reveal glass-panel p-8 rounded-[32px] flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-ios-blue shrink-0">
-                        <i class="fas fa-dollar-sign text-xl"></i>
+    <!-- 1. NAVBAR (Glass Header) -->
+    <header class="fixed top-0 w-full z-40 glass-header transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ios-blue to-purple-600 flex items-center justify-center text-white font-bold shadow-lg transform group-hover:rotate-12 transition-transform duration-300">
+                        B
                     </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Giá Tốt Nhất Khu Vực</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Cam kết mức giá thuê cạnh tranh nhất Long Biên, không phát sinh chi phí ẩn.</p>
-                    </div>
+                    <span class="text-xl font-bold tracking-tight">Bống</span>
                 </div>
-                <!-- Advantage 2 -->
-                <div class="reveal glass-panel p-8 rounded-[32px] flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-ios-green shrink-0">
-                        <i class="fas fa-file-signature text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Thủ Tục 4.0</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Nói không với giấy tờ rườm rà. Xác minh online, ký hợp đồng điện tử tiện lợi.</p>
-                    </div>
-                </div>
-                <!-- Advantage 3 -->
-                <div class="reveal glass-panel p-8 rounded-[32px] flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-ios-orange shrink-0">
-                        <i class="fas fa-wrench text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Xe Mới & Bảo Dưỡng</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Đội ngũ kỹ thuật kiểm tra xe hàng tuần. Xe luôn trong tình trạng vận hành tốt nhất.</p>
-                    </div>
-                </div>
-                <!-- Advantage 4 -->
-                <div class="reveal glass-panel p-8 rounded-[32px] flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-ios-purple shrink-0">
-                        <i class="fas fa-headset text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Hỗ Trợ 24/7</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Đội ngũ CSKH và cứu hộ luôn túc trực để giải quyết mọi sự cố trên đường.</p>
-                    </div>
+
+                <!-- Desktop Menu (Updated with new links) -->
+                <nav class="hidden xl:flex space-x-1">
+                    <a href="#hero" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all">Trang chủ</a>
+                    <a href="#process" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all text-ios-blue">Quy trình</a>
+                    <a href="#about" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all">Giới thiệu</a>
+                    <a href="#why-us" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all text-ios-blue">Ưu điểm</a>
+                    <a href="#services" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all">Dịch vụ</a>
+                    <a href="#pricing" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all">Bảng giá</a>
+                    <a href="#target-users" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all text-ios-blue">Đối tượng</a>
+                    <a href="#reviews" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all">Đánh giá</a>
+                    <a href="#guarantee" class="px-2 py-2 rounded-full text-xs font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-all text-ios-blue">Cam kết</a>
+                    <a href="#contact" class="px-3 py-2 rounded-full text-xs font-medium bg-black text-white dark:bg-white dark:text-black hover:opacity-80 transition-all shadow-lg">Liên hệ</a>
+                </nav>
+
+                <!-- Right Actions -->
+                <div class="flex items-center gap-3">
+                    <button id="theme-toggle" class="w-9 h-9 rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 transition-transform hover:scale-110 active:scale-95">
+                        <i class="fas fa-moon text-xs dark:hidden text-gray-600"></i>
+                        <i class="fas fa-sun text-xs hidden dark:block text-yellow-400"></i>
+                    </button>
+
+                    <!-- Mobile Menu Btn -->
+                    <button id="menu-btn" class="xl:hidden w-9 h-9 flex items-center justify-center text-xl focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
-       </section>
+        </div>
+    </header>
 
-       <!-- 3. DỊCH VỤ (SERVICES) -->
-       <section id="services" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
-           <div class="text-center mb-16 reveal">
-               <h2 class="text-3xl font-bold mb-4">Dịch vụ của chúng tôi</h2>
-               <p class="text-gray-500">Giải pháp di chuyển toàn diện</p>
-           </div>
-           <div class="grid md:grid-cols-3 gap-6">
-               <div class="reveal glass-panel p-6 rounded-3xl hover:bg-white dark:hover:bg-white/10 transition-colors">
-                   <i class="fas fa-clock text-4xl text-ios-blue mb-4"></i>
-                   <h3 class="text-xl font-bold mb-2">Thuê Theo Tháng</h3>
-                   <p class="text-sm text-gray-500">Giải pháp tiết kiệm cho sinh viên và người đi làm dài hạn.</p>
-               </div>
-               <div class="reveal glass-panel p-6 rounded-3xl hover:bg-white dark:hover:bg-white/10 transition-colors">
-                   <i class="fas fa-tools text-4xl text-ios-orange mb-4"></i>
-                   <h3 class="text-xl font-bold mb-2">Bảo Dưỡng Miễn Phí</h3>
-                   <p class="text-sm text-gray-500">Định kỳ thay dầu, kiểm tra phanh lốp hoàn toàn miễn phí.</p>
-               </div>
-               <div class="reveal glass-panel p-6 rounded-3xl hover:bg-white dark:hover:bg-white/10 transition-colors">
-                   <i class="fas fa-truck text-4xl text-ios-green mb-4"></i>
-                   <h3 class="text-xl font-bold mb-2">Giao Xe Tận Nơi</h3>
-                   <p class="text-sm text-gray-500">Giao xe tận nhà trong bán kính 5km quanh Long Biên.</p>
-               </div>
-           </div>
-       </section>
-
-       <!-- 4. BẢNG GIÁ (PRICING) -->
-       <section id="pricing" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
-           <div class="text-center mb-16 reveal">
-               <h2 class="text-3xl font-bold mb-4">Bảng giá minh bạch</h2>
-               <p class="text-gray-500">Giá đã bao gồm bảo dưỡng định kỳ.</p>
-           </div>
-           
-           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-               <!-- Basic -->
-               <div class="reveal glass-panel p-8 rounded-[32px] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                   <div class="h-12 w-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-2xl mb-6">⚙️</div>
-                   <h3 class="text-xl font-bold mb-2">Xe Số</h3>
-                   <div class="flex items-baseline gap-1 mb-6">
-                       <span class="text-3xl font-bold">900k</span>
-                       <span class="text-gray-500">/tháng</span>
-                   </div>
-                   <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
-                       <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Wave / Dream / Sirius</li>
-                       <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Tiết kiệm xăng nhất</li>
-                   </ul>
-                   <a href="tel:037496643" class="block w-full py-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-center font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Chọn xe này</a>
-               </div>
-
-               <!-- Standard -->
-               <div class="reveal relative p-8 rounded-[32px] bg-ios-darkCard text-white shadow-2xl transform md:-translate-y-6 border border-gray-700 overflow-hidden">
-                   <div class="absolute top-0 right-0 bg-ios-blue text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">HOT</div>
-                   <div class="h-12 w-12 rounded-2xl bg-gray-700 flex items-center justify-center text-2xl mb-6">🛵</div>
-                   <h3 class="text-xl font-bold mb-2">Xe Ga Thường</h3>
-                   <div class="flex items-baseline gap-1 mb-6">
-                       <span class="text-4xl font-bold text-ios-blue">1.2tr</span>
-                       <span class="text-gray-400">/tháng</span>
-                   </div>
-                   <ul class="space-y-4 mb-8 text-sm text-gray-300">
-                       <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Vision / Lead cũ / Attila</li>
-                       <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Cốp rộng tiện lợi</li>
-                   </ul>
-                   <a href="tel:037496643" class="block w-full py-3 rounded-xl bg-ios-blue text-white text-center font-bold hover:bg-blue-600 transition-colors shadow-glow">Chọn xe này</a>
-               </div>
-
-               <!-- Premium -->
-               <div class="reveal glass-panel p-8 rounded-[32px] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                   <div class="h-12 w-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-2xl mb-6">🏍️</div>
-                   <h3 class="text-xl font-bold mb-2">Xe Ga Cao Cấp</h3>
-                   <div class="flex items-baseline gap-1 mb-6">
-                       <span class="text-3xl font-bold">1.5tr</span>
-                       <span class="text-gray-500">/tháng</span>
-                   </div>
-                   <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
-                       <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Airblade / Vision mới</li>
-                       <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Xe đời cao, êm ái</li>
-                   </ul>
-                   <a href="tel:037496643" class="block w-full py-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-center font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Chọn xe này</a>
-               </div>
-           </div>
-       </section>
-
-       <!-- NEW SECTION 3: ĐỐI TƯỢNG PHÙ HỢP -->
-       <section id="target-users" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
-            <h2 class="text-3xl font-bold mb-12 text-center reveal">Ai nên thuê xe tại Bống?</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- User 1 -->
-                <div class="reveal glass-panel p-8 rounded-[32px] text-center group hover:bg-ios-blue/5 transition-all">
-                    <div class="w-20 h-20 mx-auto rounded-full bg-blue-100 mb-6 flex items-center justify-center">
-                        <i class="fas fa-user-graduate text-3xl text-ios-blue"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Sinh Viên</h3>
-                    <p class="text-sm text-gray-500">Tiết kiệm chi phí mua xe, không lo phí sửa chữa. Phù hợp cho các bạn đi học, đi làm thêm.</p>
-                </div>
-                <!-- User 2 -->
-                <div class="reveal glass-panel p-8 rounded-[32px] text-center group hover:bg-ios-purple/5 transition-all">
-                    <div class="w-20 h-20 mx-auto rounded-full bg-purple-100 mb-6 flex items-center justify-center">
-                        <i class="fas fa-laptop-house text-3xl text-ios-purple"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Dân Văn Phòng</h3>
-                    <p class="text-sm text-gray-500">Xe tay ga đẹp, cốp rộng để laptop/túi xách. Dễ dàng di chuyển trong giờ cao điểm.</p>
-                </div>
-                <!-- User 3 -->
-                <div class="reveal glass-panel p-8 rounded-[32px] text-center group hover:bg-ios-orange/5 transition-all">
-                    <div class="w-20 h-20 mx-auto rounded-full bg-orange-100 mb-6 flex items-center justify-center">
-                        <i class="fas fa-biking text-3xl text-ios-orange"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Tài Xế Công Nghệ</h3>
-                    <p class="text-sm text-gray-500">Dòng xe số bền bỉ, tiết kiệm xăng. Hỗ trợ thay dầu nhớt định kỳ để bạn yên tâm chạy đơn.</p>
-                </div>
+    <!-- SIDEBAR (Full Menu - Updated) -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="sidebar" class="fixed top-0 right-0 h-full w-[280px] bg-white/90 dark:bg-ios-darkCard/95 backdrop-blur-xl z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col border-l border-white/20">
+        <div class="p-6 flex justify-between items-center border-b border-gray-100 dark:border-gray-700">
+            <h2 class="text-xl font-bold">Menu</h2>
+            <button id="close-sidebar" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex-1 overflow-y-auto py-2">
+            <div class="px-4 space-y-1">
+                <a href="#hero" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-home w-6 text-ios-blue"></i> Trang chủ</a>
+                <a href="#process" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-stream w-6 text-ios-purple"></i> Quy trình thuê</a>
+                <a href="#about" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-info-circle w-6 text-purple-500"></i> Giới thiệu</a>
+                <a href="#why-us" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-thumbs-up w-6 text-ios-green"></i> Vì sao chọn Bống</a>
+                <a href="#services" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-motorcycle w-6 text-ios-orange"></i> Dịch vụ</a>
+                <a href="#pricing" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-tag w-6 text-ios-green"></i> Bảng giá</a>
+                <a href="#target-users" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-users w-6 text-blue-400"></i> Đối tượng</a>
+                <a href="#faq" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-question-circle w-6 text-ios-yellow"></i> FAQ</a>
+                <a href="#reviews" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-star w-6 text-yellow-400"></i> Đánh giá</a>
+                <a href="#guarantee" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-medal w-6 text-red-500"></i> Cam kết</a>
+                <a href="#security" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-shield-alt w-6 text-blue-400"></i> Bảo mật</a>
+                <a href="#policy" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-file-contract w-6 text-gray-500"></i> Chính sách</a>
+                <a href="#final-cta" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all"><i class="fas fa-bolt w-6 text-yellow-500"></i> Đăng ký ngay</a>
+                <a href="#contact" class="sidebar-link block px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 font-medium transition-all text-ios-blue"><i class="fas fa-paper-plane w-6"></i> Liên hệ</a>
             </div>
-       </section>
+        </div>
+    </div>
 
-       <!-- 5. FAQ -->
-       <section id="faq" class="py-16 max-w-3xl mx-auto px-4 sm:px-6 scroll-mt-24">
-           <h2 class="text-3xl font-bold mb-8 text-center reveal">Câu hỏi thường gặp</h2>
-           <div class="space-y-4 reveal">
-               <details class="group glass-panel rounded-2xl p-4 cursor-pointer">
-                   <summary class="flex justify-between items-center font-semibold">
-                       <span>Thủ tục thuê xe cần những gì?</span>
-                       <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                   </summary>
-                   <p class="text-gray-500 mt-3 text-sm">Bạn chỉ cần mang theo Căn cước công dân (CCCD) gắn chip và Thanh toán tiền thuê tháng đầu tiên. Không cần giữ lại giấy tờ gốc.</p>
-               </details>
-               <details class="group glass-panel rounded-2xl p-4 cursor-pointer">
-                   <summary class="flex justify-between items-center font-semibold">
-                       <span>Xe hỏng hóc thì sao?</span>
-                       <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                   </summary>
-                   <p class="text-gray-500 mt-3 text-sm">Nếu lỗi do xe tự phát sinh (động cơ), chúng tôi sửa miễn phí hoặc đổi xe khác. Nếu do va chạm/tai nạn, khách hàng chịu phí sửa chữa.</p>
-               </details>
-               <details class="group glass-panel rounded-2xl p-4 cursor-pointer">
-                   <summary class="flex justify-between items-center font-semibold">
-                       <span>Có cần đặt cọc không?</span>
-                       <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                   </summary>
-                   <p class="text-gray-500 mt-3 text-sm">Tùy từng loại xe, khoản cọc dao động từ 1 - 3 triệu đồng. Khoản này sẽ được hoàn trả 100% khi bạn trả xe.</p>
-               </details>
-           </div>
-       </section>
+    <!-- MAIN CONTENT -->
+    <main class="pt-24 pb-10 min-h-screen">
+        
+        <!-- 1. HERO (TRANG CHỦ) -->
+        <section id="hero" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-24 scroll-mt-28">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Text -->
+                <div class="reveal active space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ios-blue/10 border border-ios-blue/20 text-ios-blue text-xs font-bold uppercase tracking-wider">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ios-blue opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-ios-blue"></span>
+                        </span>
+                        Sẵn sàng phục vụ
+                    </div>
+                    <h1 class="text-5xl sm:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
+                        Di chuyển <br>
+                        <span class="text-gradient">Thông minh hơn.</span>
+                    </h1>
+                    <p class="text-lg text-gray-500 dark:text-gray-400 max-w-lg mx-auto lg:mx-0 font-light">
+                        Ứng dụng cho thuê xe máy <b>siêu tốc</b> tại Long Biên. Không thủ tục rườm rà, chỉ cần CCCD, nhận xe trong 10 phút.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                        <button onclick="document.getElementById('pricing').scrollIntoView()" class="bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full font-bold shadow-lg hover:transform hover:-translate-y-1 transition-all">
+                            Xem xe ngay
+                        </button>
+                        <button onclick="window.location.href='tel:037496643'" class="px-8 py-4 rounded-full font-bold border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-white/5 transition-all">
+                            Gọi tư vấn
+                        </button>
+                    </div>
+                </div>
 
-       <!-- 6. ĐÁNH GIÁ (REVIEWS) -->
-       <section id="reviews" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
-           <div class="flex items-center justify-between mb-8 reveal">
-               <h2 class="text-3xl font-bold">Khách hàng nói gì</h2>
-               <div class="flex text-yellow-400 gap-1">
-                   <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-               </div>
-           </div>
-           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
-               <div class="glass-panel p-6 rounded-3xl">
-                   <p class="text-sm text-gray-600 dark:text-gray-300 italic mb-4">"Xe chạy êm, giá rẻ hơn so với mặt bằng chung. Anh chủ rất nhiệt tình hỗ trợ khi xe mình bị thủng săm."</p>
-                   <div class="flex items-center gap-3">
-                       <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="user"></div>
-                       <div class="text-sm font-bold">Nguyễn Văn A <span class="block text-xs font-normal text-gray-500">Sinh viên</span></div>
-                   </div>
-               </div>
-               <div class="glass-panel p-6 rounded-3xl">
-                   <p class="text-sm text-gray-600 dark:text-gray-300 italic mb-4">"Thủ tục nhanh gọn thật sự, 10 phút là có xe đi. Xe Vision còn khá mới, đi phố rất tiện."</p>
-                   <div class="flex items-center gap-3">
-                       <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" alt="user"></div>
-                       <div class="text-sm font-bold">Trần Thị B <span class="block text-xs font-normal text-gray-500">NV Văn Phòng</span></div>
-                   </div>
-               </div>
-               <div class="glass-panel p-6 rounded-3xl">
-                   <p class="text-sm text-gray-600 dark:text-gray-300 italic mb-4">"Mình thuê 3 tháng để chạy Grab, xe bền, ít hỏng vặt. Rất đáng đồng tiền bát gạo."</p>
-                   <div class="flex items-center gap-3">
-                       <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" alt="user"></div>
-                       <div class="text-sm font-bold">Lê Văn C <span class="block text-xs font-normal text-gray-500">Tài xế công nghệ</span></div>
-                   </div>
-               </div>
-           </div>
-       </section>
-
-       <!-- NEW SECTION 4: CAM KẾT & BẢO ĐẢM -->
-       <section id="guarantee" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
-            <div class="glass-panel p-10 rounded-[40px] border border-ios-green/30 relative overflow-hidden reveal">
-                <div class="absolute -right-20 -top-20 w-64 h-64 bg-green-500/10 rounded-full blur-3xl"></div>
-                <div class="grid md:grid-cols-2 gap-8 items-center relative z-10">
-                    <div>
-                        <h2 class="text-3xl font-bold mb-6">Cam Kết Vàng Từ Bống</h2>
-                        <div class="space-y-6">
-                            <div class="flex items-start gap-4">
-                                <i class="fas fa-sync text-2xl text-ios-blue mt-1"></i>
-                                <div>
-                                    <h4 class="font-bold">Đổi Xe Trong 3 Ngày</h4>
-                                    <p class="text-sm text-gray-500">Nếu cảm thấy xe không phù hợp, bạn được đổi xe khác miễn phí trong 3 ngày đầu.</p>
-                                </div>
+                <!-- Interactive Calculator Card -->
+                <div class="reveal relative lg:h-[500px] flex items-center justify-center">
+                    <div class="absolute top-10 right-10 w-64 h-64 bg-blue-500/30 rounded-full blur-[80px] -z-10 animate-pulse"></div>
+                    <div class="glass-panel w-full max-w-md p-6 sm:p-8 rounded-[40px] shadow-float relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-ios-blue to-purple-500"></div>
+                        <div class="flex justify-between items-center mb-8">
+                            <div>
+                                <h3 class="text-2xl font-bold">Tính chi phí</h3>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold mt-1">Ước tính nhanh</p>
                             </div>
-                            <div class="flex items-start gap-4">
-                                <i class="fas fa-money-bill-wave text-2xl text-ios-green mt-1"></i>
-                                <div>
-                                    <h4 class="font-bold">Hoàn Cọc Siêu Tốc</h4>
-                                    <p class="text-sm text-gray-500">Cam kết hoàn lại 100% tiền cọc (nếu có) trong vòng 24h sau khi trả xe.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <i class="fas fa-tools text-2xl text-ios-red mt-1"></i>
-                                <div>
-                                    <h4 class="font-bold">Cứu Hộ Tận Nơi</h4>
-                                    <p class="text-sm text-gray-500">Xe hỏng giữa đường? Gọi ngay cho chúng tôi để được hỗ trợ.</p>
-                                </div>
+                            <div class="w-10 h-10 rounded-full bg-ios-lightBg dark:bg-white/10 flex items-center justify-center">
+                                <i class="fas fa-calculator text-ios-blue"></i>
                             </div>
                         </div>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-white/5 rounded-3xl p-6 flex flex-col items-center justify-center text-center h-full">
-                        <i class="fas fa-medal text-6xl text-yellow-400 mb-4 animate-bounce"></i>
-                        <h3 class="text-xl font-bold">Uy Tín Tạo Niềm Tin</h3>
-                        <p class="text-gray-400 text-sm mt-2">Chúng tôi không chỉ cho thuê xe, chúng tôi trao bạn sự an tâm trên mọi nẻo đường.</p>
+                        <!-- Selector -->
+                        <div class="grid grid-cols-2 gap-3 mb-8">
+                            <button class="bike-selector group relative overflow-hidden p-4 rounded-2xl border border-ios-blue bg-ios-blue/10 text-ios-blue transition-all" data-price="900000" onclick="selectBike(this)">
+                                <span class="relative z-10 flex flex-col items-center">
+                                    <i class="fas fa-motorcycle text-2xl mb-2"></i>
+                                    <span class="font-bold text-sm">Xe Số</span>
+                                </span>
+                            </button>
+                            <button class="bike-selector group relative overflow-hidden p-4 rounded-2xl border border-transparent bg-gray-100 dark:bg-white/5 text-gray-500 transition-all hover:bg-gray-200 dark:hover:bg-white/10" data-price="1200000" onclick="selectBike(this)">
+                                <span class="relative z-10 flex flex-col items-center">
+                                    <i class="fas fa-scooter text-2xl mb-2"></i>
+                                    <span class="font-bold text-sm">Xe Ga</span>
+                                </span>
+                            </button>
+                        </div>
+                        <!-- Slider -->
+                        <div class="mb-8">
+                            <div class="flex justify-between text-sm font-medium mb-4">
+                                <span class="text-gray-500">Thời gian thuê</span>
+                                <span id="month-display" class="bg-black dark:bg-white text-white dark:text-black px-3 py-1 rounded-lg text-xs font-bold">1 tháng</span>
+                            </div>
+                            <input type="range" min="1" max="12" value="1" id="month-slider" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                        </div>
+                        <!-- Result -->
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-white/10">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400">Tổng thanh toán</span>
+                            </div>
+                            <div id="total-price" class="text-4xl font-bold tracking-tighter text-gradient">900k</div>
+                        </div>
                     </div>
                 </div>
             </div>
-       </section>
+        </section>
 
-       <!-- 7 & 8. BẢO MẬT & CHÍNH SÁCH (SECURITY & POLICY) -->
-       <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 scroll-mt-24">
-           <div id="security" class="reveal glass-panel p-8 rounded-3xl border-l-4 border-ios-blue">
-               <div class="flex items-center gap-4 mb-4">
-                   <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-ios-blue"><i class="fas fa-shield-alt"></i></div>
-                   <h3 class="text-xl font-bold">Bảo Mật</h3>
-               </div>
-               <p class="text-sm text-gray-500 mb-4">Chúng tôi cam kết bảo mật tuyệt đối thông tin cá nhân của khách hàng. Dữ liệu CCCD chỉ được sử dụng cho mục đích hợp đồng thuê xe và không chia sẻ với bên thứ ba.</p>
-               <a href="#" class="text-ios-blue text-sm font-bold hover:underline">Xem chi tiết <i class="fas fa-arrow-right text-xs"></i></a>
-           </div>
+        <!-- NEW SECTION 1: QUY TRÌNH THUÊ XE -->
+        <section id="process" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl font-bold mb-4">4 Bước Đơn Giản</h2>
+                <p class="text-gray-500">Nhận xe nhanh chóng chỉ sau 10 phút</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <!-- Step 1 -->
+                <div class="reveal glass-panel p-6 rounded-[32px] text-center relative z-10">
+                    <div class="w-14 h-14 mx-auto bg-ios-blue text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-glow">1</div>
+                    <h3 class="text-lg font-bold mb-2">Chọn Xe</h3>
+                    <p class="text-sm text-gray-500">Lựa chọn mẫu xe phù hợp trên website hoặc gọi hotline.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="reveal glass-panel p-6 rounded-[32px] text-center relative z-10 delay-100">
+                    <div class="w-14 h-14 mx-auto bg-ios-purple text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-lg">2</div>
+                    <h3 class="text-lg font-bold mb-2">Gửi CCCD</h3>
+                    <p class="text-sm text-gray-500">Chụp ảnh CCCD gửi qua Zalo để làm hợp đồng điện tử.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="reveal glass-panel p-6 rounded-[32px] text-center relative z-10 delay-200">
+                    <div class="w-14 h-14 mx-auto bg-ios-orange text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-lg">3</div>
+                    <h3 class="text-lg font-bold mb-2">Nhận Xe</h3>
+                    <p class="text-sm text-gray-500">Đến cửa hàng nhận xe hoặc chúng tôi giao tận nơi.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="reveal glass-panel p-6 rounded-[32px] text-center relative z-10 delay-300">
+                    <div class="w-14 h-14 mx-auto bg-ios-green text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-glow">4</div>
+                    <h3 class="text-lg font-bold mb-2">Thanh Toán</h3>
+                    <p class="text-sm text-gray-500">Thanh toán tháng đầu và cọc (nếu có) bằng chuyển khoản/TM.</p>
+                </div>
+            </div>
+        </section>
 
-           <div id="policy" class="reveal glass-panel p-8 rounded-3xl border-l-4 border-ios-green">
-               <div class="flex items-center gap-4 mb-4">
-                   <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-ios-green"><i class="fas fa-file-contract"></i></div>
-                   <h3 class="text-xl font-bold">Chính Sách</h3>
-               </div>
-               <p class="text-sm text-gray-500 mb-4">Khách hàng được đổi xe miễn phí trong 3 ngày đầu nếu không ưng ý. Cam kết hoàn tiền cọc trong vòng 24h sau khi kết thúc hợp đồng.</p>
-               <a href="#" class="text-ios-green text-sm font-bold hover:underline">Xem điều khoản <i class="fas fa-arrow-right text-xs"></i></a>
-           </div>
-       </section>
+        <!-- 2. GIỚI THIỆU (ABOUT) -->
+        <section id="about" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
+            <div class="glass-panel p-8 md:p-12 rounded-[40px] reveal">
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 mb-6">
+                            <i class="fas fa-info-circle text-2xl"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold mb-4">Về Bống</h2>
+                        <p class="text-gray-500 dark:text-gray-300 leading-relaxed mb-6">
+                            Chúng tôi là đơn vị tiên phong trong việc số hóa quy trình thuê xe máy tại Hà Nội. Với Bống, việc thuê xe trở nên đơn giản như đặt một cuốc xe công nghệ. Không giữ giấy tờ gốc, không tiền cọc cao, ưu tiên trải nghiệm người dùng.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3"><i class="fas fa-check-circle text-ios-green"></i> <span>5 năm kinh nghiệm</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check-circle text-ios-green"></i> <span>Hơn 1000+ khách hàng hài lòng</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check-circle text-ios-green"></i> <span>Hỗ trợ sự cố 24/7</span></li>
+                        </ul>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-100 dark:bg-white/5 p-6 rounded-3xl text-center">
+                            <h4 class="text-4xl font-bold text-ios-blue mb-2">500+</h4>
+                            <p class="text-sm text-gray-500">Đầu xe</p>
+                        </div>
+                        <div class="bg-gray-100 dark:bg-white/5 p-6 rounded-3xl text-center">
+                            <h4 class="text-4xl font-bold text-ios-purple mb-2">10k+</h4>
+                            <p class="text-sm text-gray-500">Chuyến đi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-       <!-- 9. LIÊN HỆ (CONTACT) -->
-       <section id="contact" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24 reveal">
-            <h2 class="text-3xl font-bold mb-8 text-center">Liên hệ với chúng tôi</h2>
-           <div class="glass-panel p-2 rounded-[40px] shadow-lg overflow-hidden relative group">
-               <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10 pointer-events-none rounded-[40px]"></div>
-               <div class="absolute bottom-8 left-8 z-20 text-white">
-                   <h3 class="text-2xl font-bold mb-2">Ghé thăm Bống</h3>
-                   <p class="text-sm opacity-90"><i class="fas fa-map-marker-alt text-ios-red mr-2"></i>Nguyễn Văn Cừ, Bồ Đề, Long Biên, Hà Nội, Việt Nam.</p>
-                   <div class="mt-4 flex gap-3">
-                       <a href="https://maps.app.goo.gl/gzRjyx9JF5eQiXad6?g_st=ipc" target="_blank" class="bg-white text-black px-6 py-2 rounded-full text-sm font-bold hover:bg-gray-200 transition-colors">Chỉ đường</a>
-                       <a href="tel:037496643" class="bg-ios-green text-white px-6 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-colors">Gọi Ngay</a>
-                   </div>
-               </div>
-               <iframe
-                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.652758173453!2d105.87532631533235!3d21.04657689254642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135a96860000001%3A0x6a00000000000000!2sHanoi!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s"
-                   width="100%" height="400" style="border:0; border-radius: 32px; filter: grayscale(20%) contrast(1.1);" allowfullscreen="" loading="lazy">
-               </iframe>
-           </div>
-       </section>
-       
-       <!-- NEW SECTION 5: FINAL CTA -->
-       <section id="final-cta" class="py-20 max-w-7xl mx-auto px-4 sm:px-6">
-           <div class="reveal glass-panel rounded-[48px] p-12 text-center bg-gradient-to-br from-ios-blue/10 to-purple-500/10 border border-ios-blue/20">
-               <h2 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Bạn đã sẵn sàng?</h2>
-               <p class="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                   Đừng để phương tiện đi lại trở thành rào cản. Liên hệ với Bống ngay hôm nay để nhận xe trong vòng 10 phút.
-               </p>
-               <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="tel:037496643" class="px-10 py-4 rounded-full bg-ios-blue text-white font-bold shadow-glow hover:bg-blue-600 transition-all transform hover:scale-105">
-                        <i class="fas fa-phone-alt mr-2"></i> Gọi ngay: 037 496 643
-                    </a>
-                    <a href="https://zalo.me/037496643" target="_blank" class="px-10 py-4 rounded-full bg-white text-blue-500 font-bold border border-blue-100 hover:bg-gray-50 transition-all transform hover:scale-105">
-                        <i class="fas fa-comment-dots mr-2"></i> Chat Zalo
-                    </a>
-               </div>
-           </div>
-       </section>
+        <!-- NEW SECTION 2: VÌ SAO CHỌN BỐNG -->
+        <section id="why-us" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
+             <div class="text-center mb-16 reveal">
+                 <h2 class="text-3xl font-bold mb-4">Vì Sao Chọn Bống?</h2>
+                 <p class="text-gray-500">Sự khác biệt tạo nên thương hiệu</p>
+             </div>
+             <div class="grid md:grid-cols-2 gap-6">
+                 <!-- Advantage 1 -->
+                 <div class="reveal glass-panel p-8 rounded-[32px] flex items-start gap-4">
+                     <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-ios-blue shrink-0">
+                         <i class="fas fa-dollar-sign text-xl"></i>
+                     </div>
+                     <div>
+                         <h3 class="text-xl font-bold mb-2">Giá Tốt Nhất Khu Vực</h3>
+                         <p class="text-sm text-gray-500 dark:text-gray-400">Cam kết mức giá thuê cạnh tranh nhất Long Biên, không phát sinh chi phí ẩn.</p>
+                     </div>
+                 </div>
+                 <!-- Advantage 2 -->
+                 <div class="reveal glass-panel p-8 rounded-[32px] flex items-start gap-4">
+                     <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-ios-green shrink-0">
+                         <i class="fas fa-file-signature text-xl"></i>
+                     </div>
+                     <div>
+                         <h3 class="text-xl font-bold mb-2">Thủ Tục 4.0</h3>
+                         <p class="text-sm text-gray-500 dark:text-gray-400">Nói không với giấy tờ rườm rà. Xác minh online, ký hợp đồng điện tử tiện lợi.</p>
+                     </div>
+                 </div>
+                 <!-- Advantage 3 -->
+                 <div class="reveal glass-panel p-8 rounded-[32px] flex items-start gap-4">
+                     <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-ios-orange shrink-0">
+                         <i class="fas fa-wrench text-xl"></i>
+                     </div>
+                     <div>
+                         <h3 class="text-xl font-bold mb-2">Xe Mới & Bảo Dưỡng</h3>
+                         <p class="text-sm text-gray-500 dark:text-gray-400">Đội ngũ kỹ thuật kiểm tra xe hàng tuần. Xe luôn trong tình trạng vận hành tốt nhất.</p>
+                     </div>
+                 </div>
+                 <!-- Advantage 4 -->
+                 <div class="reveal glass-panel p-8 rounded-[32px] flex items-start gap-4">
+                     <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-ios-purple shrink-0">
+                         <i class="fas fa-headset text-xl"></i>
+                     </div>
+                     <div>
+                         <h3 class="text-xl font-bold mb-2">Hỗ Trợ 24/7</h3>
+                         <p class="text-sm text-gray-500 dark:text-gray-400">Đội ngũ CSKH và cứu hộ luôn túc trực để giải quyết mọi sự cố trên đường.</p>
+                     </div>
+                 </div>
+             </div>
+        </section>
 
-   </main>
+        <!-- 3. DỊCH VỤ (SERVICES) -->
+        <section id="services" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl font-bold mb-4">Dịch vụ của chúng tôi</h2>
+                <p class="text-gray-500">Giải pháp di chuyển toàn diện</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="reveal glass-panel p-6 rounded-3xl hover:bg-white dark:hover:bg-white/10 transition-colors">
+                    <i class="fas fa-clock text-4xl text-ios-blue mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Thuê Theo Tháng</h3>
+                    <p class="text-sm text-gray-500">Giải pháp tiết kiệm cho sinh viên và người đi làm dài hạn.</p>
+                </div>
+                <div class="reveal glass-panel p-6 rounded-3xl hover:bg-white dark:hover:bg-white/10 transition-colors">
+                    <i class="fas fa-tools text-4xl text-ios-orange mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Bảo Dưỡng Miễn Phí</h3>
+                    <p class="text-sm text-gray-500">Định kỳ thay dầu, kiểm tra phanh lốp hoàn toàn miễn phí.</p>
+                </div>
+                <div class="reveal glass-panel p-6 rounded-3xl hover:bg-white dark:hover:bg-white/10 transition-colors">
+                    <i class="fas fa-truck text-4xl text-ios-green mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Giao Xe Tận Nơi</h3>
+                    <p class="text-sm text-gray-500">Giao xe tận nhà trong bán kính 5km quanh Long Biên.</p>
+                </div>
+            </div>
+        </section>
 
-   <!-- FLOAT BUTTONS (REDESIGNED EXPANDABLE) -->
-   <div id="quick-action-container" class="fixed bottom-8 left-6 z-50 flex flex-col-reverse items-center gap-3">
-       <!-- Main Toggle Button -->
-       <button id="quick-main-btn" class="w-14 h-14 rounded-full bg-ios-blue text-white shadow-glow flex items-center justify-center hover:scale-105 transition-transform z-20">
-            <i class="fas fa-plus text-2xl transition-transform duration-300"></i>
-       </button>
+        <!-- 4. BẢNG GIÁ (PRICING) -->
+        <section id="pricing" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl font-bold mb-4">Bảng giá minh bạch</h2>
+                <p class="text-gray-500">Giá đã bao gồm bảo dưỡng định kỳ.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic -->
+                <div class="reveal glass-panel p-8 rounded-[32px] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-12 w-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-2xl mb-6">⚙️</div>
+                    <h3 class="text-xl font-bold mb-2">Xe Số</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-3xl font-bold">900k</span>
+                        <span class="text-gray-500">/tháng</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Wave / Dream / Sirius</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Tiết kiệm xăng nhất</li>
+                    </ul>
+                    <a href="tel:037496643" class="block w-full py-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-center font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Chọn xe này</a>
+                </div>
 
-       <!-- Sub Buttons Container (Initially Hidden) -->
-       <div id="quick-sub-btns" class="quick-action-menu inactive flex flex-col-reverse items-center gap-3 absolute bottom-16">
+                <!-- Standard -->
+                <div class="reveal relative p-8 rounded-[32px] bg-ios-darkCard text-white shadow-2xl transform md:-translate-y-6 border border-gray-700 overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-ios-blue text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">HOT</div>
+                    <div class="h-12 w-12 rounded-2xl bg-gray-700 flex items-center justify-center text-2xl mb-6">🛵</div>
+                    <h3 class="text-xl font-bold mb-2">Xe Ga Thường</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-4xl font-bold text-ios-blue">1.2tr</span>
+                        <span class="text-gray-400">/tháng</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Vision / Lead cũ / Attila</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Cốp rộng tiện lợi</li>
+                    </ul>
+                    <a href="tel:037496643" class="block w-full py-3 rounded-xl bg-ios-blue text-white text-center font-bold hover:bg-blue-600 transition-colors shadow-glow">Chọn xe này</a>
+                </div>
+
+                <!-- Premium -->
+                <div class="reveal glass-panel p-8 rounded-[32px] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="h-12 w-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-2xl mb-6">🏍️</div>
+                    <h3 class="text-xl font-bold mb-2">Xe Ga Cao Cấp</h3>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="text-3xl font-bold">1.5tr</span>
+                        <span class="text-gray-500">/tháng</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Airblade / Vision mới</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-ios-blue"></i> Xe đời cao, êm ái</li>
+                    </ul>
+                    <a href="tel:037496643" class="block w-full py-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-center font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Chọn xe này</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION 3: ĐỐI TƯỢNG PHÙ HỢP -->
+        <section id="target-users" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
+             <h2 class="text-3xl font-bold mb-12 text-center reveal">Ai nên thuê xe tại Bống?</h2>
+             <div class="grid md:grid-cols-3 gap-6">
+                 <!-- User 1 -->
+                 <div class="reveal glass-panel p-8 rounded-[32px] text-center group hover:bg-ios-blue/5 transition-all">
+                     <div class="w-20 h-20 mx-auto rounded-full bg-blue-100 mb-6 flex items-center justify-center">
+                         <i class="fas fa-user-graduate text-3xl text-ios-blue"></i>
+                     </div>
+                     <h3 class="text-xl font-bold mb-2">Sinh Viên</h3>
+                     <p class="text-sm text-gray-500">Tiết kiệm chi phí mua xe, không lo phí sửa chữa. Phù hợp cho các bạn đi học, đi làm thêm.</p>
+                 </div>
+                 <!-- User 2 -->
+                 <div class="reveal glass-panel p-8 rounded-[32px] text-center group hover:bg-ios-purple/5 transition-all">
+                     <div class="w-20 h-20 mx-auto rounded-full bg-purple-100 mb-6 flex items-center justify-center">
+                         <i class="fas fa-laptop-house text-3xl text-ios-purple"></i>
+                     </div>
+                     <h3 class="text-xl font-bold mb-2">Dân Văn Phòng</h3>
+                     <p class="text-sm text-gray-500">Xe tay ga đẹp, cốp rộng để laptop/túi xách. Dễ dàng di chuyển trong giờ cao điểm.</p>
+                 </div>
+                 <!-- User 3 -->
+                 <div class="reveal glass-panel p-8 rounded-[32px] text-center group hover:bg-ios-orange/5 transition-all">
+                     <div class="w-20 h-20 mx-auto rounded-full bg-orange-100 mb-6 flex items-center justify-center">
+                         <i class="fas fa-biking text-3xl text-ios-orange"></i>
+                     </div>
+                     <h3 class="text-xl font-bold mb-2">Tài Xế Công Nghệ</h3>
+                     <p class="text-sm text-gray-500">Dòng xe số bền bỉ, tiết kiệm xăng. Hỗ trợ thay dầu nhớt định kỳ để bạn yên tâm chạy đơn.</p>
+                 </div>
+             </div>
+        </section>
+
+        <!-- 5. FAQ -->
+        <section id="faq" class="py-16 max-w-3xl mx-auto px-4 sm:px-6 scroll-mt-24">
+            <h2 class="text-3xl font-bold mb-8 text-center reveal">Câu hỏi thường gặp</h2>
+            <div class="space-y-4 reveal">
+                <details class="group glass-panel rounded-2xl p-4 cursor-pointer">
+                    <summary class="flex justify-between items-center font-semibold">
+                        <span>Thủ tục thuê xe cần những gì?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-500 mt-3 text-sm">Bạn chỉ cần mang theo Căn cước công dân (CCCD) gắn chip và Thanh toán tiền thuê tháng đầu tiên. Không cần giữ lại giấy tờ gốc.</p>
+                </details>
+                <details class="group glass-panel rounded-2xl p-4 cursor-pointer">
+                    <summary class="flex justify-between items-center font-semibold">
+                        <span>Xe hỏng hóc thì sao?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-500 mt-3 text-sm">Nếu lỗi do xe tự phát sinh (động cơ), chúng tôi sửa miễn phí hoặc đổi xe khác. Nếu do va chạm/tai nạn, khách hàng chịu phí sửa chữa.</p>
+                </details>
+                <details class="group glass-panel rounded-2xl p-4 cursor-pointer">
+                    <summary class="flex justify-between items-center font-semibold">
+                        <span>Có cần đặt cọc không?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-500 mt-3 text-sm">Tùy từng loại xe, khoản cọc dao động từ 1 - 3 triệu đồng. Khoản này sẽ được hoàn trả 100% khi bạn trả xe.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- 6. ĐÁNH GIÁ (REVIEWS) -->
+        <section id="reviews" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
+            <div class="flex items-center justify-between mb-8 reveal">
+                <h2 class="text-3xl font-bold">Khách hàng nói gì</h2>
+                <div class="flex text-yellow-400 gap-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                <div class="glass-panel p-6 rounded-3xl">
+                    <p class="text-sm text-gray-600 dark:text-gray-300 italic mb-4">"Xe chạy êm, giá rẻ hơn so với mặt bằng chung. Anh chủ rất nhiệt tình hỗ trợ khi xe mình bị thủng săm."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="user"></div>
+                        <div class="text-sm font-bold">Nguyễn Văn A <span class="block text-xs font-normal text-gray-500">Sinh viên</span></div>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl">
+                    <p class="text-sm text-gray-600 dark:text-gray-300 italic mb-4">"Thủ tục nhanh gọn thật sự, 10 phút là có xe đi. Xe Vision còn khá mới, đi phố rất tiện."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" alt="user"></div>
+                        <div class="text-sm font-bold">Trần Thị B <span class="block text-xs font-normal text-gray-500">NV Văn Phòng</span></div>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl">
+                    <p class="text-sm text-gray-600 dark:text-gray-300 italic mb-4">"Mình thuê 3 tháng để chạy Grab, xe bền, ít hỏng vặt. Rất đáng đồng tiền bát gạo."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" alt="user"></div>
+                        <div class="text-sm font-bold">Lê Văn C <span class="block text-xs font-normal text-gray-500">Tài xế công nghệ</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION 4: CAM KẾT & BẢO ĐẢM -->
+        <section id="guarantee" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
+             <div class="glass-panel p-10 rounded-[40px] border border-ios-green/30 relative overflow-hidden reveal">
+                 <div class="absolute -right-20 -top-20 w-64 h-64 bg-green-500/10 rounded-full blur-3xl"></div>
+                 <div class="grid md:grid-cols-2 gap-8 items-center relative z-10">
+                     <div>
+                         <h2 class="text-3xl font-bold mb-6">Cam Kết Vàng Từ Bống</h2>
+                         <div class="space-y-6">
+                             <div class="flex items-start gap-4">
+                                 <i class="fas fa-sync text-2xl text-ios-blue mt-1"></i>
+                                 <div>
+                                     <h4 class="font-bold">Đổi Xe Trong 3 Ngày</h4>
+                                     <p class="text-sm text-gray-500">Nếu cảm thấy xe không phù hợp, bạn được đổi xe khác miễn phí trong 3 ngày đầu.</p>
+                                 </div>
+                             </div>
+                             <div class="flex items-start gap-4">
+                                 <i class="fas fa-money-bill-wave text-2xl text-ios-green mt-1"></i>
+                                 <div>
+                                     <h4 class="font-bold">Hoàn Cọc Siêu Tốc</h4>
+                                     <p class="text-sm text-gray-500">Cam kết hoàn lại 100% tiền cọc (nếu có) trong vòng 24h sau khi trả xe.</p>
+                                 </div>
+                             </div>
+                             <div class="flex items-start gap-4">
+                                 <i class="fas fa-tools text-2xl text-ios-red mt-1"></i>
+                                 <div>
+                                     <h4 class="font-bold">Cứu Hộ Tận Nơi</h4>
+                                     <p class="text-sm text-gray-500">Xe hỏng giữa đường? Gọi ngay cho chúng tôi để được hỗ trợ.</p>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="bg-gray-50 dark:bg-white/5 rounded-3xl p-6 flex flex-col items-center justify-center text-center h-full">
+                         <i class="fas fa-medal text-6xl text-yellow-400 mb-4 animate-bounce"></i>
+                         <h3 class="text-xl font-bold">Uy Tín Tạo Niềm Tin</h3>
+                         <p class="text-gray-400 text-sm mt-2">Chúng tôi không chỉ cho thuê xe, chúng tôi trao bạn sự an tâm trên mọi nẻo đường.</p>
+                     </div>
+                 </div>
+             </div>
+        </section>
+
+        <!-- 7 & 8. BẢO MẬT & CHÍNH SÁCH (SECURITY & POLICY) -->
+        <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 scroll-mt-24">
+            <div id="security" class="reveal glass-panel p-8 rounded-3xl border-l-4 border-ios-blue">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-ios-blue"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="text-xl font-bold">Bảo Mật</h3>
+                </div>
+                <p class="text-sm text-gray-500 mb-4">Chúng tôi cam kết bảo mật tuyệt đối thông tin cá nhân của khách hàng. Dữ liệu CCCD chỉ được sử dụng cho mục đích hợp đồng thuê xe và không chia sẻ với bên thứ ba.</p>
+                <a href="#" class="text-ios-blue text-sm font-bold hover:underline">Xem chi tiết <i class="fas fa-arrow-right text-xs"></i></a>
+            </div>
+
+            <div id="policy" class="reveal glass-panel p-8 rounded-3xl border-l-4 border-ios-green">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-ios-green"><i class="fas fa-file-contract"></i></div>
+                    <h3 class="text-xl font-bold">Chính Sách</h3>
+                </div>
+                <p class="text-sm text-gray-500 mb-4">Khách hàng được đổi xe miễn phí trong 3 ngày đầu nếu không ưng ý. Cam kết hoàn tiền cọc trong vòng 24h sau khi kết thúc hợp đồng.</p>
+                <a href="#" class="text-ios-green text-sm font-bold hover:underline">Xem điều khoản <i class="fas fa-arrow-right text-xs"></i></a>
+            </div>
+        </section>
+
+        <!-- 9. LIÊN HỆ (CONTACT) -->
+        <section id="contact" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24 reveal">
+             <h2 class="text-3xl font-bold mb-8 text-center">Liên hệ với chúng tôi</h2>
+            <div class="glass-panel p-2 rounded-[40px] shadow-lg overflow-hidden relative group">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10 pointer-events-none rounded-[40px]"></div>
+                <div class="absolute bottom-8 left-8 z-20 text-white">
+                    <h3 class="text-2xl font-bold mb-2">Ghé thăm Bống</h3>
+                    <p class="text-sm opacity-90"><i class="fas fa-map-marker-alt text-ios-red mr-2"></i>Nguyễn Văn Cừ, Bồ Đề, Long Biên, Hà Nội, Việt Nam.</p>
+                    <div class="mt-4 flex gap-3">
+                        <a href="https://maps.app.goo.gl/gzRjyx9JF5eQiXad6?g_st=ipc" target="_blank" class="bg-white text-black px-6 py-2 rounded-full text-sm font-bold hover:bg-gray-200 transition-colors">Chỉ đường</a>
+                        <a href="tel:037496643" class="bg-ios-green text-white px-6 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-colors">Gọi Ngay</a>
+                    </div>
+                </div>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.652758173453!2d105.87532631533235!3d21.04657689254642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135a96860000001%3A0x6a00000000000000!2sHanoi!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" 
+                    width="100%" height="400" style="border:0; border-radius: 32px; filter: grayscale(20%) contrast(1.1);" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </section>
+        
+        <!-- NEW SECTION 5: FINAL CTA -->
+        <section id="final-cta" class="py-20 max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="reveal glass-panel rounded-[48px] p-12 text-center bg-gradient-to-br from-ios-blue/10 to-purple-500/10 border border-ios-blue/20">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Bạn đã sẵn sàng?</h2>
+                <p class="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Đừng để phương tiện đi lại trở thành rào cản. Liên hệ với Bống ngay hôm nay để nhận xe trong vòng 10 phút.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                     <a href="tel:037496643" class="px-10 py-4 rounded-full bg-ios-blue text-white font-bold shadow-glow hover:bg-blue-600 transition-all transform hover:scale-105">
+                         <i class="fas fa-phone-alt mr-2"></i> Gọi ngay: 037 496 643
+                     </a>
+                     <!-- Changed to Simulated AI Button -->
+                     <button onclick="toggleChat()" class="px-10 py-4 rounded-full bg-white text-blue-500 font-bold border border-blue-100 hover:bg-gray-50 transition-all transform hover:scale-105 shadow-sm">
+                         <i class="fas fa-robot mr-2"></i> Chat AI Ngay
+                     </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FLOAT BUTTONS (REDESIGNED EXPANDABLE) -->
+    <div id="quick-action-container" class="fixed bottom-8 left-6 z-50 flex flex-col-reverse items-center gap-3">
+        <!-- Main Toggle Button -->
+        <button id="quick-main-btn" class="w-14 h-14 rounded-full bg-ios-blue text-white shadow-glow flex items-center justify-center hover:scale-105 transition-transform z-20">
+             <i class="fas fa-plus text-2xl transition-transform duration-300"></i>
+        </button>
+
+        <!-- Sub Buttons Container (Initially Hidden) -->
+        <div id="quick-sub-btns" class="quick-action-menu inactive flex flex-col-reverse items-center gap-3 absolute bottom-16">
             
             <!-- Map Button -->
             <a href="https://maps.app.goo.gl/gzRjyx9JF5eQiXad6?g_st=ipc" target="_blank" class="w-12 h-12 rounded-full bg-white text-ios-blue shadow-lg flex items-center justify-center hover:scale-110 transition-transform border border-blue-100" title="Chỉ đường">
@@ -761,67 +783,134 @@
                 <i class="fas fa-phone-alt text-lg"></i>
             </a>
 
+            <!-- AI Chat Button (Floating) -->
+            <button onclick="toggleChat()" class="w-12 h-12 rounded-full bg-ios-purple text-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform" title="Chat AI">
+                <i class="fas fa-robot text-lg"></i>
+            </button>
+
             <!-- Back To Top Button -->
             <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="w-12 h-12 rounded-full bg-gray-600 text-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform" title="Lên đầu trang">
                 <i class="fas fa-arrow-up text-lg"></i>
             </button>
-       </div>
-   </div>
+        </div>
+    </div>
 
-   <!-- NEW FOOTER REDESIGN (ACCORDION STYLE) -->
-   <footer class="bg-gray-50 dark:bg-black border-t border-gray-200 dark:border-gray-800 pt-10 pb-24 md:pb-10">
-       <div class="max-w-7xl mx-auto px-4 sm:px-6">
-           <!-- Grid Layout for Desktop, Stack for Mobile -->
-           <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
-
-               <!-- Col 1 (Desktop: Brand & Social) -->
-               <div class="space-y-4">
-                   <!-- ACCORDION 1: Về Bống -->
-                   <div class="footer-group bg-white dark:bg-white/5 lg:bg-transparent lg:dark:bg-transparent rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 dark:border-white/5 lg:border-none">
-                        <button class="footer-btn w-full flex items-center justify-between p-5 lg:p-0 lg:mb-4 lg:pointer-events-none text-left focus:outline-none">
-                           <div class="flex items-center gap-3">
-                               <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-ios-blue">
-                                   <i class="fas fa-laugh-beam"></i>
-                               </div>
-                               <span class="font-bold text-gray-900 dark:text-white">Về Bống</span>
-                           </div>
-                           <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 lg:hidden"></i>
-                        </button>
-                        <div class="footer-content max-h-0 opacity-0 lg:max-h-full lg:opacity-100 overflow-hidden transition-all duration-500 ease-in-out">
-                            <div class="p-5 pt-0 lg:p-0">
-                                <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3">
-                                    Đơn vị tiên phong số hóa quy trình thuê xe máy. Dịch vụ tận tâm, xe chất lượng, thủ tục 4.0 tối giản nhất Hà Nội.
-                                </p>
-                                <div class="flex items-center gap-2">
-                                    <div class="w-6 h-6 rounded-lg bg-gradient-to-br from-ios-blue to-purple-600 flex items-center justify-center text-white font-bold text-xs">B</div>
-                                    <span class="text-sm font-bold">Bống</span>
-                                </div>
-                            </div>
+    <!-- AI CHAT MODAL (SIMULATED) -->
+    <div id="ai-chat-modal" class="fixed inset-0 z-[60] hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="toggleChat()"></div>
+        
+        <!-- Chat Interface -->
+        <div class="absolute bottom-0 right-0 md:bottom-20 md:right-20 w-full md:w-[400px] h-[80vh] md:h-[600px] bg-white dark:bg-gray-900 rounded-t-3xl md:rounded-3xl flex flex-col shadow-2xl overflow-hidden animate-slide-up transform transition-transform">
+            
+            <!-- Chat Header -->
+            <div class="p-4 bg-gradient-to-r from-ios-blue to-purple-600 text-white flex justify-between items-center shadow-sm z-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                        <i class="fas fa-robot text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg">Trợ lý ảo Bống</h3>
+                        <div class="flex items-center gap-1 text-xs opacity-80">
+                            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Online
                         </div>
-                   </div>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
 
-                   <!-- ACCORDION 6: Mạng xã hội (Moved here for balance) -->
+            <!-- Chat Body -->
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-black/20 scroll-smooth">
+                <!-- Welcome Message -->
+                <div class="flex w-full mt-2 space-x-3 max-w-xs">
+                    <div class="flex-shrink-0 h-8 w-8 rounded-full bg-gradient-to-br from-ios-blue to-purple-600 flex items-center justify-center text-white text-xs font-bold">AI</div>
+                    <div>
+                        <div class="bg-gray-200 dark:bg-gray-800 p-3 rounded-r-lg rounded-bl-lg">
+                            <p class="text-sm text-gray-800 dark:text-gray-200">Xin chào! Em là trợ lý ảo của Bống. Em có thể giúp gì cho anh/chị ạ? (Hỏi về giá, thủ tục, địa chỉ...)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator (Hidden by default) -->
+            <div id="typing-indicator" class="hidden px-4 pb-2 text-xs text-gray-500 italic">
+                Bống đang soạn tin<span class="typing-dot">.</span><span class="typing-dot">.</span><span class="typing-dot">.</span>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+                <form onsubmit="handleChatSubmit(event)" class="flex gap-2">
+                    <input type="text" id="chat-input" placeholder="Nhập câu hỏi..." class="flex-1 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-ios-blue transition-all">
+                    <button type="submit" class="w-12 h-12 rounded-full bg-ios-blue text-white flex items-center justify-center hover:bg-blue-600 transition-colors shadow-lg">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+                <!-- Quick Suggestions -->
+                <div class="flex gap-2 mt-3 overflow-x-auto pb-1 no-scrollbar">
+                    <button onclick="sendQuickMessage('Giá thuê bao nhiêu?')" class="whitespace-nowrap px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Giá thuê?</button>
+                    <button onclick="sendQuickMessage('Thủ tục cần gì?')" class="whitespace-nowrap px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Thủ tục?</button>
+                    <button onclick="sendQuickMessage('Địa chỉ ở đâu?')" class="whitespace-nowrap px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Địa chỉ?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW FOOTER REDESIGN (ACCORDION STYLE) -->
+    <footer class="bg-gray-50 dark:bg-black border-t border-gray-200 dark:border-gray-800 pt-10 pb-24 md:pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <!-- Grid Layout for Desktop, Stack for Mobile -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
+
+                <!-- Col 1 (Desktop: Brand & Social) -->
+                <div class="space-y-4">
+                    <!-- ACCORDION 1: Về Bống -->
                     <div class="footer-group bg-white dark:bg-white/5 lg:bg-transparent lg:dark:bg-transparent rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 dark:border-white/5 lg:border-none">
-                        <button class="footer-btn w-full flex items-center justify-between p-5 lg:p-0 lg:mb-4 lg:pointer-events-none text-left focus:outline-none">
-                           <div class="flex items-center gap-3">
-                               <div class="w-8 h-8 rounded-full bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center text-pink-500">
-                                   <i class="fas fa-share-alt"></i>
-                               </div>
-                               <span class="font-bold text-gray-900 dark:text-white">Mạng xã hội</span>
-                           </div>
-                           <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 lg:hidden"></i>
-                        </button>
-                        <div class="footer-content max-h-0 opacity-0 lg:max-h-full lg:opacity-100 overflow-hidden transition-all duration-500 ease-in-out">
-                            <div class="p-5 pt-0 lg:p-0 flex gap-4">
-                                <a href="#" class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" class="w-10 h-10 rounded-full bg-black text-white border border-gray-700 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"><i class="fab fa-tiktok"></i></a>
+                         <button class="footer-btn w-full flex items-center justify-between p-5 lg:p-0 lg:mb-4 lg:pointer-events-none text-left focus:outline-none">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-ios-blue">
+                                    <i class="fas fa-laugh-beam"></i>
+                                </div>
+                                <span class="font-bold text-gray-900 dark:text-white">Về Bống</span>
                             </div>
-                        </div>
-                   </div>
-               </div>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 lg:hidden"></i>
+                         </button>
+                         <div class="footer-content max-h-0 opacity-0 lg:max-h-full lg:opacity-100 overflow-hidden transition-all duration-500 ease-in-out">
+                             <div class="p-5 pt-0 lg:p-0">
+                                 <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3">
+                                     Đơn vị tiên phong số hóa quy trình thuê xe máy. Dịch vụ tận tâm, xe chất lượng, thủ tục 4.0 tối giản nhất Hà Nội.
+                                 </p>
+                                 <div class="flex items-center gap-2">
+                                     <div class="w-6 h-6 rounded-lg bg-gradient-to-br from-ios-blue to-purple-600 flex items-center justify-center text-white font-bold text-xs">B</div>
+                                     <span class="text-sm font-bold">Bống</span>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
 
-               <!-- Col 2 (Desktop: Explore & Services) -->
-               <div class="space-y-4">
+                    <!-- ACCORDION 6: Mạng xã hội (Moved here for balance) -->
+                     <div class="footer-group bg-white dark:bg-white/5 lg:bg-transparent lg:dark:bg-transparent rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 dark:border-white/5 lg:border-none">
+                         <button class="footer-btn w-full flex items-center justify-between p-5 lg:p-0 lg:mb-4 lg:pointer-events-none text-left focus:outline-none">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center text-pink-500">
+                                    <i class="fas fa-share-alt"></i>
+                                </div>
+                                <span class="font-bold text-gray-900 dark:text-white">Mạng xã hội</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 lg:hidden"></i>
+                         </button>
+                         <div class="footer-content max-h-0 opacity-0 lg:max-h-full lg:opacity-100 overflow-hidden transition-all duration-500 ease-in-out">
+                             <div class="p-5 pt-0 lg:p-0 flex gap-4">
+                                 <a href="#" class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg"><i class="fab fa-facebook-f"></i></a>
+                                 <a href="#" class="w-10 h-10 rounded-full bg-black text-white border border-gray-700 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"><i class="fab fa-tiktok"></i></a>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Col 2 (Desktop: Explore & Services) -->
+                <div class="space-y-4">
                     <!-- ACCORDION 3: Khám phá -->
                     <div class="footer-group bg-white dark:bg-white/5 lg:bg-transparent lg:dark:bg-transparent rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 dark:border-white/5 lg:border-none">
                        <button class="footer-btn w-full flex items-center justify-between p-5 lg:p-0 lg:mb-4 lg:pointer-events-none text-left focus:outline-none">
@@ -866,56 +955,57 @@
 
                <!-- Col 3 (Desktop: Contact & Policy) -->
                <div class="space-y-4">
-                    <!-- ACCORDION 2: Liên hệ -->
-                    <div class="footer-group bg-white dark:bg-white/5 lg:bg-transparent lg:dark:bg-transparent rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 dark:border-white/5 lg:border-none">
-                       <button class="footer-btn w-full flex items-center justify-between p-5 lg:p-0 lg:mb-4 lg:pointer-events-none text-left focus:outline-none">
-                          <div class="flex items-center gap-3">
-                              <div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-ios-green">
-                                  <i class="fas fa-headset"></i>
-                              </div>
-                              <span class="font-bold text-gray-900 dark:text-white">Liên hệ</span>
-                          </div>
-                          <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 lg:hidden"></i>
-                       </button>
-                       <div class="footer-content max-h-0 opacity-0 lg:max-h-full lg:opacity-100 overflow-hidden transition-all duration-500 ease-in-out">
-                           <ul class="p-5 pt-0 lg:p-0 space-y-3 text-sm text-gray-500 dark:text-gray-400">
-                               <li class="flex items-start gap-3 border-b border-gray-100 dark:border-white/5 lg:border-none pb-2 lg:pb-0">
-                                   <i class="fas fa-phone-alt mt-1 text-ios-green"></i>
-                                   <a href="tel:037496643" class="hover:text-white transition-colors font-medium">037 496 643</a>
-                               </li>
-                               <li class="flex items-start gap-3 border-b border-gray-100 dark:border-white/5 lg:border-none pb-2 lg:pb-0">
-                                   <i class="fas fa-map-marker-alt mt-1 text-ios-blue"></i>
-                                   <span>Nguyễn Văn Cừ, Bồ Đề, Long Biên, Hà Nội, Việt Nam.</span>
-                               </li>
-                               <li class="flex items-start gap-3">
-                                   <i class="fas fa-envelope mt-1 text-purple-500"></i>
-                                   <a href="mailto:lienhe@bongapp.vn" class="hover:text-white transition-colors">lienhe@bongapp.vn</a>
-                               </li>
-                           </ul>
-                       </div>
-                  </div>
-
-                   <!-- ACCORDION 5: Chính sách -->
+                   <!-- ACCORDION 2: Liên hệ -->
                    <div class="footer-group bg-white dark:bg-white/5 lg:bg-transparent lg:dark:bg-transparent rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 dark:border-white/5 lg:border-none">
-                       <button class="footer-btn w-full flex items-center justify-between p-5 lg:p-0 lg:mb-4 lg:pointer-events-none text-left focus:outline-none">
-                          <div class="flex items-center gap-3">
-                              <div class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-ios-red">
-                                  <i class="fas fa-shield-alt"></i>
-                              </div>
-                              <span class="font-bold text-gray-900 dark:text-white">Chính sách</span>
-                          </div>
-                          <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 lg:hidden"></i>
-                       </button>
-                       <div class="footer-content max-h-0 opacity-0 lg:max-h-full lg:opacity-100 overflow-hidden transition-all duration-500 ease-in-out">
-                           <ul class="p-5 pt-0 lg:p-0 space-y-3 text-sm text-gray-500 dark:text-gray-400">
-                               <li><a href="#faq" class="hover:text-ios-blue transition-colors block py-1 border-b border-gray-100 dark:border-white/5 lg:border-none">Câu hỏi thường gặp</a></li>
-                               <li><a href="#guarantee" class="hover:text-ios-blue transition-colors block py-1 border-b border-gray-100 dark:border-white/5 lg:border-none">Cam kết dịch vụ</a></li>
-                               <li><a href="#security" class="hover:text-ios-blue transition-colors block py-1 border-b border-gray-100 dark:border-white/5 lg:border-none">Chính sách bảo mật</a></li>
-                               <li><a href="#policy" class="hover:text-ios-blue transition-colors block py-1">Điều khoản sử dụng</a></li>
-                           </ul>
-                       </div>
-                  </div>
-               </div>
+                      <button class="footer-btn w-full flex items-center justify-between p-5 lg:p-0 lg:mb-4 lg:pointer-events-none text-left focus:outline-none">
+                         <div class="flex items-center gap-3">
+                             <div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-ios-green">
+                                 <i class="fas fa-headset"></i>
+                             </div>
+                             <span class="font-bold text-gray-900 dark:text-white">Liên hệ</span>
+                         </div>
+                         <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 lg:hidden"></i>
+                      </button>
+                      <div class="footer-content max-h-0 opacity-0 lg:max-h-full lg:opacity-100 overflow-hidden transition-all duration-500 ease-in-out">
+                          <ul class="p-5 pt-0 lg:p-0 space-y-3 text-sm text-gray-500 dark:text-gray-400">
+                              <li class="flex items-start gap-3 border-b border-gray-100 dark:border-white/5 lg:border-none pb-2 lg:pb-0">
+                                  <i class="fas fa-phone-alt mt-1 text-ios-green"></i>
+                                  <a href="tel:037496643" class="hover:text-white transition-colors font-medium">037 496 643</a>
+                              </li>
+                              <li class="flex items-start gap-3 border-b border-gray-100 dark:border-white/5 lg:border-none pb-2 lg:pb-0">
+                                  <i class="fas fa-map-marker-alt mt-1 text-ios-blue"></i>
+                                  <span>Nguyễn Văn Cừ, Bồ Đề, Long Biên, Hà Nội, Việt Nam.</span>
+                              </li>
+                              <!-- Updated with Email -->
+                              <li class="flex items-start gap-3">
+                                  <i class="fas fa-envelope mt-1 text-purple-500"></i>
+                                  <a href="mailto:mrtuantu1982@gmail.com" class="hover:text-white transition-colors break-all">mrtuantu1982@gmail.com</a>
+                              </li>
+                          </ul>
+                      </div>
+                 </div>
+
+                 <!-- ACCORDION 5: Chính sách -->
+                 <div class="footer-group bg-white dark:bg-white/5 lg:bg-transparent lg:dark:bg-transparent rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 dark:border-white/5 lg:border-none">
+                     <button class="footer-btn w-full flex items-center justify-between p-5 lg:p-0 lg:mb-4 lg:pointer-events-none text-left focus:outline-none">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-ios-red">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <span class="font-bold text-gray-900 dark:text-white">Chính sách</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 lg:hidden"></i>
+                     </button>
+                     <div class="footer-content max-h-0 opacity-0 lg:max-h-full lg:opacity-100 overflow-hidden transition-all duration-500 ease-in-out">
+                         <ul class="p-5 pt-0 lg:p-0 space-y-3 text-sm text-gray-500 dark:text-gray-400">
+                             <li><a href="#faq" class="hover:text-ios-blue transition-colors block py-1 border-b border-gray-100 dark:border-white/5 lg:border-none">Câu hỏi thường gặp</a></li>
+                             <li><a href="#guarantee" class="hover:text-ios-blue transition-colors block py-1 border-b border-gray-100 dark:border-white/5 lg:border-none">Cam kết dịch vụ</a></li>
+                             <li><a href="#security" class="hover:text-ios-blue transition-colors block py-1 border-b border-gray-100 dark:border-white/5 lg:border-none">Chính sách bảo mật</a></li>
+                             <li><a href="#policy" class="hover:text-ios-blue transition-colors block py-1">Điều khoản sử dụng</a></li>
+                         </ul>
+                     </div>
+                 </div>
+              </div>
            </div>
 
            <!-- Copyright -->
@@ -923,131 +1013,222 @@
                <p class="text-xs text-gray-400">© 2024 Cho thuê xe máy Bống. Design by Ultra UI.</p>
            </div>
        </div>
-   </footer>
+    </footer>
 
-   <!-- Scripts -->
-   <script>
-       // --- 1. Dark Mode Logic ---
-       const html = document.documentElement;
-       const themeToggle = document.getElementById('theme-toggle');
-       
-       if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-           html.classList.add('dark');
-       }
+    <!-- Scripts -->
+    <script>
+        // --- 1. Dark Mode Logic ---
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
 
-       themeToggle.addEventListener('click', () => {
-           html.classList.toggle('dark');
-           localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
-       });
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        });
 
-       // --- 2. Calculator Logic ---
-       let currentBasePrice = 900000;
-       const slider = document.getElementById('month-slider');
-       const monthDisplay = document.getElementById('month-display');
-       const totalPriceEl = document.getElementById('total-price');
+        // --- 2. Calculator Logic ---
+        let currentBasePrice = 900000;
+        const slider = document.getElementById('month-slider');
+        const monthDisplay = document.getElementById('month-display');
+        const totalPriceEl = document.getElementById('total-price');
 
-       function updateCalculator() {
-           const months = parseInt(slider.value);
-           monthDisplay.innerText = months + (months === 1 ? ' tháng' : ' tháng');
-           
-           let discount = 0;
-           if (months >= 6) discount = 0.10;
-           else if (months >= 3) discount = 0.05;
+        function updateCalculator() {
+            const months = parseInt(slider.value);
+            monthDisplay.innerText = months + (months === 1 ? ' tháng' : ' tháng');
+            
+            let discount = 0;
+            if (months >= 6) discount = 0.10;
+            else if (months >= 3) discount = 0.05;
 
-           let total = currentBasePrice * months * (1 - discount);
-           
-           if(total >= 1000000) {
-               totalPriceEl.innerText = (total / 1000000).toFixed(1).replace('.0', '') + ' triệu';
-           } else {
-               totalPriceEl.innerText = (total / 1000).toFixed(0) + 'k';
-           }
-       }
+            let total = currentBasePrice * months * (1 - discount);
+            
+            if(total >= 1000000) {
+                totalPriceEl.innerText = (total / 1000000).toFixed(1).replace('.0', '') + ' triệu';
+            } else {
+                totalPriceEl.innerText = (total / 1000).toFixed(0) + 'k';
+            }
+        }
 
-       function selectBike(btn) {
-           document.querySelectorAll('.bike-selector').forEach(b => {
-               b.className = 'bike-selector group relative overflow-hidden p-4 rounded-2xl border border-transparent bg-gray-100 dark:bg-white/5 text-gray-500 transition-all hover:bg-gray-200 dark:hover:bg-white/10';
-           });
-           btn.className = 'bike-selector group relative overflow-hidden p-4 rounded-2xl border border-ios-blue bg-ios-blue/10 text-ios-blue transition-all';
-           currentBasePrice = parseInt(btn.dataset.price);
-           totalPriceEl.classList.remove('reveal');
-           void totalPriceEl.offsetWidth; 
-           updateCalculator();
-       }
+        function selectBike(btn) {
+            document.querySelectorAll('.bike-selector').forEach(b => {
+                b.className = 'bike-selector group relative overflow-hidden p-4 rounded-2xl border border-transparent bg-gray-100 dark:bg-white/5 text-gray-500 transition-all hover:bg-gray-200 dark:hover:bg-white/10';
+            });
+            btn.className = 'bike-selector group relative overflow-hidden p-4 rounded-2xl border border-ios-blue bg-ios-blue/10 text-ios-blue transition-all';
+            currentBasePrice = parseInt(btn.dataset.price);
+            totalPriceEl.classList.remove('reveal');
+            void totalPriceEl.offsetWidth; 
+            updateCalculator();
+        }
 
-       slider.addEventListener('input', updateCalculator);
+        slider.addEventListener('input', updateCalculator);
 
-       // --- 3. Sidebar Mobile Menu ---
-       const menuBtn = document.getElementById('menu-btn');
-       const closeSidebar = document.getElementById('close-sidebar');
-       const sidebar = document.getElementById('sidebar');
-       const backdrop = document.getElementById('sidebar-backdrop');
-       const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        // --- 3. Sidebar Mobile Menu ---
+        const menuBtn = document.getElementById('menu-btn');
+        const closeSidebar = document.getElementById('close-sidebar');
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.getElementById('sidebar-backdrop');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
 
-       function toggleMenu() {
-           const isClosed = sidebar.classList.contains('translate-x-full');
-           if (isClosed) {
-               backdrop.classList.remove('hidden');
-               setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
-               sidebar.classList.remove('translate-x-full');
-               document.body.style.overflow = 'hidden'; 
-           } else {
-               backdrop.classList.add('opacity-0');
-               sidebar.classList.add('translate-x-full');
-               setTimeout(() => backdrop.classList.add('hidden'), 300);
-               document.body.style.overflow = '';
-           }
-       }
+        function toggleMenu() {
+            const isClosed = sidebar.classList.contains('translate-x-full');
+            if (isClosed) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+                sidebar.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                backdrop.classList.add('opacity-0');
+                sidebar.classList.add('translate-x-full');
+                setTimeout(() => backdrop.classList.add('hidden'), 300);
+                document.body.style.overflow = '';
+            }
+        }
 
-       menuBtn.addEventListener('click', toggleMenu);
-       closeSidebar.addEventListener('click', toggleMenu);
-       backdrop.addEventListener('click', toggleMenu);
-       sidebarLinks.forEach(link => link.addEventListener('click', toggleMenu));
+        menuBtn.addEventListener('click', toggleMenu);
+        closeSidebar.addEventListener('click', toggleMenu);
+        backdrop.addEventListener('click', toggleMenu);
+        sidebarLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-       // --- 4. Scroll Reveal ---
-       const observer = new IntersectionObserver((entries) => {
-           entries.forEach(entry => {
-               if (entry.isIntersecting) {
-                   entry.target.classList.add('active');
-               }
-           });
-       }, { threshold: 0.1 });
+        // --- 4. Scroll Reveal ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
 
-       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-       // --- 5. Footer Accordion Logic (NEW) ---
-       document.querySelectorAll('.footer-btn').forEach(btn => {
-           btn.addEventListener('click', function() {
-               // Chỉ chạy trên mobile (kiểm tra width < 1024px)
-               if (window.innerWidth < 1024) {
-                   const parent = this.parentElement;
-                   parent.classList.toggle('active');
-               }
-           });
-       });
+        // --- 5. Footer Accordion Logic ---
+        document.querySelectorAll('.footer-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Chỉ chạy trên mobile (kiểm tra width < 1024px)
+                if (window.innerWidth < 1024) {
+                    const parent = this.parentElement;
+                    parent.classList.toggle('active');
+                }
+            });
+        });
 
-       // --- 6. Quick Action Button Logic (NEW) ---
-       const quickMainBtn = document.getElementById('quick-main-btn');
-       const quickSubBtns = document.getElementById('quick-sub-btns');
+        // --- 6. Quick Action Button Logic ---
+        const quickMainBtn = document.getElementById('quick-main-btn');
+        const quickSubBtns = document.getElementById('quick-sub-btns');
 
-       quickMainBtn.addEventListener('click', () => {
-           quickMainBtn.classList.toggle('active');
-           if(quickSubBtns.classList.contains('inactive')) {
-               quickSubBtns.classList.remove('inactive');
-               quickSubBtns.classList.add('active');
-           } else {
-               quickSubBtns.classList.remove('active');
-               quickSubBtns.classList.add('inactive');
-           }
-       });
+        quickMainBtn.addEventListener('click', () => {
+            quickMainBtn.classList.toggle('active');
+            if(quickSubBtns.classList.contains('inactive')) {
+                quickSubBtns.classList.remove('inactive');
+                quickSubBtns.classList.add('active');
+            } else {
+                quickSubBtns.classList.remove('active');
+                quickSubBtns.classList.add('inactive');
+            }
+        });
 
-       // Auto close menu when scrolling
-       window.addEventListener('scroll', () => {
-           if(quickSubBtns.classList.contains('active')) {
-               quickMainBtn.classList.remove('active');
-               quickSubBtns.classList.remove('active');
-               quickSubBtns.classList.add('inactive');
-           }
-       });
-   </script>
+        // Auto close menu when scrolling
+        window.addEventListener('scroll', () => {
+            if(quickSubBtns.classList.contains('active')) {
+                quickMainBtn.classList.remove('active');
+                quickSubBtns.classList.remove('active');
+                quickSubBtns.classList.add('inactive');
+            }
+        });
+
+        // --- 7. SIMULATED AI CHAT LOGIC (No API) ---
+        const chatModal = document.getElementById('ai-chat-modal');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const typingIndicator = document.getElementById('typing-indicator');
+
+        // Toggle Chat Visibility
+        function toggleChat() {
+            chatModal.classList.toggle('hidden');
+            if(!chatModal.classList.contains('hidden')) {
+                chatInput.focus();
+            }
+        }
+
+        // Add a message bubble to the chat
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex w-full mt-2 space-x-3 max-w-xs ${isUser ? 'ml-auto justify-end' : ''}`;
+            
+            const avatarHtml = isUser 
+                ? '' 
+                : `<div class="flex-shrink-0 h-8 w-8 rounded-full bg-gradient-to-br from-ios-blue to-purple-600 flex items-center justify-center text-white text-xs font-bold">AI</div>`;
+            
+            const contentHtml = `
+                <div class="${isUser ? 'chat-bubble-user' : 'chat-bubble-ai'} p-3 shadow-sm">
+                    <p class="text-sm">${text}</p>
+                </div>
+            `;
+
+            messageDiv.innerHTML = isUser ? contentHtml + avatarHtml : avatarHtml + contentHtml;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Simulate AI Logic
+        function simulateAIResponse(userText) {
+            // Show typing indicator
+            typingIndicator.classList.remove('hidden');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            setTimeout(() => {
+                typingIndicator.classList.add('hidden');
+                
+                const lowerText = userText.toLowerCase();
+                let response = "";
+
+                // Basic Logic Matching
+                if (lowerText.includes("giá") || lowerText.includes("bao nhiêu") || lowerText.includes("chi phí")) {
+                    response = "Dạ, xe số bên em giá từ 900k/tháng, xe ga từ 1.2tr - 1.5tr/tháng ạ. Giá đã bao gồm phí bảo dưỡng định kỳ rồi ạ.";
+                } 
+                else if (lowerText.includes("thủ tục") || lowerText.includes("giấy tờ")) {
+                    response = "Thủ tục siêu đơn giản ạ! Anh/chị chỉ cần chụp ảnh CCCD gắn chip và thanh toán tháng đầu tiên là nhận xe ngay.";
+                }
+                else if (lowerText.includes("địa chỉ") || lowerText.includes("ở đâu")) {
+                    response = "Địa chỉ bên em tại: Nguyễn Văn Cừ, Bồ Đề, Long Biên, Hà Nội. Anh/chị có thể xem bản đồ ở phần Liên hệ ạ.";
+                }
+                else if (lowerText.includes("hỏng") || lowerText.includes("sự cố")) {
+                    response = "Nếu xe hỏng do lỗi kỹ thuật, bên em sửa miễn phí hoặc đổi xe khác ngay ạ. Anh/chị gọi hotline 037 496 643 để được cứu hộ nhé.";
+                }
+                else if (lowerText.includes("liên hệ") || lowerText.includes("sđt") || lowerText.includes("số điện thoại")) {
+                    response = "Hotline/Zalo bên em: 037 496 643. Email: mrtuantu1982@gmail.com ạ.";
+                }
+                else if (lowerText.includes("xin chào") || lowerText.includes("hi") || lowerText.includes("hello")) {
+                    response = "Chào anh/chị! Em có thể giúp gì cho anh/chị về việc thuê xe hôm nay ạ?";
+                }
+                else {
+                    response = "Dạ em chưa hiểu rõ ý mình lắm. Anh/chị có thể để lại số điện thoại hoặc gọi 037 496 643 để nhân viên tư vấn kỹ hơn không ạ?";
+                }
+
+                addMessage(response, false);
+            }, 1500); // 1.5s delay for realism
+        }
+
+        // Handle Form Submit
+        function handleChatSubmit(e) {
+            e.preventDefault();
+            const text = chatInput.value.trim();
+            if(!text) return;
+
+            addMessage(text, true);
+            chatInput.value = '';
+            simulateAIResponse(text);
+        }
+
+        // Quick Message Buttons
+        function sendQuickMessage(text) {
+            addMessage(text, true);
+            simulateAIResponse(text);
+        }
+
+    </script>
 </body>
 </html>
