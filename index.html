@@ -372,12 +372,12 @@
                     </div>
                 </div>
 
-                <!-- Interactive Calculator Card (Kept Original) -->
+                <!-- Interactive Calculator Card (Updated with Daily/Monthly Logic) -->
                 <div class="reveal relative lg:h-[500px] flex items-center justify-center">
                     <div class="absolute top-10 right-10 w-64 h-64 bg-blue-500/30 rounded-full blur-[80px] -z-10 animate-pulse"></div>
                     <div class="glass-panel w-full max-w-md p-6 sm:p-8 rounded-[40px] shadow-float relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-ios-blue to-purple-500"></div>
-                        <div class="flex justify-between items-center mb-8">
+                        <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h3 class="text-2xl font-bold">Tính chi phí</h3>
                                 <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold mt-1">Ước tính nhanh</p>
@@ -386,15 +386,30 @@
                                 <i class="fas fa-calculator text-ios-blue"></i>
                             </div>
                         </div>
+
+                        <!-- Mode Switcher (New) -->
+                        <div class="flex bg-gray-100 dark:bg-white/10 p-1 rounded-xl mb-6 relative">
+                            <div id="mode-indicator" class="absolute top-1 left-1 w-[calc(50%-4px)] h-[calc(100%-8px)] bg-white dark:bg-gray-700 rounded-lg shadow-sm transition-all duration-300"></div>
+                            <button onclick="setMode('day')" class="flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors duration-300" id="btn-day">Theo Ngày</button>
+                            <button onclick="setMode('month')" class="flex-1 relative z-10 py-2 text-sm font-medium text-center text-gray-500 transition-colors duration-300" id="btn-month">Theo Tháng</button>
+                        </div>
+
                         <!-- Selector -->
                         <div class="grid grid-cols-2 gap-3 mb-8">
-                            <button class="bike-selector group relative overflow-hidden p-4 rounded-2xl border border-ios-blue bg-ios-blue/10 text-ios-blue transition-all" data-price="900000" onclick="selectBike(this)">
+                            <!-- Added data-day and data-month attributes -->
+                            <button class="bike-selector group relative overflow-hidden p-4 rounded-2xl border border-ios-blue bg-ios-blue/10 text-ios-blue transition-all" 
+                                    data-day="150000" 
+                                    data-month="900000" 
+                                    onclick="selectBike(this)">
                                 <span class="relative z-10 flex flex-col items-center">
                                     <i class="fas fa-motorcycle text-2xl mb-2"></i>
                                     <span class="font-bold text-sm">Xe Số</span>
                                 </span>
                             </button>
-                            <button class="bike-selector group relative overflow-hidden p-4 rounded-2xl border border-transparent bg-gray-100 dark:bg-white/5 text-gray-500 transition-all hover:bg-gray-200 dark:hover:bg-white/10" data-price="1200000" onclick="selectBike(this)">
+                            <button class="bike-selector group relative overflow-hidden p-4 rounded-2xl border border-transparent bg-gray-100 dark:bg-white/5 text-gray-500 transition-all hover:bg-gray-200 dark:hover:bg-white/10" 
+                                    data-day="200000" 
+                                    data-month="1200000" 
+                                    onclick="selectBike(this)">
                                 <span class="relative z-10 flex flex-col items-center">
                                     <i class="fas fa-scooter text-2xl mb-2"></i>
                                     <span class="font-bold text-sm">Xe Ga</span>
@@ -404,17 +419,18 @@
                         <!-- Slider -->
                         <div class="mb-8">
                             <div class="flex justify-between text-sm font-medium mb-4">
-                                <span class="text-gray-500">Thời gian thuê</span>
-                                <span id="month-display" class="bg-black dark:bg-white text-white dark:text-black px-3 py-1 rounded-lg text-xs font-bold">1 tháng</span>
+                                <span id="duration-label" class="text-gray-500">Thời gian thuê (Ngày)</span>
+                                <span id="time-display" class="bg-black dark:bg-white text-white dark:text-black px-3 py-1 rounded-lg text-xs font-bold">1 ngày</span>
                             </div>
-                            <input type="range" min="1" max="12" value="1" id="month-slider" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                            <!-- Default max 30 for days -->
+                            <input type="range" min="1" max="30" value="1" id="time-slider" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
                         </div>
                         <!-- Result -->
                         <div class="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-white/10">
                             <div class="flex flex-col">
                                 <span class="text-xs text-gray-400">Tổng thanh toán</span>
                             </div>
-                            <div id="total-price" class="text-4xl font-bold tracking-tighter text-gradient">900k</div>
+                            <div id="total-price" class="text-4xl font-bold tracking-tighter text-gradient">150k</div>
                         </div>
                     </div>
                 </div>
@@ -450,7 +466,7 @@
                 <div class="reveal glass-panel p-6 rounded-[32px] text-center relative z-10 delay-300">
                     <div class="w-14 h-14 mx-auto bg-ios-green text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-glow">4</div>
                     <h3 class="text-lg font-bold mb-2">Thanh Toán & Cọc</h3>
-                    <p class="text-sm text-gray-500">Thanh toán tháng đầu và cọc từ <strong>2-5 triệu</strong> (tùy xe).</p>
+                    <p class="text-sm text-gray-500">Thanh toán tiền thuê và cọc từ <strong>2-5 triệu</strong> (tùy xe).</p>
                 </div>
             </div>
         </section>
@@ -1169,41 +1185,109 @@
             localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
         });
 
-        // --- 2. Calculator Logic ---
-        let currentBasePrice = 900000;
-        const slider = document.getElementById('month-slider');
-        const monthDisplay = document.getElementById('month-display');
+        // --- 2. Calculator Logic (UPDATED) ---
+        let currentMode = 'day'; // Default mode is 'day'
+        let currentBasePrice = 150000; // Default daily price for first bike
+        const slider = document.getElementById('time-slider');
+        const timeDisplay = document.getElementById('time-display');
+        const durationLabel = document.getElementById('duration-label');
         const totalPriceEl = document.getElementById('total-price');
 
-        function updateCalculator() {
-            const months = parseInt(slider.value);
-            monthDisplay.innerText = months + (months === 1 ? ' tháng' : ' tháng');
-            
-            let discount = 0;
-            if (months >= 6) discount = 0.10;
-            else if (months >= 3) discount = 0.05;
+        // Mode Switching Logic
+        function setMode(mode) {
+            currentMode = mode;
+            const indicator = document.getElementById('mode-indicator');
+            const btnDay = document.getElementById('btn-day');
+            const btnMonth = document.getElementById('btn-month');
 
-            let total = currentBasePrice * months * (1 - discount);
-            
-            if(total >= 1000000) {
-                totalPriceEl.innerText = (total / 1000000).toFixed(1).replace('.0', '') + ' triệu';
+            // Reset slider val to 1 when switching
+            slider.value = 1;
+
+            if (mode === 'day') {
+                // UI changes for Day Mode
+                indicator.style.transform = 'translateX(0)';
+                btnDay.className = 'flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors duration-300';
+                btnMonth.className = 'flex-1 relative z-10 py-2 text-sm font-medium text-center text-gray-500 transition-colors duration-300';
+                
+                // Slider settings for Days
+                slider.max = 30;
+                durationLabel.innerText = 'Thời gian thuê (Ngày)';
             } else {
-                totalPriceEl.innerText = (total / 1000).toFixed(0) + 'k';
+                // UI changes for Month Mode
+                indicator.style.transform = 'translateX(100%)';
+                btnDay.className = 'flex-1 relative z-10 py-2 text-sm font-medium text-center text-gray-500 transition-colors duration-300';
+                btnMonth.className = 'flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors duration-300';
+                
+                // Slider settings for Months
+                slider.max = 12;
+                durationLabel.innerText = 'Thời gian thuê (Tháng)';
+            }
+
+            // Refresh Bike Prices based on new mode
+            const activeBikeBtn = document.querySelector('.bike-selector.border-ios-blue');
+            if (activeBikeBtn) {
+                selectBike(activeBikeBtn);
+            }
+        }
+
+        function updateCalculator() {
+            const timeValue = parseInt(slider.value);
+            
+            if (currentMode === 'day') {
+                timeDisplay.innerText = timeValue + ' ngày';
+                
+                // Simple calculation for days
+                let total = currentBasePrice * timeValue;
+
+                if(total >= 1000000) {
+                    totalPriceEl.innerText = (total / 1000000).toFixed(1).replace('.0', '') + ' triệu';
+                } else {
+                    totalPriceEl.innerText = (total / 1000).toFixed(0) + 'k';
+                }
+
+            } else {
+                timeDisplay.innerText = timeValue + ' tháng';
+                
+                // Existing discount logic for months
+                let discount = 0;
+                if (timeValue >= 6) discount = 0.10;
+                else if (timeValue >= 3) discount = 0.05;
+
+                let total = currentBasePrice * timeValue * (1 - discount);
+                
+                if(total >= 1000000) {
+                    totalPriceEl.innerText = (total / 1000000).toFixed(1).replace('.0', '') + ' triệu';
+                } else {
+                    totalPriceEl.innerText = (total / 1000).toFixed(0) + 'k';
+                }
             }
         }
 
         function selectBike(btn) {
+            // Reset styles for all buttons
             document.querySelectorAll('.bike-selector').forEach(b => {
                 b.className = 'bike-selector group relative overflow-hidden p-4 rounded-2xl border border-transparent bg-gray-100 dark:bg-white/5 text-gray-500 transition-all hover:bg-gray-200 dark:hover:bg-white/10';
             });
+            // Set active style for clicked button
             btn.className = 'bike-selector group relative overflow-hidden p-4 rounded-2xl border border-ios-blue bg-ios-blue/10 text-ios-blue transition-all';
-            currentBasePrice = parseInt(btn.dataset.price);
+            
+            // Get price based on current mode
+            if (currentMode === 'day') {
+                currentBasePrice = parseInt(btn.dataset.day);
+            } else {
+                currentBasePrice = parseInt(btn.dataset.month);
+            }
+            
+            // Animation reset for price
             totalPriceEl.classList.remove('reveal');
             void totalPriceEl.offsetWidth; 
+            
             updateCalculator();
         }
 
         slider.addEventListener('input', updateCalculator);
+        // Initialize logic once
+        setMode('day'); // Default as requested
 
         // --- 3. Sidebar Mobile Menu ---
         const menuBtn = document.getElementById('menu-btn');
