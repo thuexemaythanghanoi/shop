@@ -1466,96 +1466,364 @@
             }
         });
 
-        // --- 7. SIMULATED AI CHAT LOGIC ---
-        const chatModal = document.getElementById('ai-chat-modal');
-        const chatMessages = document.getElementById('chat-messages');
-        const chatInput = document.getElementById('chat-input');
-        const typingIndicator = document.getElementById('typing-indicator');
+        // --- 7. ENHANCED OFFLINE AI-SIMULATOR (NO API) ---
+        // Replace the old AI chat block with this. Self-contained, safer, and smarter.
 
-        function toggleChat() {
-            chatModal.classList.toggle('hidden');
-            if(!chatModal.classList.contains('hidden')) {
-                chatInput.focus();
-            }
-        }
-
-        function addMessage(text, isUser = false) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `flex w-full mt-2 space-x-3 max-w-xs ${isUser ? 'ml-auto justify-end' : ''}`;
-
-            if (!isUser) {
-                const avatar = document.createElement('div');
-                avatar.className = 'flex-shrink-0 h-8 w-8 rounded-full bg-gradient-to-br from-ios-blue to-purple-600 flex items-center justify-center text-white text-xs font-bold';
-                avatar.textContent = 'AI';
-                messageDiv.appendChild(avatar);
-            }
-
-            const bubble = document.createElement('div');
-            bubble.className = (isUser ? 'chat-bubble-user' : 'chat-bubble-ai') + ' p-3 shadow-sm';
-            const p = document.createElement('p');
-            p.className = 'text-sm';
-            p.textContent = text; // SAFE
-            bubble.appendChild(p);
-
-            if (isUser) messageDiv.appendChild(bubble);
-            else messageDiv.appendChild(bubble);
-
+        (() => {
+            // Elements (single declarations)
+            const chatModal = document.getElementById('ai-chat-modal');
             const chatMessages = document.getElementById('chat-messages');
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
+            const chatInput = document.getElementById('chat-input');
+            const typingIndicator = document.getElementById('typing-indicator');
 
-        function simulateAIResponse(userText) {
-            typingIndicator.classList.remove('hidden');
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            // Small in-memory convo context
+            const convo = {
+                history: [], // { role: 'user'|'ai', text, ts }
+                lastIntent: null,
+                lastEntity: null,
+                maxHistory: 20
+            };
 
-            setTimeout(() => {
-                typingIndicator.classList.add('hidden');
-                
-                const lowerText = userText.toLowerCase();
-                let response = "";
+            // Helpers
+            const now = () => new Date().toISOString();
+            const pushHistory = (role, text) => {
+                convo.history.push({ role, text, ts: now() });
+                if (convo.history.length > convo.maxHistory) convo.history.shift();
+            };
+            const safeText = (s) => String(s ?? '').trim();
 
-                // LOGIC TRẢ LỜI CỨNG THEO YÊU CẦU
-                if (lowerText.includes("thủ tục") || lowerText.includes("giấy tờ") || lowerText.includes("cọc")) {
-                    response = "Dạ, Thủ tục cần CCCD + Bằng lái xe, cọc từ 2-5 triệu ạ.";
+            // Typing simulator with variable delay based on message length
+            const simulateTypingDelay = (text) => {
+                const base = 500; // ms
+                const perChar = 18; // ms per char
+                const cap = 2500;
+                return Math.min(base + (text.length * perChar), cap);
+            };
+
+            // Utility: format currency VN
+            const formatVND = (n) => {
+                if (isNaN(n)) return n;
+                if (n >= 1000000) return (n / 1000000).toFixed(n % 1000000 === 0 ? 0 : 1).replace('.0','') + ' triệu';
+                return (n / 1000).toFixed(0) + 'k';
+            };
+
+            // Dynamic data extractor: try to read prices from pricing cards on page
+            function extractPricesFromDOM() {
+                try {
+                    const results = {};
+                    // look for sections with price amounts (common selectors in your HTML)
+                    document.querySelectorAll('#pricing, #detailed-pricing').forEach(section => {
+                        section.querySelectorAll('div').forEach(div => {
+                            // naive search for text like "900k", "1.2tr", "1.2tr" or numeric amounts
+                            const text = div.textContent || '';
+                            const m = text.match(/(\d+(?:[.,]\d+)?)(?:\s*(k|tr|trieu|tr\.)|,?)/i);
+                            if (m) {
+                                // attempt to attach by nearest heading (look up DOM)
+                                let heading = null;
+                                const headingEl = div.closest('div').querySelector('h3, h4, h2, .text-xl, .font-bold');
+                                if (headingEl) heading = headingEl.textContent.trim();
+                                // normalize number to VND
+                                let value = parseFloat(m[1].replace(',','.'));
+                                const unit = (m[2] || '').toLowerCase();
+                                if (unit.startsWith('k')) value = value * 1000;
+                                else if (unit.startsWith('tr') || unit.includes('trieu')) value = value * 1000000;
+                                if (heading) results[heading] = value;
+                            }
+                        });
+                    });
+                    // fallback common labels
+                    if (!results['Xe Số']) {
+                        const el = document.querySelector('.reveal .text-3xl.font-bold') || document.querySelector('#pricing');
+                        // nothing more precise — return empty if nothing clear
+                    }
+                    return results;
+                } catch (e) { return {}; }
+            }
+
+            // Intent classifier using rules, synonyms, regex
+            const intentMatchers = [
+                {
+                    name: 'greeting',
+                    patterns: [/^(xin chào|chào|hi|hello|hey)\b/i],
+                    handler: (text) => `Chào anh/chị! Em là Trợ lý ảo của Bống — em có thể hỗ trợ thông tin giá, thủ tục, giao xe tận nơi hoặc kết nối nhân viên tư vấn. Anh/chị cần hỗ trợ gì ạ?`
+                },
+                {
+                    name: 'price_query',
+                    patterns: [/\b(giá|bao nhiêu|tiền|chi phí|tốn)\b/i],
+                    handler: (text) => {
+                        // attempt to use DOM prices
+                        const prices = extractPricesFromDOM();
+                        const keys = Object.keys(prices);
+                        if (keys.length) {
+                            let msg = 'Hiện giá tham khảo bên em: ';
+                            const parts = keys.slice(0,3).map(k => `${k.replace(/\s+/g,' ')}: ${formatVND(prices[k])}`);
+                            return msg + parts.join(' • ') + '. (Gọi 037 496 6430 để được báo giá chính xác theo xe và thời điểm)';
+                        }
+                        return 'Xe số ~900k/tháng, xe ga thường ~1.2tr/tháng, xe ga cao cấp ~1.5tr/tháng. Muốn em gửi chi tiết theo mẫu xe cụ thể không ạ?';
+                    }
+                },
+                {
+                    name: 'procedure',
+                    patterns: [/\b(thủ tục|giấy tờ|cần|hồ sơ|cccd|chứng minh|bằng lái|bằng)\b/i],
+                    handler: () => 'Thủ tục: CCCD gắn chip + Bằng lái hợp lệ; cọc từ 2–5 triệu (tùy xe). Em có thể gửi hướng dẫn nộp ảnh qua Zalo/Hotline nếu cần.'
+                },
+                {
+                    name: 'delivery',
+                    patterns: [/\b(giao|tận nơi|ship|giao tận|đưa|nhận tại nhà)\b/i],
+                    handler: () => 'Có ạ — Bống giao tận nơi trong Long Biên (miễn phí trong bán kính giới hạn). Bạn cho biết địa chỉ hoặc khu vực để em kiểm tra nhanh nhé.'
+                },
+                {
+                    name: 'address',
+                    patterns: [/\b(địa chỉ|ở đâu|ở đâu vậy|nằm ở)\b/i],
+                    handler: () => 'Địa chỉ: Nguyễn Văn Cừ, Bồ Đề, Long Biên, Hà Nội. Gọi/ Zalo: 037 496 6430 để đặt xe nhanh.'
+                },
+                {
+                    name: 'contact',
+                    patterns: [/\b(sđt|số điện thoại|hotline|zalo|liên hệ|email)\b/i],
+                    handler: () => 'Hotline / Zalo: 037 496 6430. Email: mrtuantu1982@gmail.com'
+                },
+                {
+                    name: 'damage_policy',
+                    patterns: [/\b(hỏng|sửa|bảo dưỡng|cứu hộ|hư hỏng|hư)\b/i],
+                    handler: () => 'Nếu xe hỏng do lỗi kỹ thuật, Bống sửa miễn phí hoặc đổi xe. Hỗ trợ cứu hộ 24/7 — gọi ngay hotline khi cần.'
+                },
+                {
+                    name: 'fallback',
+                    patterns: [/./],
+                    handler: (text) => {
+                        // smart fallback: detect phone number; ask clarifying Q; offer direct actions
+                        const phoneMatch = text.match(/(\+?84|0)\s*\d{9,10}/);
+                        if (phoneMatch) {
+                            return `Cảm ơn! Mình đã nhận số ${phoneMatch[0]}. Nhân viên sẽ gọi/zalo trong ít phút. Muốn đặt trước loại xe nào không ạ?`;
+                        }
+                        // If user asked long question, try to extract entities like '3 tháng', '1 tháng' etc
+                        const monthsMatch = text.match(/(\d+)\s*(tháng|th)/i);
+                        if (monthsMatch) {
+                            const n = parseInt(monthsMatch[1], 10);
+                            return `Anh/chị muốn thuê ${n} tháng — em có gói ưu đãi giảm ${n >= 6 ? '10%' : n >= 3 ? '5%' : '0%'} cho thuê dài hạn. Muốn em tính thử giá cho loại xe nào?`;
+                        }
+                        // Default fallback
+                        return "Em chưa hiểu rõ, anh/chị có thể hỏi cụ thể hơn (ví dụ: 'Giá Vision 1 tháng bao nhiêu?' hoặc gửi số điện thoại để nhân viên gọi hỗ trợ). Hoặc chọn một trong các nút gợi ý bên dưới.";
+                    }
                 }
-                else if (lowerText.includes("giá") || lowerText.includes("bao nhiêu") || lowerText.includes("chi phí")) {
-                    response = "Dạ, xe số bên em giá từ 900k/tháng, xe ga từ 1.2tr - 1.5tr/tháng ạ. Giá đã bao gồm phí bảo dưỡng định kỳ rồi ạ.";
-                } 
-                else if (lowerText.includes("giao") || lowerText.includes("tận nơi")) {
-                    response = "Bên em có hỗ trợ giao xe tận nơi tại Long Biên và các khu vực lân cận ạ.";
+            ];
+
+            // Run classifier
+            function classifyIntent(text) {
+                for (const it of intentMatchers) {
+                    for (const p of it.patterns) {
+                        if (p.test(text)) return it;
+                    }
                 }
-                else if (lowerText.includes("địa chỉ") || lowerText.includes("ở đâu")) {
-                    response = "Địa chỉ bên em tại: Nguyễn Văn Cừ, Bồ Đề, Long Biên, Hà Nội. Anh/chị có thể xem bản đồ ở phần Liên hệ ạ.";
-                }
-                else if (lowerText.includes("liên hệ") || lowerText.includes("sđt") || lowerText.includes("số điện thoại")) {
-                    response = "Hotline/Zalo bên em: 037 496 6430. Email: mrtuantu1982@gmail.com ạ.";
-                }
-                else if (lowerText.includes("xin chào") || lowerText.includes("hi") || lowerText.includes("hello")) {
-                    response = "Chào anh/chị! Em là Bống, em có thể giúp gì cho anh/chị ạ?";
-                }
-                else {
-                    response = "Dạ em chưa hiểu rõ ý mình lắm. Anh/chị có thể để lại số điện thoại hoặc gọi 037 496 6430 để nhân viên tư vấn kỹ hơn không ạ?";
+                return intentMatchers.find(i => i.name === 'fallback');
+            }
+
+            // UI helpers - create message bubbles safely
+            function createMessageBubble(text, isUser = false) {
+                const wrapper = document.createElement('div');
+                wrapper.className = `flex w-full mt-2 ${isUser ? 'justify-end' : ''}`;
+                const inner = document.createElement('div');
+                inner.style.maxWidth = '80%';
+
+                if (!isUser) {
+                    const avatar = document.createElement('div');
+                    avatar.className = 'flex-shrink-0 h-8 w-8 rounded-full bg-gradient-to-br from-ios-blue to-purple-600 flex items-center justify-center text-white text-xs font-bold mr-3';
+                    avatar.textContent = 'AI';
+                    wrapper.appendChild(avatar);
+                } else {
+                    inner.style.display = 'flex';
+                    inner.style.justifyContent = 'flex-end';
                 }
 
-                addMessage(response, false);
-            }, 1000); 
-        }
+                const bubble = document.createElement('div');
+                bubble.className = isUser ? 'chat-bubble-user p-3 shadow-sm' : 'chat-bubble-ai p-3 shadow-sm';
+                // Use textContent to avoid XSS
+                const p = document.createElement('p');
+                p.className = 'text-sm';
+                p.textContent = text;
+                bubble.appendChild(p);
+                inner.appendChild(bubble);
+                wrapper.appendChild(inner);
+                return wrapper;
+            }
 
-        function handleChatSubmit(e) {
-            e.preventDefault();
-            const text = chatInput.value.trim();
-            if(!text) return;
+            function appendMessage(text, isUser = false) {
+                const node = createMessageBubble(text, isUser);
+                chatMessages.appendChild(node);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                pushHistory(isUser ? 'user' : 'ai', text);
+            }
 
-            addMessage(text, true);
-            chatInput.value = '';
-            simulateAIResponse(text);
-        }
+            // Quick-reply chips under chat: dynamically insert when needed
+            function showQuickReplies(items = []) {
+                // remove old quick area if exists
+                const existing = document.getElementById('ai-quick-replies');
+                if (existing) existing.remove();
+                if (!items.length) return;
+                const container = document.createElement('div');
+                container.id = 'ai-quick-replies';
+                container.className = 'p-3 flex gap-2 overflow-x-auto no-scrollbar';
+                items.forEach(it => {
+                    const btn = document.createElement('button');
+                    btn.className = 'whitespace-nowrap px-3 py-1 rounded-full bg-gray-100 text-xs text-gray-700 hover:bg-gray-200';
+                    btn.textContent = it.label;
+                    btn.addEventListener('click', () => {
+                        // local echo + handle
+                        appendMessage(it.label, true);
+                        handleUserText(it.label);
+                    });
+                    container.appendChild(btn);
+                });
+                // place before input area (append to chat modal container)
+                const chatModalInner = document.querySelector('#ai-chat-modal .p-4.bg-white') || document.querySelector('#ai-chat-modal');
+                if (chatModalInner) {
+                    chatModalInner.parentNode.insertBefore(container, chatModalInner.nextSibling);
+                }
+            }
 
-        function sendQuickMessage(text) {
-            addMessage(text, true);
-            simulateAIResponse(text);
-        }
+            // Core: handle user text and produce response (multi-turn)
+            function handleUserText(raw) {
+                const text = safeText(raw).toLowerCase();
+                if (!text) return;
+
+                // store user
+                pushHistory('user', raw);
+
+                // classify
+                const intent = classifyIntent(text);
+                convo.lastIntent = intent.name;
+
+                // get quick direct response
+                let response = intent.handler(text);
+
+                // If response is a function result or promise — here it's a string
+                // Simulate typing
+                typingIndicator.classList.remove('hidden');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                const delay = simulateTypingDelay(response);
+                setTimeout(() => {
+                    typingIndicator.classList.add('hidden');
+                    // append response
+                    appendMessage(response, false);
+
+                    // Post-response actions (suggest quick-replies)
+                    if (intent.name === 'price_query') {
+                        showQuickReplies([
+                            { label: 'Chi tiết Xe Số' },
+                            { label: 'Chi tiết Xe Ga' },
+                            { label: 'Cho tôi liên hệ nhân viên' }
+                        ]);
+                    } else if (intent.name === 'procedure') {
+                        showQuickReplies([{ label: 'Gửi ảnh CCCD' }, { label: 'Gọi nhân viên' }]);
+                    } else if (intent.name === 'delivery') {
+                        showQuickReplies([{ label: 'Giao miễn phí không?' }, { label: 'Tôi ở Sài Đồng' }]);
+                    } else {
+                        // default generic suggestions
+                        showQuickReplies([
+                            { label: 'Giá thuê?' },
+                            { label: 'Thủ tục?' },
+                            { label: 'Giao tận nơi?' }
+                        ]);
+                    }
+                }, delay);
+            }
+
+            // Public UI interactions
+            function toggleChat() {
+                chatModal.classList.toggle('hidden');
+                if (!chatModal.classList.contains('hidden')) {
+                    chatInput.focus();
+                    // remove quick replies area if any (fresh open)
+                    const existing = document.getElementById('ai-quick-replies');
+                    if (existing) existing.remove();
+                }
+            }
+
+            // Add message safe (user and ai)
+            function addMessage(text, isUser = false) {
+                // keep API same as original for compatibility
+                if (!text) return;
+                if (isUser) {
+                    appendMessage(text, true);
+                    pushHistory('user', text);
+                } else {
+                    appendMessage(text, false);
+                }
+            }
+
+            // When user submits the chat form
+            function handleChatSubmit(e) {
+                if (e && e.preventDefault) e.preventDefault();
+                const txt = safeText(chatInput.value);
+                if (!txt) return;
+                // local echo
+                appendMessage(txt, true);
+                chatInput.value = '';
+                // clear quick replies area
+                const q = document.getElementById('ai-quick-replies'); if (q) q.remove();
+                // process
+                handleUserText(txt);
+            }
+
+            // Quick message helper
+            function sendQuickMessage(text) {
+                appendMessage(text, true);
+                // clear previous quick replies
+                const q = document.getElementById('ai-quick-replies'); if (q) q.remove();
+                handleUserText(text);
+            }
+
+            // Wire event listeners (safe single bindings)
+            // note: ensure we don't double-bind if this block injected twice
+            (function bindOnce() {
+                // theme: check if handlers already bound by a data attribute
+                if (chatModal.dataset.enhancedAi === '1') return;
+                chatModal.dataset.enhancedAi = '1';
+
+                // toggleChat function should match existing button onclicks that call toggleChat()
+                window.toggleChat = toggleChat;
+
+                // keep addMessage compatibility
+                window.addMessage = addMessage;
+                window.sendQuickMessage = sendQuickMessage;
+
+                // form submit handler
+                const forms = document.querySelectorAll('form[onsubmit="handleChatSubmit(event)"], form');
+                // attach to the specific chat input form if present (prefer local)
+                const chatForm = Array.from(forms).find(f => f.querySelector('#chat-input'));
+                if (chatForm) {
+                    chatForm.addEventListener('submit', handleChatSubmit);
+                } else {
+                    // fallback: try to find any on-page form for chat
+                    const fallbackForm = document.querySelector('form');
+                    if (fallbackForm && fallbackForm.querySelector('#chat-input')) fallbackForm.addEventListener('submit', handleChatSubmit);
+                }
+
+                // permit pressing Enter in input to send
+                if (chatInput) {
+                    chatInput.addEventListener('keydown', (ev) => {
+                        if (ev.key === 'Enter' && !ev.shiftKey) {
+                            ev.preventDefault();
+                            handleChatSubmit(ev);
+                        }
+                    });
+                }
+            })();
+
+            // Initial message (replace existing greeting bubble once on load)
+            (function initialGreeting() {
+                // remove initial hard-coded greeting node to avoid duplication if present
+                const firstMsg = chatMessages.querySelector('div');
+                // keep it but do not duplicate if already in history
+                if (!convo.history.length) {
+                    const greet = 'Xin chào! Em là trợ lý ảo của Bống. Em có thể giúp gì cho anh/chị ạ? (Hỏi về giá thuê, thủ tục, giao xe tận nơi...)';
+                    appendMessage(greet, false);
+                }
+                pushHistory('system', 'assistant initialized');
+            })();
+
+        })();
     </script>
 </body>
 </html>
