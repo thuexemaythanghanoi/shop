@@ -234,39 +234,43 @@
             40% { transform: scale(1); }
         }
 
-        /* SEO Article Styles */
-        .seo-content h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            color: #007AFF;
+        /* SEO Article Styles - Optimized */
+        .seo-box-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            margin-right: 8px;
         }
-        .dark .seo-content h2 {
-            color: #5856D6;
+        .seo-highlight-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 8px;
         }
-        .seo-content h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
+        .seo-highlight-list li::before {
+            content: "\f00c"; /* FontAwesome check */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #34C759;
+            font-size: 14px;
+            top: 4px;
         }
-        .seo-content p {
-            margin-bottom: 1rem;
-            line-height: 1.7;
-            color: #4B5563;
+        
+        /* Legal Section Optimized Styles */
+        .legal-card {
+            transition: all 0.3s ease;
         }
-        .dark .seo-content p {
-            color: #9CA3AF;
+        .legal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        .seo-content ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
-            margin-bottom: 1rem;
-            color: #4B5563;
-        }
-        .dark .seo-content ul {
-            color: #9CA3AF;
+        .legal-content p {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -343,7 +347,7 @@
     <!-- MAIN CONTENT -->
     <main class="pt-24 pb-10 min-h-screen">
         
-        <!-- 1. HERO (TRANG CHỦ) - H1 Optimized for Keyword -->
+        <!-- 1. HERO (TRANG CHỦ) -->
         <section id="hero" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-24 scroll-mt-28">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Text -->
@@ -739,36 +743,76 @@
              </div>
         </section>
 
-        <!-- NEW SEO CONTENT SECTION (Article Style) -->
-        <section id="seo-content" class="py-16 max-w-4xl mx-auto px-4 sm:px-6 scroll-mt-24 seo-content reveal">
-            <article class="glass-panel p-8 md:p-12 rounded-[40px]">
-                <h2 class="text-3xl font-bold mb-6 text-center text-ios-blue">Kinh nghiệm thuê xe máy tháng Long Biên</h2>
-                
-                <h3>Tại sao nên chọn dịch vụ cho thuê xe máy tháng Long Biên giao tận nơi?</h3>
-                <p>
-                    Long Biên là cửa ngõ quan trọng của thủ đô Hà Nội, nhu cầu di chuyển rất lớn. Dịch vụ <strong>cho thuê xe máy tháng Long Biên giao tận nơi</strong> của Bống giúp bạn tiết kiệm thời gian và công sức. Thay vì phải đi xe ôm hay taxi đắt đỏ, bạn sở hữu ngay một chiếc xe máy riêng với chi phí chỉ từ 30k/ngày. Đặc biệt, chúng tôi hỗ trợ giao xe đến tận nhà ở các khu vực như Bồ Đề, Ngọc Lâm, Nguyễn Văn Cừ, Sài Đồng...
-                </p>
+        <!-- OPTIMIZED SECTION: KINH NGHIỆM THUÊ XE MÁY LONG BIÊN -->
+        <section id="seo-content" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24 reveal">
+            <div class="glass-panel p-8 md:p-12 rounded-[40px] border border-gray-100 dark:border-white/10">
+                <div class="grid lg:grid-cols-12 gap-10">
+                    <!-- Left: Sticky Summary -->
+                    <div class="lg:col-span-4 lg:sticky lg:top-32 h-fit">
+                        <div class="bg-blue-50 dark:bg-white/5 p-6 rounded-3xl">
+                            <span class="inline-block px-3 py-1 mb-4 rounded-full bg-ios-blue text-white text-xs font-bold uppercase">Cẩm Nang</span>
+                            <h2 class="text-3xl font-bold mb-4 text-ios-blue leading-tight">Kinh nghiệm thuê xe máy tháng Long Biên</h2>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Tổng hợp những điều cần biết để thuê xe máy giá tốt, an toàn và nhanh chóng nhất tại khu vực Long Biên.</p>
+                            <a href="#contact" class="inline-flex items-center text-sm font-bold text-ios-blue hover:translate-x-1 transition-transform">
+                                Đặt xe ngay <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
 
-                <h3>Quy trình giao nhận xe tận nhà nhanh chóng</h3>
-                <p>
-                    Để thuận tiện nhất cho khách hàng, Bống tối ưu quy trình thuê xe chỉ trong 3 bước:
-                </p>
-                <ul>
-                    <li><strong>Bước 1:</strong> Liên hệ <a href="#contact" class="text-ios-blue font-bold hover:underline">037 496 643</a> để chọn mẫu xe ưng ý (Xe số, Vision, Airblade, Lead...).</li>
-                    <li><strong>Bước 2:</strong> Gửi ảnh CCCD và <strong>Bằng lái xe</strong> qua Zalo để nhân viên soạn hợp đồng.</li>
-                    <li><strong>Bước 3:</strong> Nhân viên Bống sẽ <strong>giao xe tận nơi</strong> tại Long Biên trong vòng 15-30 phút.</li>
-                </ul>
+                    <!-- Right: Detailed Content -->
+                    <div class="lg:col-span-8 space-y-8">
+                        <!-- Content Block 1 -->
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-2xl bg-ios-blue/10 flex items-center justify-center text-ios-blue">
+                                    <i class="fas fa-map-marked-alt text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Tại sao nên thuê xe giao tận nơi?</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
+                                    Long Biên là cửa ngõ quan trọng của thủ đô Hà Nội. Thay vì mất thời gian di chuyển, dịch vụ <strong>cho thuê xe máy tháng Long Biên giao tận nơi</strong> của Bống giúp bạn tiết kiệm công sức. Chỉ từ 30k/ngày, bạn sở hữu ngay phương tiện cá nhân, chủ động di chuyển tại Bồ Đề, Ngọc Lâm, Sài Đồng mà không lo phụ thuộc Grab hay Taxi.
+                                </p>
+                            </div>
+                        </div>
 
-                <h3>Đa dạng dòng xe và bảng giá thuê xe máy Long Biên</h3>
-                <p>
-                    Tại Bống, chúng tôi cung cấp đa dạng các dòng xe phù hợp với mọi nhu cầu. Nếu bạn cần tiết kiệm xăng để chạy Grab/GoJek, dòng xe số như Honda Wave, Yamaha Sirius là lựa chọn hoàn hảo với giá thuê chỉ từ 900k/tháng. Nếu bạn là nhân viên văn phòng cần xe đẹp, cốp rộng, các dòng xe ga như Vision, Lead, Airblade luôn sẵn sàng phục vụ. Xem chi tiết tại <a href="#pricing" class="text-ios-blue font-bold hover:underline">Bảng giá thuê xe</a>.
-                </p>
+                        <!-- Content Block 2 -->
+                        <div class="flex gap-4">
+                             <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-2xl bg-ios-purple/10 flex items-center justify-center text-ios-purple">
+                                    <i class="fas fa-clipboard-check text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Quy trình giao nhận xe siêu tốc</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-3">
+                                    Để tối ưu trải nghiệm, Bống áp dụng quy trình 3 bước chuẩn 4.0:
+                                </p>
+                                <ul class="seo-highlight-list text-sm text-gray-500 dark:text-gray-400">
+                                    <li><strong>Bước 1:</strong> Chọn xe qua Hotline/Zalo <a href="tel:037496643" class="text-ios-blue font-bold">037 496 643</a>.</li>
+                                    <li><strong>Bước 2:</strong> Gửi ảnh CCCD gắn chip & Bằng lái xe để làm hợp đồng điện tử.</li>
+                                    <li><strong>Bước 3:</strong> Nhận xe tại nhà sau 15-30 phút.</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                <h3>Thông tin về Cọc & Thủ tục</h3>
-                <p>
-                    Để đảm bảo quyền lợi cho cả hai bên, Bống áp dụng chính sách <strong>cọc từ 2 - 5 triệu</strong> (tùy giá trị xe) và yêu cầu bắt buộc có <strong>Bằng lái xe</strong>. Chúng tôi cam kết thủ tục minh bạch, có hợp đồng rõ ràng và hoàn cọc ngay sau khi kết thúc hợp đồng thuê xe. Mọi xe đều được bảo dưỡng định kỳ miễn phí, đảm bảo an toàn tuyệt đối trên mọi nẻo đường Hà Nội.
-                </p>
-            </article>
+                        <!-- Content Block 3 -->
+                        <div class="flex gap-4">
+                             <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-2xl bg-ios-green/10 flex items-center justify-center text-ios-green">
+                                    <i class="fas fa-wallet text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Lưu ý về Cọc & Thủ tục</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
+                                    Để đảm bảo quyền lợi, Bống áp dụng chính sách <strong>cọc từ 2 - 5 triệu</strong> (tùy giá trị xe). Đây là khoản đảm bảo trách nhiệm và sẽ được hoàn lại 100% khi kết thúc hợp đồng. Xe tại Bống luôn được bảo dưỡng định kỳ, đảm bảo an toàn tuyệt đối cho bạn trên mọi nẻo đường Hà Nội.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- 8. FAQ -->
@@ -872,24 +916,83 @@
              </div>
         </section>
 
-        <!-- 11 & 12. BẢO MẬT & CHÍNH SÁCH -->
-        <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 scroll-mt-24">
-            <div id="security" class="reveal glass-panel p-8 rounded-3xl border-l-4 border-ios-blue">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-ios-blue"><i class="fas fa-shield-alt"></i></div>
-                    <h3 class="text-xl font-bold">Bảo Mật</h3>
-                </div>
-                <p class="text-sm text-gray-500 mb-4">Chúng tôi cam kết bảo mật tuyệt đối thông tin cá nhân của khách hàng. Dữ liệu CCCD và Bằng lái chỉ được sử dụng cho mục đích hợp đồng thuê xe.</p>
-                <a href="#" class="text-ios-blue text-sm font-bold hover:underline">Xem chi tiết <i class="fas fa-arrow-right text-xs"></i></a>
-            </div>
+        <!-- OPTIMIZED SECTIONS: BẢO MẬT & ĐIỀU KHOẢN (FULL CONTENT) -->
+        <section id="legal-section" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
+            <h2 class="text-3xl font-bold mb-12 text-center text-gray-800 dark:text-white reveal">Thông tin pháp lý</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Security Policy Card -->
+                <div id="security" class="reveal legal-card glass-panel p-8 rounded-[32px] border-t-4 border-ios-blue h-full flex flex-col">
+                    <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100 dark:border-white/10">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-ios-blue shadow-sm">
+                            <i class="fas fa-user-shield text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Chính Sách Bảo Mật</h3>
+                    </div>
+                    
+                    <div class="legal-content text-sm text-gray-600 dark:text-gray-300 overflow-y-auto max-h-[400px] pr-2 custom-scrollbar">
+                        <p class="font-bold text-gray-800 dark:text-white mb-2">1. Cam kết bảo vệ dữ liệu khách hàng</p>
+                        <p>
+                            Tại Bống, chúng tôi hiểu rằng thông tin cá nhân của quý khách là tài sản quý giá. Chúng tôi cam kết bảo mật tuyệt đối mọi thông tin mà khách hàng cung cấp trong quá trình thuê xe, bao gồm: Họ tên, Số điện thoại, hình ảnh CCCD và Bằng lái xe.
+                        </p>
+                        
+                        <p class="font-bold text-gray-800 dark:text-white mb-2 mt-4">2. Mục đích thu thập thông tin</p>
+                        <ul class="list-disc pl-5 mb-3 space-y-1">
+                            <li>Xác minh danh tính để đảm bảo an ninh và tuân thủ quy định pháp luật.</li>
+                            <li>Soạn thảo hợp đồng thuê xe máy điện tử hoặc giấy.</li>
+                            <li>Liên lạc hỗ trợ khẩn cấp khi xảy ra sự cố giao thông hoặc hỏng hóc xe.</li>
+                            <li>Gửi thông báo về thời hạn bảo dưỡng hoặc gia hạn hợp đồng thuê.</li>
+                        </ul>
 
-            <div id="policy" class="reveal glass-panel p-8 rounded-3xl border-l-4 border-ios-green">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-ios-green"><i class="fas fa-file-contract"></i></div>
-                    <h3 class="text-xl font-bold">Chính Sách</h3>
+                        <p class="font-bold text-gray-800 dark:text-white mb-2 mt-4">3. Phạm vi sử dụng & Chia sẻ</p>
+                        <p>
+                            Thông tin của quý khách chỉ được lưu hành nội bộ trong hệ thống quản lý của Bống. Chúng tôi cam kết <strong>KHÔNG</strong> bán, trao đổi hay chia sẻ dữ liệu cho bên thứ ba vì mục đích thương mại. Thông tin chỉ được cung cấp cho cơ quan chức năng có thẩm quyền trong trường hợp cần thiết liên quan đến an ninh trật tự hoặc tai nạn giao thông theo yêu cầu của pháp luật Việt Nam.
+                        </p>
+
+                        <p class="font-bold text-gray-800 dark:text-white mb-2 mt-4">4. Thời gian lưu trữ</p>
+                        <p>
+                            Dữ liệu sẽ được lưu trữ an toàn trong suốt thời gian quý khách sử dụng dịch vụ và sẽ được hủy bỏ hoặc mã hóa sau khi kết thúc hợp đồng thanh lý, trừ khi có yêu cầu khác từ khách hàng.
+                        </p>
+                    </div>
+                    <div class="mt-auto pt-6 text-center">
+                        <span class="text-xs text-gray-400 font-medium bg-gray-100 dark:bg-white/5 px-4 py-2 rounded-full">Cập nhật lần cuối: 2024</span>
+                    </div>
                 </div>
-                <p class="text-sm text-gray-500 mb-4">Khách hàng được đổi xe miễn phí trong 3 ngày đầu nếu không ưng ý. Cam kết hoàn tiền cọc trong vòng 24h sau khi kết thúc hợp đồng.</p>
-                <a href="#" class="text-ios-green text-sm font-bold hover:underline">Xem điều khoản <i class="fas fa-arrow-right text-xs"></i></a>
+
+                <!-- Terms of Use Card -->
+                <div id="policy" class="reveal legal-card glass-panel p-8 rounded-[32px] border-t-4 border-ios-green h-full flex flex-col">
+                    <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100 dark:border-white/10">
+                        <div class="w-12 h-12 rounded-2xl bg-green-100 flex items-center justify-center text-ios-green shadow-sm">
+                            <i class="fas fa-file-contract text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Điều Khoản Sử Dụng</h3>
+                    </div>
+
+                    <div class="legal-content text-sm text-gray-600 dark:text-gray-300 overflow-y-auto max-h-[400px] pr-2 custom-scrollbar">
+                        <p class="font-bold text-gray-800 dark:text-white mb-2">1. Trách nhiệm của bên thuê (Khách hàng)</p>
+                        <p>
+                            Khách hàng phải có <strong>Giấy phép lái xe (GPLX)</strong> hợp lệ tương ứng với loại xe thuê. Trong quá trình sử dụng, quý khách cam kết tuân thủ tuyệt đối Luật Giao thông đường bộ Việt Nam. Mọi chi phí phạt nguội hoặc vi phạm giao thông trong thời gian thuê sẽ do khách hàng chịu trách nhiệm chi trả hoàn toàn.
+                        </p>
+                        <p class="mt-2">
+                            Quý khách có trách nhiệm bảo quản xe, không được tự ý thay đổi kết cấu, cầm cố, thế chấp hoặc chuyển nhượng xe cho người khác sử dụng mà không có sự đồng ý của Bống.
+                        </p>
+
+                        <p class="font-bold text-gray-800 dark:text-white mb-2 mt-4">2. Chính sách về sự cố & Hư hỏng</p>
+                        <ul class="list-disc pl-5 mb-3 space-y-1">
+                            <li><strong>Lỗi kỹ thuật (Máy móc, động cơ):</strong> Bống chịu trách nhiệm sửa chữa miễn phí hoặc đổi xe tương đương cho khách hàng.</li>
+                            <li><strong>Lỗi do người dùng (Thủng săm, vỡ vỏ, tai nạn):</strong> Khách hàng chịu chi phí sửa chữa thay thế linh kiện chính hãng.</li>
+                            <li>Trong trường hợp mất xe, khách hàng phải bồi thường theo giá trị xe tại thời điểm hiện tại được ghi rõ trong hợp đồng.</li>
+                        </ul>
+
+                        <p class="font-bold text-gray-800 dark:text-white mb-2 mt-4">3. Thanh toán & Hoàn cọc</p>
+                        <p>
+                            Tiền thuê xe thanh toán vào đầu mỗi kỳ hạn (tháng). Tiền đặt cọc (từ 2-5 triệu) sẽ được hoàn lại <strong>100% trong vòng 24h</strong> sau khi khách hàng trả xe, thanh lý hợp đồng và không phát sinh lỗi hư hỏng hay phạt nguội.
+                        </p>
+                    </div>
+                    <div class="mt-auto pt-6 text-center">
+                        <span class="text-xs text-gray-400 font-medium bg-gray-100 dark:bg-white/5 px-4 py-2 rounded-full">Hiệu lực: Toàn quốc</span>
+                    </div>
+                </div>
             </div>
         </section>
 
