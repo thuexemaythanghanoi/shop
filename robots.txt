@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thuexemaythanghanoi.github.io/sitemap.xml
